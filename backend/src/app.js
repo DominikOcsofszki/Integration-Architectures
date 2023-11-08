@@ -13,8 +13,6 @@ const cors = require('cors');
 
 const mongoose = require('mongoose')
 
-const MongoClient = mongodb.MongoClient;
-
 let environment;
 if(process.env.NODE_ENV === 'development'){
     environment = require('../environments/environment.js').default;
