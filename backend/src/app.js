@@ -11,7 +11,8 @@ const app = express();
 const crypto = require('crypto');
 const cors = require('cors');
 
-const mongodb = require('mongodb');
+const mongoose = require('mongoose')
+
 const MongoClient = mongodb.MongoClient;
 
 let environment;
@@ -49,16 +50,38 @@ if(environment.db.username){
     db_credentials = environment.db.username+':'+environment.db.password+'@';
 }
 
-MongoClient.connect('mongodb://' + db_credentials + environment.db.host + ':' + environment.db.port + '/?authSource='+environment.db.authSource).then(async dbo =>{ //connect to MongoDb
+const dbUri = 'mongodb://' + db_credentials + environment.db.host + ':' + environment.db.port + '/?authSource='+environment.db.authSource
 
-    const db = dbo.db(environment.db.name);
-    await initDb(db); //run initialization function
-    app.set('db',db); //register database in the express app
+// Connect to MongoDB using Mongoose
+mongoose.connect(dbUri, {
+    useUnifiedTopology: true,
+    // auth: {
+    //   authSource: environment.db.authSource,
+    // },
+    //user: environment.db.username, // Your MongoDB username
+    //pass: environment.db.password, // Your MongoDB password
+    });
+  
+const db = mongoose.connection;
+  
+db.on('error', (err) => {
+    console.error('Mongoose connection error:', err);
+});
+  
+db.once('open', async () => {
+    console.log('Mongoose connected to MongoDB.');
+  
+    // You can run your initialization function here if needed
+    await initDb(db);
 
-    app.listen(environment.port, () => { //start webserver, after database-connection was established
+    app.set('db', db);
+  
+    // Start your Express app after the database connection is established
+    app.listen(environment.port, () => {
         console.log('Webserver started.');
     });
 });
+
 
 async function initDb(db){
     if(await db.collection('users').count() < 1){ //if no user exists create admin user
