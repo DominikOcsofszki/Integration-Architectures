@@ -1,11 +1,15 @@
+import { User } from "../models/User";
+
 /**
  * marks user's session as authenticated
  * @param session current session
  * @param {User} user information about the current user
  */
-exports.authenticate = function (session, user){
+exports.authenticate = function (session: { authenticated: boolean; user: User; }, user: User){
     session.authenticated = true;
-    delete user.password;
+    if(user.password) {
+        delete user.password;
+    }
     session.user = user;
 }
 

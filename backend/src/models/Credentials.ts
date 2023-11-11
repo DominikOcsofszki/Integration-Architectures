@@ -3,8 +3,11 @@
  * @param {string} username
  * @param {string} password
  */
-class Credentials{
-    constructor(username, password) {
+export class Credentials{
+    username: string;
+    password: string;
+    
+    constructor(username: string, password: string) {
         this.username = username;
         this.password = password;
     }
