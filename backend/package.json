@@ -7,7 +7,8 @@
     "start_win": "set NODE_ENV=development&& node ./src/app.js",
     "start_production": "set NODE_ENV=production&& node ./src/app.js",
     "test_unit": "mocha",
-    "coverage": "nyc --all --reporter=cobertura --reporter=text-summary npm run test_unit"
+    "coverage": "nyc --all --reporter=cobertura --reporter=text-summary npm run test_unit",
+    "tsc": "tsc"
   },
   "mocha": {
     "exit": true,
@@ -27,6 +28,10 @@
     "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
+    "@types/cookie-session": "^2.0.47",
+    "@types/cors": "^2.8.16",
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.10",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "chai-exclude": "^2.1.0",
@@ -34,6 +39,7 @@
     "mocha": "^10.0.0",
     "mocha-junit-reporter": "^2.0.2",
     "mongo-mock": "^4.1.0",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "typescript": "^5.2.2"
   }
 }

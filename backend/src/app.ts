@@ -1,19 +1,21 @@
 /*
     This file acts as the entrypoint for node.js
  */
+import mongoose from "mongoose";
+import express from "express";
+import cookieSession from "cookie-session";
+import multer from "multer";
+import crypto from "crypto";
+import cors from "cors";
 
-const express = require('express');
-const cookieSession = require('cookie-session');
+import apiRouter from './routes/api-routes';
 
-const multer = require('multer');
 const upload = multer();
 const app = express();
-const crypto = require('crypto');
-const cors = require('cors');
 
-const mongoose = require('mongoose')
+//const mongoose = require('mongoose')
 
-let environment;
+let environment: any;
 if(process.env.NODE_ENV === 'development'){
     environment = require('../environments/environment.js').default;
 }else{
@@ -24,7 +26,7 @@ app.set('environment', environment);
 
 app.use(express.json()); //adds support for json encoded bodies
 app.use(express.urlencoded({extended: true})); //adds support url encoded bodies
-app.use(upload.array()); //adds support multipart/form-data bodies
+//app.use(upload.array()); //adds support multipart/form-data bodies
 
 app.use(cookieSession({
     secret: crypto.randomBytes(32).toString('hex'),
@@ -38,7 +40,7 @@ app.use(cors({
     credentials: true
 }));
 
-const apiRouter = require('./routes/api-routes'); //get api-router from routes/api
+//const apiRouter = require('./routes/api-routes'); //get api-router from routes/api
 app.use('/api', apiRouter); //mount api-router at path "/api"
 // !!!! attention all middlewares, mounted after the router wont be called for any requests
 
@@ -52,17 +54,16 @@ const dbUri = 'mongodb://' + db_credentials + environment.db.host + ':' + enviro
 
 // Connect to MongoDB using Mongoose
 mongoose.connect(dbUri, {
-    useUnifiedTopology: true,
     // auth: {
-    //   authSource: environment.db.authSource,
+    //    authSource: environment.db.authSource,
     // },
     //user: environment.db.username, // Your MongoDB username
     //pass: environment.db.password, // Your MongoDB password
     });
   
-const db = mongoose.connection;
+const db: mongoose.Connection = mongoose.connection;
   
-db.on('error', (err) => {
+db.on('error', (err: Error) => {
     console.error('Mongoose connection error:', err);
 });
   
@@ -80,8 +81,19 @@ db.once('open', async () => {
     });
 });
 
+let schema = new mongoose.Schema({
+    name: String,
+    age: Number
+});
+  
+let Model = mongoose.model("model", schema, "myCollection");
 
-async function initDb(db){
+let doc1 = new Model({ name: "John", age: 21 });
+
+doc1.save();
+
+
+async function initDb(db: mongoose.Connection){
     if(await db.collection('users').count() < 1){ //if no user exists create admin user
         const userService = require('./services/user-service');
         const User = require("./models/User");
