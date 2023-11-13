@@ -43,7 +43,6 @@ app.use(cors({
 
 //const apiRouter = require('./routes/api-routes'); //get api-router from routes/api
 app.use('/api', apiRouter); //mount api-router at path "/api"
-console.log(apiRouter);
 // !!!! attention all middlewares, mounted after the router wont be called for any requests
 
 //preparing database credentials for establishing the connection:

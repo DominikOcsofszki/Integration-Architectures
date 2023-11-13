@@ -16,7 +16,6 @@ router.get('/login', isLoggedIn); //the function, which handles requests is spec
 router.get('/user', checkAuthorization(false), getSelf);
 
 const peopleDemoApi = require('../apis/people-demo-api');
-router.get('/people', checkAuthorization(false), peopleDemoApi.getPeople);
-console.log("Router setup successful");
+router.get('/people', checkAuthorization(true), peopleDemoApi.getPeople);
 
 export default router;
