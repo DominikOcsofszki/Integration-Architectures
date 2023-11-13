@@ -7,18 +7,18 @@ export type Session  = {
 };
 
 
-exports.authenticate = function (session: Session, user: User){
+export function authenticate (session: Session, user: User){
     session.authenticated = true;
     user.password = "";
     session.user = user;
 }
 
 
-exports.isAuthenticated = function (session: Session){
+export function isAuthenticated(session: Session){
     return session.authenticated;
 }
 
-exports.deAuthenticate = function (session: Session){
+export function deAuthenticate(session: Session){
     session.authenticated = false;
     session.user = undefined;
 }

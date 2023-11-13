@@ -2,18 +2,17 @@
     This file acts as the entrypoint for node.js
  */
 import mongoose from "mongoose";
-import express from "express";
+import express, {Request, Response} from "express";
 import cookieSession from "cookie-session";
 import multer from "multer";
 import crypto from "crypto";
 import cors from "cors";
 
 import apiRouter from './routes/api-routes';
+import { login } from "./apis/auth-api";
 
 const upload = multer();
 const app = express();
-
-//const mongoose = require('mongoose')
 
 let environment: any;
 if(process.env.NODE_ENV === 'development'){
@@ -27,6 +26,8 @@ app.set('environment', environment);
 app.use(express.json()); //adds support for json encoded bodies
 app.use(express.urlencoded({extended: true})); //adds support url encoded bodies
 //app.use(upload.array()); //adds support multipart/form-data bodies
+
+app.post("/login", login)
 
 app.use(cookieSession({
     secret: crypto.randomBytes(32).toString('hex'),
@@ -42,6 +43,7 @@ app.use(cors({
 
 //const apiRouter = require('./routes/api-routes'); //get api-router from routes/api
 app.use('/api', apiRouter); //mount api-router at path "/api"
+console.log(apiRouter);
 // !!!! attention all middlewares, mounted after the router wont be called for any requests
 
 //preparing database credentials for establishing the connection:
@@ -90,8 +92,7 @@ let Model = mongoose.model("model", schema, "myCollection");
 
 let doc1 = new Model({ name: "John", age: 21 });
 
-doc1.save();
-
+console.log("App is running")
 
 async function initDb(db: mongoose.Connection){
     if(await db.collection('users').count() < 1){ //if no user exists create admin user

@@ -1,24 +1,22 @@
 import { Router } from "express"
+import { login, logout, isLoggedIn } from "../apis/auth-api";
+import { checkAuthorization } from "../middlewares/auth-middleware";
+import { getSelf } from "../apis/user-api";
 
-export default (): Router => {
-    const router = Router();
-    const {checkAuthorization} = require('../middlewares/auth-middleware');
 
-    /*
-        In this file is the routing for the REST-endpoints under /api managed
-    */
+const router = Router();
 
-    const authApi = require('../apis/auth-api'); //api-endpoints are loaded from separate files
-    router.post('/login', authApi.login); //the function decides which request type should be accepted
-    router.delete('/login', checkAuthorization(),authApi.logout); //middlewares can be defined in parameters
-    router.get('/login', authApi.isLoggedIn); //the function, which handles requests is specified as the last parameter
+/*
+    In this file is the routing for the REST-endpoints under /api managed
+*/
+router.post('/login', login); //the function decides which request type should be accepted
+router.delete('/login', checkAuthorization(false), logout); //middlewares can be defined in parameters
+router.get('/login', isLoggedIn); //the function, which handles requests is specified as the last parameter
 
-    const userApi = require('../apis/user-api');
-    router.get('/user', checkAuthorization(), userApi.getSelf);
+router.get('/user', checkAuthorization(false), getSelf);
 
-    const peopleDemoApi = require('../apis/people-demo-api');
-    router.get('/people', checkAuthorization(), peopleDemoApi.getPeople);
+const peopleDemoApi = require('../apis/people-demo-api');
+router.get('/people', checkAuthorization(false), peopleDemoApi.getPeople);
+console.log("Router setup successful");
 
-    return router;
-
-}
+export default router;

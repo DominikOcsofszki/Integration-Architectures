@@ -1,32 +1,32 @@
-const userService = require('../services/user-service')
-const authService = require('../services/auth-service');
-import { Router } from "express";
+import {add, get, verify} from '../services/user-service';
+import {authenticate, isAuthenticated, deAuthenticate, Session} from '../services/auth-service';
 import { Request } from "express";
 import { Response } from "express";
 import { User } from "../models/User";
 
-export default class UserApi {
-    login(req: Request, res: Response): void {
-        const db = req.app.get('db');//get database from express
-    
-        userService.verify(db, req.body).then((user: User) => { //verify credentials via user-service
-            authService.authenticate(req.session, user); //mark session as authenticated
-            res.send('login successful');
-        }).catch(() =>{
-            res.status(401).send('login failed');
-        })
-    }
-    
-    logout(req: Request, res: Response): void{
-        authService.deAuthenticate(req.session); //destroy session
-        res.send('logout successful');
-    }
-    
-    isLoggedIn(req: Request, res: Response): void{
-        if(authService.isAuthenticated(req.session)){ //check via auth-service
-            res.send({loggedIn: true});
-        }else {
-            res.send({loggedIn: false});
-        }
+
+export function login(req: Request, res: Response): void {
+    console.log("login called")
+    const db = req.app.get('db');//get database from express
+    console.log(db)
+
+    verify(db, req.body).then((user: User) => { //verify credentials via user-service
+        authenticate(req.session as Session, user); //mark session as authenticated
+        res.send('login successful');
+    }).catch(() =>{
+        res.status(401).send('login failed');
+    })
+}
+
+export function logout(req: Request, res: Response): void{
+    deAuthenticate(req.session as Session); //destroy session
+    res.send('logout successful');
+}
+
+export function isLoggedIn(req: Request, res: Response): void{
+    if(isAuthenticated(req.session as Session)){ //check via auth-service
+        res.send({loggedIn: true});
+    }else {
+        res.send({loggedIn: false});
     }
 }
