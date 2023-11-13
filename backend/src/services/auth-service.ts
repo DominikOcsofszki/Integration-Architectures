@@ -1,33 +1,24 @@
 import { User } from "../models/User";
 
-/**
- * marks user's session as authenticated
- * @param session current session
- * @param {User} user information about the current user
- */
-exports.authenticate = function (session: { authenticated: boolean; user: User; }, user: User){
+
+export type Session  = {
+    authenticated?: boolean
+    user?: User
+};
+
+
+exports.authenticate = function (session: Session, user: User){
     session.authenticated = true;
-    if(user.password) {
-        delete user.password;
-    }
+    user.password = "";
     session.user = user;
 }
 
-/**
- * checks session, if user is authenticated
- * @param session current session
- * @return {boolean} true if user is authenticated
- */
-exports.isAuthenticated = function (session){
-    return session.authenticated ? true : false;
+
+exports.isAuthenticated = function (session: Session){
+    return session.authenticated;
 }
 
-/**
- * resets session to a 'non-authenticated' state
- * @param session current session
- */
-exports.deAuthenticate = function (session){
+exports.deAuthenticate = function (session: Session){
     session.authenticated = false;
     session.user = undefined;
-    session = null;
 }

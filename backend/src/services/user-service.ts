@@ -1,35 +1,23 @@
-const crypto = require('crypto');
+import crypto from "crypto";
+import { Connection } from "mongoose"
+import { User } from "../models/User";
+import { Credentials } from "../models/Credentials";
+
 const salt = 'integrationArchitectures';
 
-/**
- * inserts a new user into database & hashes its password
- * @param db target database
- * @param {User} user new user
- * @return {Promise<any>}
- */
-exports.add = async function (db, user){
+exports.add = async function (db: Connection, user: User): Promise<any>{
     user.password = hashPassword(user.password);
 
     return (await db.collection('users').insertOne(user)).insertedId; //return unique ID
 }
 
-/**
- * retrieves user from database by its username
- * @param db source database
- * @param {string} username
- * @return {Promise<User>}
- */
-exports.get = async function (db, username){
-    return db.collection('users').findOne({username: username});
+
+exports.get = async function (db: Connection, username: string): Promise<User | null> {
+    return db.collection('users').findOne({ username: username }) as unknown as Promise<User>;
 }
 
-/**
- * verifies provided credentials against a database
- * @param db source database
- * @param {Credentials} credentials credentials to verify
- * @return {Promise<User>}
- */
-exports.verify = async function (db, credentials){
+
+exports.verify = async function (db: Connection, credentials: Credentials){
     let user = await this.get(db, credentials.username); //retrieve user with given email from database
 
     if(!user) throw new Error('User was not found!'); //no user found -> throw error
@@ -38,23 +26,12 @@ exports.verify = async function (db, credentials){
     return user;
 }
 
-/**
- * hashes password with sha3 256bit
- * @param {string} password
- * @return {string} hashed password
- */
-function hashPassword(password){
+function hashPassword(password: string): string{
     let hash = crypto.createHmac('sha3-256', salt);
     hash.update(password);
     return hash.digest('base64');
 }
 
-/**
- * verifies password against hash
- * @param {string} password password to verify
- * @param {string} hash hash of expected password
- * @return {boolean} true if password matches
- */
-function verifyPassword(password, hash){
+function verifyPassword(password: string, hash: string): boolean {
     return hashPassword(password) === hash; //verify by comparing hashes
 }
