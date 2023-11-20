@@ -8,6 +8,7 @@ import multer from "multer";
 import crypto from "crypto";
 import cors from "cors";
 
+import { User } from "./models/User"
 import apiRouter from './routes/api-routes';
 import { login } from "./apis/auth-api";
 
@@ -54,13 +55,13 @@ if(environment.db.username){
 const dbUri = 'mongodb://' + db_credentials + environment.db.host + ':' + environment.db.port + '/?authSource='+environment.db.authSource
 
 // Connect to MongoDB using Mongoose
-mongoose.connect(dbUri, {
+mongoose.connect(dbUri);
     // auth: {
     //    authSource: environment.db.authSource,
     // },
     //user: environment.db.username, // Your MongoDB username
     //pass: environment.db.password, // Your MongoDB password
-    });
+    // });
   
 const db: mongoose.Connection = mongoose.connection;
   
@@ -95,8 +96,7 @@ console.log("App is running")
 
 async function initDb(db: mongoose.Connection){
     if(await db.collection('users').count() < 1){ //if no user exists create admin user
-        const userService = require('./services/user-service');
-        const User = require("./models/User");
+        const userService = require('./services/user-service')
 
         const adminPassword = environment.defaultAdminPassword;
         await userService.add(db, new User('admin', '', 'admin', '', adminPassword, true));
