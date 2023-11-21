@@ -7,6 +7,7 @@ import multer from "multer";
 import crypto from "crypto";
 import cors from "cors";
 
+import { User } from "./models/User"
 import apiRouter from './routes/api-routes';
 import { login } from "./apis/auth-api";
 import { add } from './services/user-service';
