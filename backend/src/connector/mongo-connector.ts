@@ -18,13 +18,7 @@ export class MongoConnector {
         const dbUri = 'mongodb://' + db_credentials + environment.db.host + ':' + environment.db.port + '/?authSource='+environment.db.authSource
 
         // Connect to MongoDB using Mongoose
-        mongoose.connect(dbUri, {
-            // auth: {
-            //    authSource: environment.db.authSource,
-            // },
-            //user: environment.db.username, // Your MongoDB username
-            //pass: environment.db.password, // Your MongoDB password
-            });
+        mongoose.connect(dbUri);
         
         this.db = mongoose.connection;
         
