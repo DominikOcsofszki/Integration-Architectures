@@ -7,26 +7,26 @@ import multer from "multer";
 import crypto from "crypto";
 import cors from "cors";
 
-import { User } from "./models/User"
-import apiRouter from './routes/api-routes';
-import { login } from "./apis/auth-api";
-import { add } from './services/user-service';
+import { User } from "./model/User"
+import apiRouter from './api/api-routes';
+import { login } from "./api/auth-api";
+import { add } from './service/user-service';
 import { MongoConnector } from "./connector/mongo-connector"
 
 const upload = multer();
 const app = express();
 
 let environment: any;
-if(process.env.NODE_ENV === 'development'){
-    environment = require('../environments/environment.js').default;
-}else{
-    environment = require('../environments/environment.prod.js').default;
+if (process.env.NODE_ENV === 'development') {
+    environment = require('../environment/environment.js').default;
+} else {
+    environment = require('../environment/environment.prod.js').default;
 }
 
 app.set('environment', environment);
 
 app.use(express.json()); //adds support for json encoded bodies
-app.use(express.urlencoded({extended: true})); //adds support url encoded bodies
+app.use(express.urlencoded({ extended: true })); //adds support url encoded bodies
 //app.use(upload.array()); //adds support multipart/form-data bodies
 
 app.post("/login", login)
