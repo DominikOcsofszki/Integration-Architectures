@@ -1,28 +1,23 @@
 import axios from "axios";
 
-async function asyncCall() {
+export async function getItemsCRX(restOfLink: string) {
+    require('dotenv').config();
     const baseUrl = 'https://sepp-crm.inf.h-brs.de/opencrx-rest-CRX';
-    const credentials = { username: 'guest', password: 'guest', };
+    const credentials = {
+        username: `${process.env.CRX_USERNAME}`,
+        password: `${process.env.CRX_PASSWORD}`,
+    };
     const config = { headers: { 'Accept': 'application/json' }, auth: credentials, };
-    const product = "/org.opencrx.kernel.product1/provider/CRX/segment/Standard/product/";
-    const account = "/org.opencrx.kernel.product1/provider/CRX/segment/Standard/account/";
-    // const productUrl = `${baseUrl}/org.opencrx.kernel.product1/provider/CRX/segment/Standard/product/`;
-    const productUrl = `${baseUrl}${product}`;
-    const accountUrl = `${baseUrl}${account}`;
-
-    const someProducts = await axios.get(productUrl, config);
-    const someAccounts = await axios.get(productUrl, config);
-
-    console.log(someProducts);
-    const objects = someProducts.data.objects;
-    console.log(objects);
-    const objectsAccount = someAccounts.data.objects;
-    console.log(objectsAccount);
-
-    for (var i = 0; i < objects.length; i++) {
-        console.log(objects[i].name);
-    }
-
-
+    const fullUrl = `${baseUrl}${restOfLink}`;
+    const itemsReturnedAsJson = await axios.get(fullUrl, config);
+    const objects = itemsReturnedAsJson.data.objects;
+    return objects;
 }
-asyncCall();
+
+// //For testing purposes
+// import { crxAccountURL } from './tools-connector';
+// async function test() {
+//     const items = await getItemsCRX(crxAccountURL);
+//     console.log(items);
+// }
+// test();
