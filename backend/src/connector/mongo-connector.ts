@@ -19,7 +19,6 @@ export class MongoConnector {
 
         // Connect to MongoDB using Mongoose
         mongoose.connect(dbUri);
-        console.log(dbUri);
 
         this.db = mongoose.connection;
 
