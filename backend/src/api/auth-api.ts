@@ -7,7 +7,7 @@ import { User } from "../model/User";
 
 export function login(req: Request, res: Response): void {
     const db = req.app.get('db');//get database from express
-
+    console.log(req.body);
     verify(db, req.body).then((user: User) => { //verify credentials via user-service
         authenticate(req.session as Session, user); //mark session as authenticated
         res.send('login successful');
