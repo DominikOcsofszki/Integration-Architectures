@@ -25,8 +25,10 @@ router.post('/salesman/create', createSalesman)
 router.get('/salesman/read/:id', readSalesman)
 router.put('/salesman/update', updateSalesman)
 router.delete('/salesman/delete/:id', deleteSalesman)
-router.get("/bonus", readBonusComputationSheet);
+
+// REST-Interface for BonusComputationSheet CRUD
 router.post("/bonus", createBonusComputationSheet);
+router.get("/bonus/:salesManId/:yearOfOrder", readBonusComputationSheet);
 router.put("/bonus", updateBonusComputationSheet);
 router.delete("/bonus", deleteBonusComputationSheet);
 
