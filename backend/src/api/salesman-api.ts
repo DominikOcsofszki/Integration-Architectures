@@ -1,24 +1,33 @@
 import {Request, Response} from "express";
 import {createSalesmanService, readSalesmanService, updateSalesmanService, deleteSalesmanService} from "../service/salesman-service";
+import {Salesman} from "../model/Salesman";
 
 
-// Todo: check salesman data and improve exception handling
-export function createSalesman(req: Request, res: Response){
+export async function createSalesman(req: Request, res: Response){
     const db = req.app.get('db'); // line is duplicated in every method -> better strategy?
     const salesman = req.body;
-    createSalesmanService(db, salesman)
-        .then(() => res.status(200).send('Salesman created'))
-        .catch((reason) => res.status(400).send('Error on creation of salesman; reason: ' + reason))
+    if (checkSalesmanData(salesman)){
+        await createSalesmanService(db, salesman)
+            .then(() => res.status(200).send('Salesman created'))
+            .catch((reason) => res.status(400).send('Error on creation of salesman; reason: ' + reason))
+    } else {
+        res.status(400).send("Insufficient salesman data (id, firstname, lastname, department)")
+    }
+}
+
+function checkSalesmanData(salesman: Salesman): boolean{
+    return !(salesman.id === undefined || salesman.firstname === undefined
+        || salesman.lastname === undefined || salesman.department === undefined);
 }
 
 // Todo: move error handling to salesman-service?
-export function readSalesman(req: Request, res: Response){
+export async function readSalesman(req: Request, res: Response){
     const db = req.app.get('db');
     const salesmanId = parseInt(req.params.id);
     if (isNaN(salesmanId)){
         res.status(400).send("Id has to be a number")
     } else {
-        readSalesmanService(db, salesmanId)
+        await readSalesmanService(db, salesmanId)
             .then((value) =>
             {
                 if (value === null){
@@ -32,10 +41,10 @@ export function readSalesman(req: Request, res: Response){
 }
 
 // Todo: similar code to readSalesman -> outsource to function?
-export function updateSalesman(req: Request, res: Response) {
+export async function updateSalesman(req: Request, res: Response) {
     const db = req.app.get('db');
     const updatedSalesman = req.body;
-    updateSalesmanService(db, updatedSalesman)
+    await updateSalesmanService(db, updatedSalesman)
         .then((value) =>
         {
             if (value.matchedCount == 0){
@@ -47,13 +56,13 @@ export function updateSalesman(req: Request, res: Response) {
         .catch((reason) => res.status(400).send('Error on updating of salesman; reason: ' + reason))
 }
 
-export function deleteSalesman(req: Request, res: Response) {
+export async function deleteSalesman(req: Request, res: Response) {
     const db = req.app.get('db');
     const salesmanId = parseInt(req.params.id);
     if (isNaN(salesmanId)) {
         res.status(400).send("Id has to be a number")
     } else {
-        deleteSalesmanService(db, salesmanId)
+        await deleteSalesmanService(db, salesmanId)
             .then(value =>
             {
                 if (value.deletedCount == 0){
