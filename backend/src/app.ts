@@ -12,6 +12,11 @@ import apiRouter from './api/api-routes';
 import { login } from "./api/auth-api";
 import { add } from './service/user-service';
 import { MongoConnector } from "./connector/mongo-connector"
+import {getItemsFromHRM} from "./connector/hrm-connector";
+import {getItemsCRX} from "./connector/crx-connector";
+import {crxProductURL} from "./connector/tools-connector";
+
+require('dotenv').config({path: "./environment/.env"});
 
 const upload = multer();
 const app = express();
