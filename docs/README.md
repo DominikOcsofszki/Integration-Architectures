@@ -6,6 +6,7 @@ List of all documentation artifacts:
 - Mockups
 - Class Diagram for Bonus Computation Sheet
 - Glossar
+- Use Case Diagram
 - 4 Views Model including:
     - Context View
     - Runtime View
