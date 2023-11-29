@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "24b3632f-1027-4d85-be9c-45d2b14388ff",
+		"name": "Salesman CRUD Node.js",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30817167"
+	},
+	"item": [
+		{
+			"name": "Create Salesman",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 7,\r\n    \"firstname\": \"Heinz\",\r\n    \"lastname\": \"Zimmer\",\r\n    \"department\": \"Verkauf\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/salesman/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"salesman",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Salesman",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/salesman/read/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"salesman",
+						"read",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Salesman",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 7,\r\n    \"firstname\": \"Heinz\",\r\n    \"lastname\": \"Meier\",\r\n    \"department\": \"Management\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/salesman/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"salesman",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Salesman",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/salesman/delete/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"salesman",
+						"delete",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
