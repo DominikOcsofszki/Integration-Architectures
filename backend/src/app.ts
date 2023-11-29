@@ -53,3 +53,17 @@ app.use('/api', apiRouter); //mount api-router at path "/api"
 // !!!! attention all middlewares, mounted after the router wont be called for any requests
 
 const connector = new MongoConnector(app);
+
+//Testing of OrangeHRM Api
+function getSalesmanFromHRM(){
+    const data = getItemsFromHRM("https://sepp-hrm.inf.h-brs.de/symfony/web/index.php/api/v1/employee/search");
+    data.then((value => {console.log(value)}))
+}
+getSalesmanFromHRM();
+
+// Testing of OpenCRX Api
+function getDataFromCRX(){
+    const data = getItemsCRX(crxProductURL);
+    data.then((value => {console.log(value)}))
+}
+getDataFromCRX();
