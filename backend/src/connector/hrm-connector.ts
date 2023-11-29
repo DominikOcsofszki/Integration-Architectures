@@ -4,8 +4,7 @@ export async function getItemsFromHRM(fullUrl: string) {
     const token = await getTokenHRM();
     const config = { headers: { Authorization: `Bearer ${token}` } };
     const itemsReturnedAsJson = await axios.get(fullUrl, config);
-    const data = await itemsReturnedAsJson.data;
-    return data;
+    return itemsReturnedAsJson.data;
 }
 
 // //For testing purposes, can be deleted later
@@ -18,9 +17,7 @@ export async function getItemsFromHRM(fullUrl: string) {
 
 
 async function getTokenHRM() {
-    require('dotenv').config();
     const baseUrl = `${process.env.BASE_URL_HRM}`;
-    const axios = require('axios');
     const qs = require('querystring');
     const body = qs.stringify({
         client_id: 'api_oauth_id',
