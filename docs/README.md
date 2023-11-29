@@ -4,6 +4,8 @@ List of all documentation artifacts:
 - Userstories
 - OOA of most important business objects (including OrangeHrm, OpenCRX, Oodo)
 - Mockups
+- Class Diagram for Bonus Computation Sheet
+- Glossar
 - 4 Views Model including:
     - Context View
     - Runtime View
