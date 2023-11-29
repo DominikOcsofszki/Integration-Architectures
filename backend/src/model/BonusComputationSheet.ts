@@ -24,7 +24,7 @@ export interface Order {
 
 export interface SocialPerformanceEvaluation {
     socialAttributes: [SocialAttribute]
-    bonussumb: number;
+    bonussum: number;
 }
 
 export interface SocialAttribute {
