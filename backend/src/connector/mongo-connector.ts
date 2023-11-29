@@ -2,6 +2,7 @@ import { Express } from "express";
 import mongoose, { Connection } from "mongoose";
 import { add } from "../service/user-service";
 import { User } from "../model/User";
+import { TestUser } from "../model/Object";
 
 export class MongoConnector {
     app: Express
@@ -15,8 +16,7 @@ export class MongoConnector {
             db_credentials = environment.db.username + ':' + environment.db.password + '@';
         }
 
-        const dbUri = 'mongodb://' + db_credentials + environment.db.host + ':' + environment.db.port + '/?authSource=' + environment.db.authSource
-
+        const dbUri = 'mongodb://' + db_credentials + environment.db.host + ':' + environment.db.port + "/" +  environment.db.name + '?authSource=' + environment.db.authSource;
         // Connect to MongoDB using Mongoose
         mongoose.connect(dbUri);
 
@@ -34,8 +34,10 @@ export class MongoConnector {
                 console.log('Webserver started.');
             });
         });
-        console.log("App is running")
-    }
+        console.log("App is running");
+
+        
+    }   
 
     async initDb(db: Connection) {
         if (await db.collection('users').countDocuments() < 1) { //if no user exists create admin user
