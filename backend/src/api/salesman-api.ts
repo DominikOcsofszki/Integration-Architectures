@@ -1,5 +1,4 @@
 import {Request, Response} from "express";
-import {createSalesmanService, readSalesmanService, updateSalesmanService, deleteSalesmanService} from "../service/salesman-service";
 import { Salesman, SalesmanModel } from "../model/Salesman";
 
 
@@ -18,7 +17,7 @@ export async function readSalesman(req: Request, res: Response){
 
 // Todo: similar code to readSalesman -> outsource to function?
 export async function updateSalesman(req: Request, res: Response) {
-    await SalesmanModel.findOneAndUpdate({id: req.params.id}, req.body) //value a good default?
+    await SalesmanModel.findOneAndUpdate({id: req.params.id}, req.body)
         .then((value) =>
         {   
             if(value === null) {
@@ -31,19 +30,14 @@ export async function updateSalesman(req: Request, res: Response) {
 }
 
 export async function deleteSalesman(req: Request, res: Response) {
-    const salesmanId = parseInt(req.params.id);
-    if (isNaN(salesmanId)) {
-        res.status(400).send("Id has to be a number")
-    } else {
-        await SalesmanModel.findOneAndDelete({id: salesmanId})
-            .then(value =>
-            {
-                if (value  === null){
-                    res.status(400).send({message: `No Salesman with the id: ${req.body.id}`})
-                } else {
-                    res.status(200).send(value)
-                }
-            })
-            .catch((reason) => res.status(400).send(reason))
-    }
+    await SalesmanModel.findOneAndDelete({id: req.params.id})
+        .then(value =>
+        {
+            if (value  === null){
+                res.status(400).send({message: `No Salesman with the id: ${req.params.id}`})
+            } else {
+                res.status(200).send(value)
+            }
+        })
+        .catch((reason) => res.status(400).send(reason))
 }
