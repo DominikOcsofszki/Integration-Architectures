@@ -2,7 +2,6 @@ import { Express } from "express";
 import mongoose, { Connection } from "mongoose";
 import { add } from "../service/user-service";
 import { User } from "../model/User";
-import { TestUser } from "../model/Object";
 
 export class MongoConnector {
     app: Express

@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 export class Salesman {
     id: number;
     firstname: String;
@@ -19,3 +21,12 @@ export class Salesman {
         email:${this.department}`;
     }
 }
+
+export const SalesmanSchema = new mongoose.Schema({
+    id: {type: Number, required: true, unique: true},
+    firstname: {type: String, required: true},
+    lastname: {type: String, required: true},
+    department: {type: String, required: true},
+});
+
+export const SalesmanModel = mongoose.model("Salesman", SalesmanSchema);

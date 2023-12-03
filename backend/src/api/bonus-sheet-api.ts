@@ -8,7 +8,7 @@ export function createBonusComputationSheet(req: Request, res: Response) {
     try {
         const db: Connection = req.app.get('db');
         const sheet: BonusComputationSheet = req.body;
-        db.getClient().db(dbName).collection("BonusComputationSheet").insertOne(sheet);
+        db.collection("BonusComputationSheet").insertOne(sheet);
         res.send("Creation Successfull");
     } catch(e: unknown) {
         if(e instanceof Error){
@@ -22,7 +22,7 @@ export function readBonusComputationSheet(req: Request, res: Response) {
         const db: Connection = req.app.get("db");
         const salesManId: number = parseInt(req.params.salesManId);
         const yearOfOrder: number = parseInt(req.params.yearOfOrder);
-        const sheet: Promise<BonusComputationSheet> = db.getClient().db(dbName).collection("BonusComputationSheet")
+        const sheet: Promise<BonusComputationSheet> = db.collection("BonusComputationSheet")
             .findOne({salesManId: salesManId, yearOfOrder: yearOfOrder}) as unknown as Promise<BonusComputationSheet>;
         sheet.then((value) => res.status(200).send(value));
     } catch(e: unknown) {
