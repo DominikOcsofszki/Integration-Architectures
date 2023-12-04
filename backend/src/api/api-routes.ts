@@ -23,13 +23,13 @@ router.get('/people', checkAuthorization(true), getPeople);
 // REST-Interface for Salesman-CRUD
 router.post('/salesman', checkAuthorization(false), createSalesman)
 router.get('/salesman/:id', checkAuthorization(false), readSalesman)
-router.put('/salesman', checkAuthorization(false), updateSalesman)
+router.put('/salesman/:id', checkAuthorization(false), updateSalesman)
 router.delete('/salesman/:id', checkAuthorization(false), deleteSalesman)
 
 // REST-Interface for BonusComputationSheet CRUD
 router.post("/bonus", checkAuthorization(false), createBonusComputationSheet);
-router.get("/bonus/:salesManId/:yearOfOrder", checkAuthorization(false), readBonusComputationSheet);
-router.put("/bonus", checkAuthorization(false), updateBonusComputationSheet);
-router.delete("/bonus", checkAuthorization(false), deleteBonusComputationSheet);
+router.get("/bonus/:salesManId/:yearOfEvaluation", checkAuthorization(false), readBonusComputationSheet);
+router.put("/bonus/:salesManId/:yearOfEvaluation", checkAuthorization(false), updateBonusComputationSheet);
+router.delete("/bonus/:salesManId/:yearOfEvaluation", checkAuthorization(false), deleteBonusComputationSheet);
 
 export default router;
