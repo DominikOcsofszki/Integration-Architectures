@@ -27,7 +27,10 @@ export function getSalesmanFromHRM(){
     data.then((value => {
         const salesmen = value.data;
         salesmen.forEach((element: any) => {
-            console.log(element);
+            const id = parseInt(element.code);
+            const firstname = element.firstName;
+            const lastname = element.lastName;
+            createSalesman(id, firstname, lastname);
         });
     }))
 }
