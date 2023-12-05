@@ -8,14 +8,19 @@ export async function createSalesman(req: Request, res: Response){
         .catch((reason) => res.status(400).send(reason));
 }
 
-// Todo: move error handling to salesman-service?
 export async function readSalesman(req: Request, res: Response){
     await SalesmanModel.findOne({id: req.params.id})
-        .then((value) => res.status(200).send(value))
+        .then((value) =>
+        {
+            if(value === null){
+                res.status(404).send({message: `No salesman with the id ${req.params.id} found`});
+            }else {
+                res.status(200).send(value)
+            }
+        })
         .catch((reason) => res.status(400).send(reason))
 }
 
-// Todo: similar code to readSalesman -> outsource to function?
 export async function updateSalesman(req: Request, res: Response) {
     await SalesmanModel.findOneAndUpdate({id: req.params.id}, req.body)
         .then((value) =>
