@@ -16,6 +16,7 @@ import {getItemsFromHRM} from "./connector/hrm-connector";
 import {getItemsCRX} from "./connector/crx-connector";
 import {crxProductURL} from "./connector/tools-connector";
 import {getSalesmanFromHRM} from "./service/salesman-service";
+import {createLogger, transports} from "winston";
 
 require('dotenv').config({path: "./environment/.env"});
 
@@ -64,3 +65,7 @@ getSalesmanFromHRM();
 //     data.then((value => {console.log(value)}))
 // }
 // getDataFromCRX();
+
+export const logger = createLogger({
+    transports: [new transports.Console()],
+});

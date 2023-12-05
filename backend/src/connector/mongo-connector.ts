@@ -2,6 +2,7 @@ import { Express } from "express";
 import mongoose, { Connection } from "mongoose";
 import { add } from "../service/user-service";
 import { User } from "../model/User";
+import {logger} from "../app";
 
 export class MongoConnector {
     app: Express
@@ -26,14 +27,14 @@ export class MongoConnector {
         });
 
         this.db.once('open', async () => {
-            console.log('Mongoose connected to MongoDB.');
+            logger.info('Mongoose connected to MongoDB')
             await this.initDb(this.db);
             app.set('db', this.db);
             app.listen(environment.port, () => {
-                console.log('Webserver started.');
+                logger.info('Webserver started');
             });
         });
-        console.log("App is running");
+        logger.info("App is running");
 
         
     }   
