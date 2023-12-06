@@ -27,14 +27,17 @@ export class MongoConnector {
         });
 
         this.db.once('open', async () => {
-            logger.info('Mongoose connected to MongoDB')
+            // logger.info('Mongoose connected to MongoDB');
+            console.log('Mongoose connected to MongoDB');
             await this.initDb(this.db);
             app.set('db', this.db);
             app.listen(environment.port, () => {
-                logger.info('Webserver started');
+                console.log('Webserver started');
+                // logger.info('Webserver started');
             });
         });
-        logger.info("App is running");
+        console.log('App is running');
+        // logger.info("App is running");
 
         
     }   

@@ -15,7 +15,7 @@ import { MongoConnector } from "./connector/mongo-connector"
 import {getItemsFromHRM} from "./connector/hrm-connector";
 import {getItemsCRX} from "./connector/crx-connector";
 import {crxProductURL} from "./connector/tools-connector";
-import {getSalesmanFromHRM} from "./service/salesman-service";
+import {requestAndStoreSalesmanFromHRM} from "./service/salesman-service";
 import {createLogger, transports} from "winston";
 
 require('dotenv').config({path: "./environment/.env"});
@@ -57,7 +57,7 @@ app.use('/api', apiRouter); //mount api-router at path "/api"
 const connector = new MongoConnector(app);
 
 //Testing of OrangeHRM Api
-getSalesmanFromHRM();
+requestAndStoreSalesmanFromHRM();
 
 // // Testing of OpenCRX Api
 // function getDataFromCRX(){
