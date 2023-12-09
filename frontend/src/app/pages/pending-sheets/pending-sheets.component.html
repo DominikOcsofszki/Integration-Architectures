@@ -1,23 +1,19 @@
-<p>bonus-view-salesman works!</p>
-
-<!-- <button mat-raised-button color="primary" (click)="openDialog()">Open Dialog</button> -->
-<!-- 
-<p>
-    This is another example page. <br> 
-    You will find its files at: <code>frontend/src/app/pages/example-page/</code>
+<h1>Example Page</h1>
+<!-- <p>
+  This is another example page. <br>
+  You will find its files at: <code>frontend/src/app/pages/example-page/</code>
 </p>
 <p>
-    <code>example-page.component.html</code> specifies its HTML-template. There you can specify the structure of the
-    page.
+  <code>example-page.component.html</code> specifies its HTML-template. There you can specify the structure of the page.
 </p>
 
 <p>
-    The logic of this page is located in <code>example-page.component.ts</code> .
+  The logic of this page is located in <code>example-page.component.ts</code> .
 </p>
 
-<h2>Here is a litte example about fetching data from the backend and displaying it as a table:</h2>
+<h2>Here is a litte example about fetching data from the backend and displaying it as a table:</h2> -->
 
-<table mat-table class="mat-elevation-z8 cdk-table" [dataSource]="people">
+<table mat-table class="mat-elevation-z8 cdk-table" [dataSource]="pendingSalesman">
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
         <td mat-cell *matCellDef="let person">{{person.id}}</td>
@@ -43,4 +39,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table> -->
+</table>
