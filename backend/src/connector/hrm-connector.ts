@@ -10,8 +10,8 @@ export async function getItemsFromHRM(fullUrl: string) {
 // //For testing purposes, can be deleted later
 // import { hrmEmployeeURL } from './tools-connector';
 // async function test() {
-//     const items = await getItemsFromHRM(hrmEmployeeURL);
-//     console.log(items);
+    //     const items = await getItemsFromHRM(hrmEmployeeURL);
+    //     console.log(items);
 // }
 // test();
 

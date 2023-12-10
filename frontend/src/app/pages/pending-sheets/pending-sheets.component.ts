@@ -12,17 +12,10 @@ import { PendingSalesmanService } from '../../services/pending-saleman.service';
 })
 export class PendingSheetsComponent implements OnInit {
 
-  // }
-  // export class ExamplePageComponent implements OnInit {
-
-  // displayedColumns = ['id', 'name', 'color', 'age'];
   displayedColumns = ['id', 'firstname', 'lastname', 'department'];
-  // id: number;
-  // firstname: String;
-  // lastname: String;
-  // department: String;
 
   pendingSalesman: Salesman[] = [];
+  // pendingSalesman: Salesman[] = [new Salesman(1, 'John', 'Doe', 'Sales'),];
 
   constructor(private pendingSalesmanService: PendingSalesmanService) { }
 
