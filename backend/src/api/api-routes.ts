@@ -9,6 +9,8 @@ import { updateSalesman } from "./salesman-api";
 import { deleteSalesman } from "./salesman-api";
 import { createBonusComputationSheet, readBonusComputationSheet, 
     updateBonusComputationSheet, deleteBonusComputationSheet } from "./bonus-sheet-api";
+import hrRouter from "./hr-routes";
+import { readSheetStatus } from "./hr-api";
 
 const router = Router();
 
@@ -28,8 +30,10 @@ router.delete('/salesman/:id', checkAuthorization(false), deleteSalesman)
 
 // REST-Interface for BonusComputationSheet CRUD
 router.post("/bonus", checkAuthorization(false), createBonusComputationSheet);
-router.get("/bonus/:salesManId/:yearOfEvaluation", checkAuthorization(false), readBonusComputationSheet);
-router.put("/bonus/:salesManId/:yearOfEvaluation", checkAuthorization(false), updateBonusComputationSheet);
-router.delete("/bonus/:salesManId/:yearOfEvaluation", checkAuthorization(false), deleteBonusComputationSheet);
+router.get("/bonus/:salesmanId/:yearOfEvaluation", checkAuthorization(false), readBonusComputationSheet);
+router.put("/bonus/:salesmanId/:yearOfEvaluation", checkAuthorization(false), updateBonusComputationSheet);
+router.delete("/bonus/:salesmanId/:yearOfEvaluation", checkAuthorization(false), deleteBonusComputationSheet);
+
+router.use("/hr", hrRouter);
 
 export default router;

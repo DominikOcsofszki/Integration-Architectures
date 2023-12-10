@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 export interface BonusComputationSheet {
     socialPerformanceEvaluation: SocialPerformanceEvaluation;
     orderEvaluation: OrderEvaluation;
-    salesManId: number;
+    salesmanId: number;
     totalBonus: number;
     yearOfEvaluation: number;
     id: number;
-    status: string; //define it better
+    status: "incomplete"|"pending-hr"|"pending-ceo"|"pending-salesman"|"finished";
 }
 
 export interface OrderEvaluation {
@@ -71,7 +71,7 @@ const OrderEvaluationSchema = new mongoose.Schema({
 
 export const BonusComputationSheetSchema = new mongoose.Schema({
     id: {type: Number, required: true, unique: true},
-    salesManId: {type: Number, required: true},
+    salesmanId: {type: Number, required: true},
     yearOfEvaluation: {type: Number, required: true},
     totalBonus: {type: Number, required: true},
     status: {type: String, required: true},
