@@ -7,8 +7,10 @@ import { createSalesman } from './salesman-api'
 import { readSalesman } from './salesman-api'
 import { updateSalesman } from "./salesman-api";
 import { deleteSalesman } from "./salesman-api";
-import { createBonusComputationSheet, readBonusComputationSheet, 
-    updateBonusComputationSheet, deleteBonusComputationSheet } from "./bonus-sheet-api";
+import {
+    createBonusComputationSheet, readBonusComputationSheet,
+    updateBonusComputationSheet, deleteBonusComputationSheet
+} from "./bonus-sheet-api";
 
 const router = Router();
 
@@ -31,5 +33,8 @@ router.post("/bonus", checkAuthorization(false), createBonusComputationSheet);
 router.get("/bonus/:salesManId/:yearOfEvaluation", checkAuthorization(false), readBonusComputationSheet);
 router.put("/bonus/:salesManId/:yearOfEvaluation", checkAuthorization(false), updateBonusComputationSheet);
 router.delete("/bonus/:salesManId/:yearOfEvaluation", checkAuthorization(false), deleteBonusComputationSheet);
+
+// REST-Interface for Sheets
+// router.get('/hr/sheets/pending', checkAuthorization(false), sheetsPending) //ToDo Change to proper function!!!
 
 export default router;
