@@ -20,7 +20,7 @@ import { PendingSheetsComponent } from './pages/pending-sheets/pending-sheets.co
 const routes: Routes = [
     { path: 'login', component: LoginPageComponent },
     { path: 'example', component: ExamplePageComponent, canActivate: [AuthGuardService] },
-    { path: 'hr', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
+    { path: 'hr/sheet', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: 'hr/pending', component: PendingSheetsComponent, canActivate: [AuthGuardService] },
     { path: '', component: LandingPageComponent, canActivate: [AuthGuardService] },
     { path: '**', component: NotFoundPageComponent } // these entries are matched from top to bottom => not found should be the last entry
