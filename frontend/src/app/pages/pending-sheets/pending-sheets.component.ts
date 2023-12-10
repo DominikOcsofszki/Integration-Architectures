@@ -12,15 +12,25 @@ import { PendingSalesmanService } from '../../services/pending-saleman.service';
 })
 export class PendingSheetsComponent implements OnInit {
 
-  displayedColumns = ['id', 'firstname', 'lastname', 'department'];
+  displayedColumns = ['id', 'firstname', 'lastname', 'department', 'status'];
 
-  pendingSalesman: Salesman[] = [];
-  // pendingSalesman: Salesman[] = [new Salesman(1, 'John', 'Doe', 'Sales'),];
+  // pendingSalesman: Salesman[] = [];
+  pendingSalesman: Salesman[] = [new Salesman(1, 'John', 'Doe', 'Sales'),];
 
   constructor(private pendingSalesmanService: PendingSalesmanService) { }
 
   ngOnInit(): void {
-    this.fetchPendingSalesman();
+    this.pendingSalesman = [new Salesman(1, 'John', 'Doe', 'Sales'),
+    new Salesman(2, 'Jane', 'Doe', 'Sales'),
+    new Salesman(3, 'John', 'Smith', 'Sales'),
+    new Salesman(4, 'Jane', 'Smith', 'Sales'),
+    new Salesman(5, 'John', 'Doe', 'Sales'),
+    new Salesman(6, 'Jane', 'Doe', 'Sales'),
+    new Salesman(7, 'John', 'Smith', 'Sales'),
+    new Salesman(8, 'Jane', 'Smith', 'Sales'),
+    ];
+
+    // this.fetchPendingSalesman(); //ToDo add again after DB is ready
   }
   //Waiting for entries in DB!!!
   fetchPendingSalesman(): void {

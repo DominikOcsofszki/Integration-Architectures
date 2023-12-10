@@ -7,6 +7,7 @@ import { createSalesman } from './salesman-api'
 import { readSalesman } from './salesman-api'
 import { updateSalesman } from "./salesman-api";
 import { deleteSalesman } from "./salesman-api";
+import { readAllSalesman } from "./salesman-api";
 import {
     createBonusComputationSheet, readBonusComputationSheet,
     updateBonusComputationSheet, deleteBonusComputationSheet
@@ -35,6 +36,7 @@ router.put("/bonus/:salesManId/:yearOfEvaluation", checkAuthorization(false), up
 router.delete("/bonus/:salesManId/:yearOfEvaluation", checkAuthorization(false), deleteBonusComputationSheet);
 
 // REST-Interface for Sheets
+router.get('/hr/sheets/pending', checkAuthorization(false), readAllSalesman) //ToDo Change to proper function!!!
 // router.get('/hr/sheets/pending', checkAuthorization(false), sheetsPending) //ToDo Change to proper function!!!
 
 export default router;

@@ -1,5 +1,5 @@
-<h1>Sheet-DoDo name</h1>
-<p>displayedColumns = ['id', 'firstname', 'lastname', 'department'];</p>
+<h1> pending sheets:</h1>
+<p>Waiting for api</p>
 
 <table mat-table class="mat-elevation-z8 cdk-table" [dataSource]="pendingSalesman">
   <ng-container matColumnDef="id">
@@ -7,18 +7,23 @@
     <td mat-cell *matCellDef="let salesman">{{salesman.id}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="name">
+  <ng-container matColumnDef="firstname">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let salesman">{{salesman.firstname}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="name">
+  <ng-container matColumnDef="lastname">
     <th mat-header-cell *matHeaderCellDef>lastname</th>
     <td mat-cell *matCellDef="let salesman">{{salesman.lastname}}</td>
   </ng-container>
-  <ng-container matColumnDef="name">
+  <ng-container matColumnDef="department">
     <th mat-header-cell *matHeaderCellDef>department</th>
     <td mat-cell *matCellDef="let salesman">{{salesman.department}}</td>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>status</th>
+    <td mat-cell *matCellDef="let salesman">pending</td>
+    <!-- <td mat-cell *matCellDef="let salesman">{{salesman.department}}</td> -->
   </ng-container>
 
   <!-- <ng-container matColumnDef="color">
