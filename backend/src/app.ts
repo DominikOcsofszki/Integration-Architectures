@@ -17,7 +17,7 @@ import {getItemsCRX} from "./connector/crx-connector";
 import {crxProductURL} from "./connector/tools-connector";
 import {requestAndStoreSalesmanFromHRM} from "./service/salesman-service";
 import {createLogger, transports} from "winston";
-import {getSalesorderFromCRX} from "./service/salesorder-service";
+import {createOrderEvaluation, findSalesOrdersForSalesman} from "./service/salesorder-service";
 
 require('dotenv').config({path: "./environment/.env"});
 
@@ -61,7 +61,13 @@ const connector = new MongoConnector(app);
 // requestAndStoreSalesmanFromHRM();
 
 // Testing of OpenCRX Api
-getSalesorderFromCRX();
+// getSalesmanFromCRX().then((object) => console.log(object));
+createOrderEvaluation(90123);
+// async function test(){
+//     const items = await getItemsCRX("https://sepp-crm.inf.h-brs.de/opencrx-rest-CRX/org.opencrx.kernel.account1/provider/CRX/segment/Standard/account/L0NTAXG7TQTPM0EBHQA5MAZ7J");
+//     console.log(items);
+// }
+// test();
 
 export const logger = createLogger({
     transports: [new transports.Console()],
