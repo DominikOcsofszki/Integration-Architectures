@@ -29,9 +29,33 @@ export async function signSheet(req: Request, res: Response) {
         ).catch((reason) => res.status(400).send(reason));
 }
 
-export async function getSheets(req: Request, res: Response) {
+export async function getSheetByIdAndYear(req: Request, res: Response) {
     await BonusComputationSheetModel.find(
         {salesmanId: req.params.salesmanId, yearOfEvaluation: req.params.yearOfEvaluation})
+        .then((value) => {
+            res.status(200).send(value);
+        }).catch((reason) => res.status(400).send(reason));
+}
+
+export async function getSheetsById(req: Request, res: Response) {
+    await BonusComputationSheetModel.find(
+        {salesmanId: req.params.salesmanId})
+        .then((value) => {
+            res.status(200).send(value);
+        }).catch((reason) => res.status(400).send(reason));
+}
+
+export async function getSheetsByYear(req: Request, res: Response) {
+    await BonusComputationSheetModel.find(
+        {yearOfEvaluation: req.params.yearOfEvaluation})
+        .then((value) => {
+            res.status(200).send(value);
+        }).catch((reason) => res.status(400).send(reason));
+}
+
+export async function getAllSheets(req: Request, res: Response) {
+    await BonusComputationSheetModel.find(
+        {})
         .then((value) => {
             res.status(200).send(value);
         }).catch((reason) => res.status(400).send(reason));

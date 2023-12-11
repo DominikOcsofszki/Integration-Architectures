@@ -1,4 +1,5 @@
 import { Router } from "express"
+
 import { checkAuthorization } from "../middleware/auth-middleware";
 import hrRouter from "./hr";
 import ceoRouter from "./ceo";
