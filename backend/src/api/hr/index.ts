@@ -1,13 +1,5 @@
 /*
-    Post /setComputationDate ?
-    Get /sheet/status readSheetStatus()
-    Get /sheets/pending readPendingSheets()
-    Post /sheets/pending/sign/:salesmanId/:yearOfEvaluation signSheet()
-
-    Get /sheet/:year/:salesman getSheets()
-    Get /sheet/:year
-    Get /sheet/:salesman 
-    Get /sheet/
+    still missing: Post /setComputationDate ?
 */
 import { Router } from "express";
 import { readPendingSheets, readSheetStatus, signSheet, 
