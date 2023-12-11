@@ -1,17 +1,27 @@
-<h1> Name</h1>
-
-<button mat-raised-button color="primary">Download PDF</button>
+<h1> {{title}}</h1>
 
 
-<button>prev</button>
-<div>Show component from api call //ToDo</div> <button>next</button>
+<button (click)="generatePdf(contentToConvert, 99)">Generate PDF</button>
+
+<div>
+    <button id="prev">prev</button>
+
+    <div #contentToConvert>
+        <div class="salesman">
+            <p>The Api is needed, since we do not have a class for mongoRecords</p>
+            {{OneBonusComputationSheet.salesman.id}}
+            {{OneBonusComputationSheet.salesman.firstname}}
+            {{OneBonusComputationSheet.salesman.lastname}}
+            {{OneBonusComputationSheet.salesman.department}}
+
+            {{OneBonusComputationSheet.totalBonus}}
+        </div>
 
 
+    </div>
 
-
-
-
-
-<button mat-raised-button color="primary">
-    Sign
-</button>
+    <button id="next">next</button>
+    <button mat-raised-button color="primary">
+        Sign
+    </button>
+</div>
