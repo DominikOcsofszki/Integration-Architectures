@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { isLoggedIn, login, logout } from "./auth/auth-api";
-import { checkAuthorization } from "../middleware/auth-middleware";
+import { isLoggedIn, login, logout } from "./auth-api";
+import { checkAuthorization } from "../../middleware/auth-middleware";
 import { getSelf } from "./user-api";
 
 const router = Router();
@@ -10,3 +10,5 @@ router.delete('/login', checkAuthorization(["user"]), logout);
 router.get('/login', isLoggedIn);
 
 router.get('/user', checkAuthorization(["user"]), getSelf);
+
+export default router;
