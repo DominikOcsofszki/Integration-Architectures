@@ -15,25 +15,25 @@ import { readSheetStatus } from "./hr-api";
 const router = Router();
 
 router.post('/login', login);
-router.delete('/login', checkAuthorization(false), logout);
+router.delete('/login', checkAuthorization(["user"]), logout);
 router.get('/login', isLoggedIn);
 
-router.get('/user', checkAuthorization(false), getSelf);
+router.get('/user', checkAuthorization(["user"]), getSelf);
 
-router.get('/people', checkAuthorization(true), getPeople);
+router.get('/people', checkAuthorization(["admin"]), getPeople);
 
 // REST-Interface for Salesman-CRUD
-router.post('/salesman', checkAuthorization(false), createSalesman)
-router.get('/salesman/:id', checkAuthorization(false), readSalesman)
-router.put('/salesman/:id', checkAuthorization(false), updateSalesman)
-router.delete('/salesman/:id', checkAuthorization(false), deleteSalesman)
+router.post('/salesman', checkAuthorization(["admin"]), createSalesman)
+router.get('/salesman/:id', checkAuthorization(["admin"]), readSalesman)
+router.put('/salesman/:id', checkAuthorization(["admin"]), updateSalesman)
+router.delete('/salesman/:id', checkAuthorization(["admin"]), deleteSalesman)
 
 // REST-Interface for BonusComputationSheet CRUD
-router.post("/bonus", checkAuthorization(false), createBonusComputationSheet);
-router.get("/bonus/:salesmanId/:yearOfEvaluation", checkAuthorization(false), readBonusComputationSheet);
-router.put("/bonus/:salesmanId/:yearOfEvaluation", checkAuthorization(false), updateBonusComputationSheet);
-router.delete("/bonus/:salesmanId/:yearOfEvaluation", checkAuthorization(false), deleteBonusComputationSheet);
+router.post("/bonus", checkAuthorization(["admin"]), createBonusComputationSheet);
+router.get("/bonus/:salesmanId/:yearOfEvaluation", checkAuthorization(["admin"]), readBonusComputationSheet);
+router.put("/bonus/:salesmanId/:yearOfEvaluation", checkAuthorization(["admin"]), updateBonusComputationSheet);
+router.delete("/bonus/:salesmanId/:yearOfEvaluation", checkAuthorization(["admin"]), deleteBonusComputationSheet);
 
-router.use("/hr", hrRouter);
+router.use("/hr",checkAuthorization(["hr"]), hrRouter);
 
 export default router;

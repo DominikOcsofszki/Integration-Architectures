@@ -1,19 +1,24 @@
-export class User{
+import mongoose from "mongoose";
+
+export type Role = "admin"|"salesman"|"hr"|"ceo"|"user";
+
+export interface User{
     _id: undefined;
     username: string;
     firstname: string;
     lastname: string;
     email: string;
     password: string;
-    isAdmin: boolean;
-
-    constructor(username: string, firstname: string, lastname: string, email: string, password: string, isAdmin: boolean) {
-        this._id = undefined;
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-        this.isAdmin = isAdmin;
-    }
+    role: Role;
 }
+    
+export const UserSchema = new mongoose.Schema({
+    username: {type: String, required: true},
+    firstname: {type: String, required: true},
+    lastname: {type: String, required: true},
+    email: {type: String, required: true},
+    password: {type: String, required: true},
+    role: {type: String, required:true}
+});
+
+export const UserModel = mongoose.model("users",UserSchema);
