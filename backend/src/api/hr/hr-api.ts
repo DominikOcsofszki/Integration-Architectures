@@ -29,7 +29,7 @@ export async function signSheet(req: Request, res: Response) {
         ).catch((reason) => res.status(400).send(reason));
 }
 
-export async function readSalesman(req: Request, res: Response) {
+export async function getSheets(req: Request, res: Response) {
     await BonusComputationSheetModel.find(
         {salesmanId: req.params.salesmanId, yearOfEvaluation: req.params.yearOfEvaluation})
         .then((value) => {
