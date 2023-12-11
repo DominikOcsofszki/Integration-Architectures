@@ -2,7 +2,7 @@ import { Router } from "express"
 import { login, logout, isLoggedIn } from "./auth/auth-api";
 import { checkAuthorization } from "../middleware/auth-middleware";
 import { getSelf } from "./user-api";
-import { createSalesman } from './admin/salesman-api'
+import { createSalesman, createSalesmanUser } from './admin/salesman-api'
 import { readSalesman } from './admin/salesman-api'
 import { updateSalesman } from "./admin/salesman-api";
 import { deleteSalesman } from "./admin/salesman-api";
@@ -10,6 +10,7 @@ import { createBonusComputationSheet, readBonusComputationSheet,
     updateBonusComputationSheet, deleteBonusComputationSheet } from "./admin/bonus-sheet-api";
 import hrRouter from "./hr/hr-routes";
 import ceoRouter from "./ceo/ceo-routes";
+import salesmanRouter from "./salesman/salesman-routes";
 
 const router = Router();
 
@@ -24,6 +25,7 @@ router.post('/salesman', checkAuthorization(["admin"]), createSalesman)
 router.get('/salesman/:id', checkAuthorization(["admin"]), readSalesman)
 router.put('/salesman/:id', checkAuthorization(["admin"]), updateSalesman)
 router.delete('/salesman/:id', checkAuthorization(["admin"]), deleteSalesman)
+router.post("/creator", createSalesmanUser);
 
 // REST-Interface for BonusComputationSheet CRUD
 router.post("/bonus", checkAuthorization(["admin"]), createBonusComputationSheet);
@@ -34,5 +36,7 @@ router.delete("/bonus/:salesmanId/:yearOfEvaluation", checkAuthorization(["admin
 router.use("/hr",checkAuthorization(["hr"]), hrRouter);
 
 router.use("/ceo", checkAuthorization(["ceo"]), ceoRouter);
+
+router.use("/salesman", checkAuthorization(["salesman"]), salesmanRouter)
 
 export default router;

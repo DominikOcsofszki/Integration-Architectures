@@ -11,7 +11,7 @@ export async function readBonusComputationSheet(req: Request, res: Response) {
     await BonusComputationSheetModel.findOne({salesmanId: req.params.salesmanId, 
         yearOfEvaluation: req.params.yearOfEvaluation})
         .then((value) => res.status(200).send(value))
-        .catch((reason) => res.status(400).send(reason))
+        .catch((reason) => res.status(400).send(reason));
 }
 
 export async function updateBonusComputationSheet(req: Request, res: Response) {
