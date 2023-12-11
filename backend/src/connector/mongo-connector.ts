@@ -38,6 +38,8 @@ export class MongoConnector {
         
     }   
 
+
+    //@todo: How can I start this method?
     async initDb(db: Connection) {
         if (await db.collection('users').countDocuments() < 1) { //if no user exists create admin user
             const adminPassword = this.app.get("environment").defaultAdminPassword;

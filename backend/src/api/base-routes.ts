@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isLoggedIn, login, logout } from "./auth-api";
+import { isLoggedIn, login, logout } from "./auth/auth-api";
 import { checkAuthorization } from "../middleware/auth-middleware";
 import { getSelf } from "./user-api";
 

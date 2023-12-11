@@ -1,4 +1,4 @@
-import { BonusComputationSheet, BonusComputationSheetModel } from "../model/BonusComputationSheet";
+import { BonusComputationSheet, BonusComputationSheetModel } from "../../model/BonusComputationSheet";
 import { Request, Response } from "express";
 
 export async function createBonusComputationSheet(req: Request, res: Response) {
@@ -15,7 +15,6 @@ export async function readBonusComputationSheet(req: Request, res: Response) {
 }
 
 export async function updateBonusComputationSheet(req: Request, res: Response) {
-    console.log(req.body);
     await BonusComputationSheetModel.findOneAndUpdate({salesmanId: req.params.salesmanId, 
         yearOfEvaluation: req.params.yearOfEvaluation}, req.body)
         .then((value) =>

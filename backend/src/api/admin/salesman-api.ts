@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import { Salesman, SalesmanModel } from "../model/Salesman";
+import { Salesman, SalesmanModel } from "../../model/Salesman";
 
 
 export async function createSalesman(req: Request, res: Response){

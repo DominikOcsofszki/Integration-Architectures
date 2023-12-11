@@ -1,13 +1,12 @@
-import { verify } from '../service/user-service';
-import { authenticate, isAuthenticated, deAuthenticate, Session } from '../service/auth-service';
+import { verify } from '../../service/user-service';
+import { authenticate, isAuthenticated, deAuthenticate, Session } from '../../service/auth-service';
 import { Request } from "express";
 import { Response } from "express";
-import { User } from "../model/User";
+import { User } from "../../model/User";
 
 
 export function login(req: Request, res: Response): void {
     verify(req.body).then((user: User) => { //verify credentials via user-service
-        console.log(user);
         authenticate(req.session as Session, user); //mark session as authenticated
         res.send('login successful');
     }).catch(() => {

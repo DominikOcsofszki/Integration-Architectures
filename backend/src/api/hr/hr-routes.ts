@@ -1,13 +1,13 @@
 /*
     Post /setComputationDate ?
-    Get /sheets/status readSheetStatus()
+    Get /sheet/status readSheetStatus()
     Get /sheets/pending readPendingSheets()
     Post /sheets/pending/sign/:salesmanId/:yearOfEvaluation signSheet()
 
-    Get /sheets/:year/:salesman readSalesman()
-    Get /sheets/:year
-    Get /sheets/:salesman 
-    Get /sheets/
+    Get /sheet/:year/:salesman readSalesman()
+    Get /sheet/:year
+    Get /sheet/:salesman 
+    Get /sheet/
 */
 import { Router } from "express";
 import { readPendingSheets, readSheetStatus, signSheet, readSalesman } from "./hr-api";

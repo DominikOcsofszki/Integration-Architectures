@@ -1,6 +1,6 @@
 //Which endpoints does Salesmen need?
 
 /* 
-    get /sheet
+    get /sheet/:year
     post /confirm
 */
