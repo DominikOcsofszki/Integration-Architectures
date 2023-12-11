@@ -3,11 +3,47 @@ import {getItemsCRX} from "../connector/crx-connector";
 
 export async function createOrderEvaluation(salesmanId: number){
     const salesOrders = await findSalesOrdersForSalesman(salesmanId);
-    const allCustomers = await getAllCustomerFromCRX();
-    salesOrders.forEach((salesOrder: any) => {
+    const allCustomers = await getAllCustomersFromCRX();
+    for (const salesOrder of salesOrders) {
         const client = findClientNameForSalesorder(salesOrder, allCustomers);
         const clientRanking = getClientRankingForClient(client, allCustomers);
         console.log(salesOrder.name + ' Client: ' + client + ' ClientRanking: ' + clientRanking);
+
+        const positions = await getPositionsOfSalesOrder(salesOrder);
+
+        try{
+            for (const position of positions) {
+                const price = position.pricePerUnit;
+                const itemAmount = position.quantity;
+                const productUrl = position['product']['@href'] as string;
+                const productname = await getProductnameOfPostion(productUrl);
+                console.log('price: ' + price + ' itemAmount: ' + itemAmount + ' productname: ' + productname);
+            }
+        } catch{
+            console.log("No positions found");
+        }
+    }
+}
+
+async function getProductnameOfPostion(productUrl: string){
+    return new Promise<string>((resolve, reject) => {
+        const product = getItemsCRX(productUrl);
+        product.then((product) => {resolve(product['name'])});
+        product.catch((reason) => {reject(reason)});
+    })
+}
+
+async function getPositionsOfSalesOrder(salesOrder: any){
+    return new Promise<any[]>((resolve, reject) => {
+        const salesOrderURl = salesOrder['@href'];
+        const positions = getItemsCRX(salesOrderURl+'/position');
+        positions.then((positions) => {
+            if (positions != undefined){
+                resolve(positions.objects)
+            } else {
+                reject('No positions for salesorder');
+            }});
+        positions.catch((reason) => {reject(reason)});
     })
 }
 
@@ -64,7 +100,7 @@ async function getSalesordersFromCRX(): Promise<object[]> {
 }
 
 function getSalesordersForSalesman(salesOrders: any[], salesmanUrl: string) {
-    const assignedSalesOrders: object[] = [];
+    const assignedSalesOrders: any[] = [];
     for (const salesOrder of salesOrders) {
         if (salesOrder.salesRep['@href'] as string === salesmanUrl){
             assignedSalesOrders.push(salesOrder);
@@ -73,7 +109,7 @@ function getSalesordersForSalesman(salesOrders: any[], salesmanUrl: string) {
     return assignedSalesOrders;
 }
 
-async function getAllCustomerFromCRX(){
+async function getAllCustomersFromCRX(){
     return new Promise<any[]>((resolve, reject) => {
         const allCustomer = getItemsCRX("https://sepp-crm.inf.h-brs.de/opencrx-rest-CRX/org.opencrx.kernel.account1/provider/CRX/segment/Standard/account/?queryType=org:opencrx:kernel:account1:LegalEntity");
         allCustomer.then((customers) => {
