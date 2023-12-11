@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as jsPDFAll from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Salesman } from 'src/app/models/Salesman';
@@ -10,8 +10,25 @@ import { BonusComputationSheet, BonusComputationSheetSchema, BonusComputationShe
 })
 export class BonusViewSalesmanComponent {
   title = "HR"
-  salesman: Salesman = new Salesman(1, 'John', 'Doe', 'Sales');
-  OneBonusComputationSheet: any = new BonusComputationSheetModel(this.salesman[0]);
+  salesman: Salesman = new Salesman(1, 'John', 'Doe', 'Sales'); //ToDo delete after DB is ready
+  OneBonusComputationSheet: any;
+
+  ngOnInit(): void {
+    this.OneBonusComputationSheet = new BonusComputationSheetModel(this.salesman[0]);
+    // this.fetchBonusSheetSalesman(); //ToDo add again after DB is ready
+  }
+  //Waiting for entries in DB!!!
+  // fetchBonusSheetSalesman(): void {
+  //   this.bonusService.getPendingSalesman().subscribe((response): void => {
+  //     if (response.status === 200) {
+  //       this.OneBonusComputationSheet = response.body;
+  //     }
+  //   });
+  // }
+
+
+
+
 
   generatePdf(data, id: number) {
     html2canvas(data, { allowTaint: true }).then(canvas => {
