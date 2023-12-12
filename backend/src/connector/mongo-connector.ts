@@ -1,7 +1,7 @@
 import { Express } from "express";
 import mongoose, { Connection } from "mongoose";
-import { add } from "../service/user-service";
-import { User } from "../model/User";
+import { User, UserModel, UserSchema } from "../model/User";
+import { hashPassword } from "../service/user-service";
 
 export class MongoConnector {
     app: Express
@@ -27,7 +27,7 @@ export class MongoConnector {
 
         this.db.once('open', async () => {
             console.log('Mongoose connected to MongoDB.');
-            await this.initDb(this.db);
+            this.initDb(this.db);
             app.set('db', this.db);
             app.listen(environment.port, () => {
                 console.log('Webserver started.');
@@ -38,10 +38,21 @@ export class MongoConnector {
         
     }   
 
+
+    //@todo: How can I start this method?
     async initDb(db: Connection) {
         if (await db.collection('users').countDocuments() < 1) { //if no user exists create admin user
             const adminPassword = this.app.get("environment").defaultAdminPassword;
-            await add(db, new User('admin', '', 'admin', '', adminPassword, true));
+            await UserModel.create(
+                {
+                username:'admin',
+                email: 'admin',
+                firstname: '',
+                lastname: '', 
+                password: hashPassword(adminPassword),
+                role: "admin"
+                }
+            );
             console.log('created admin user with password: ' + adminPassword);
         }
     }
