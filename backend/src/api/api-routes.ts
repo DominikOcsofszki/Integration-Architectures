@@ -7,8 +7,10 @@ import { createSalesman } from './salesman-api'
 import { readSalesman } from './salesman-api'
 import { updateSalesman } from "./salesman-api";
 import { deleteSalesman } from "./salesman-api";
-import { createBonusComputationSheet, readBonusComputationSheet, 
-    updateBonusComputationSheet, deleteBonusComputationSheet } from "./bonus-sheet-api";
+import {
+    createBonusComputationSheet, readBonusComputationSheet,
+    updateBonusComputationSheet, deleteBonusComputationSheet
+} from "./bonus-sheet-api";
 
 const router = Router();
 
