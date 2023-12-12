@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {PeopleDemoService} from '../../services/people-demo.service';
-import {ExampleDatapoint} from '../../interfaces/example-datapoint';
+import { PeopleDemoService } from '../../services/people-demo.service';
+import { ExampleDatapoint } from '../../interfaces/example-datapoint';
 
 @Component({
     selector: 'app-example-page',
@@ -18,9 +18,9 @@ export class ExamplePageComponent implements OnInit {
         this.fetchPeople();
     }
 
-    fetchPeople(): void{
+    fetchPeople(): void {
         this.peopleDemoService.getPeople().subscribe((response): void => {
-            if (response.status === 200){
+            if (response.status === 200) {
                 this.people = response.body;
             }
         });

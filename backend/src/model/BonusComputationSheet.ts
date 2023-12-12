@@ -3,11 +3,12 @@ import mongoose from "mongoose";
 export interface BonusComputationSheet {
     socialPerformanceEvaluation: SocialPerformanceEvaluation;
     orderEvaluation: OrderEvaluation;
-    salesManId: number;
+    salesmanId: number;
     totalBonus: number;
     yearOfEvaluation: number;
     id: number;
-    status: string; //define it better
+    status: Status;
+    comment?: string;
 }
 
 export interface OrderEvaluation {
@@ -18,10 +19,10 @@ export interface OrderEvaluation {
 export interface Order {
     productname: string;
     client: string;
-    clientRanking: 1 | 2 | 3 | 4 | 5;
+    clientRanking: ClientRanking;
     bonus: number;
     itemamount: number;
-    comment: string;
+    comment?: string;
     price: number;
 }
 
@@ -31,7 +32,7 @@ export interface SocialPerformanceEvaluation {
 }
 
 export interface SocialAttribute {
-    comment: string;
+    comment?: string;
     targetValue: number;
     actualValue: number;
     socialAttributeName: string;
@@ -71,13 +72,23 @@ const OrderEvaluationSchema = new mongoose.Schema({
 
 export const BonusComputationSheetSchema = new mongoose.Schema({
     id: {type: Number, required: true, unique: true},
-    salesManId: {type: Number, required: true},
+    salesmanId: {type: Number, required: true},
     yearOfEvaluation: {type: Number, required: true},
     totalBonus: {type: Number, required: true},
     status: {type: String, required: true},
     socialPerformanceEvaluation:{type: SocialPerformanceEvaluationSchema, required: true},
     orderEvaluation: {type: OrderEvaluationSchema, required: true},
+    comment: String,
 });
 
 export const BonusComputationSheetModel = mongoose.model("sheets",BonusComputationSheetSchema);
 
+export type Comment = {
+    type: "Order" | "SocialAttribute" | "BonusComputationSheet";
+    _id?: String;
+    text: String;
+}
+
+export type Status = "incomplete"|"pending-hr"|"pending-ceo"|"pending-salesman"|"finished";
+
+export type ClientRanking = 1 | 2 | 3 | 4 | 5;

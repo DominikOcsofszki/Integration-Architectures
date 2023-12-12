@@ -1,5 +1,7 @@
 import {Request, Response} from "express";
-import { Salesman, SalesmanModel } from "../model/Salesman";
+import { Salesman, SalesmanModel } from "../../model/Salesman";
+import { UserModel } from "../../model/User";
+import { hashPassword } from "../../service/user-service";
 
 
 export async function createSalesman(req: Request, res: Response){
@@ -46,3 +48,4 @@ export async function deleteSalesman(req: Request, res: Response) {
         })
         .catch((reason) => res.status(400).send(reason))
 }
+
