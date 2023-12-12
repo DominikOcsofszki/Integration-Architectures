@@ -43,16 +43,3 @@ export async function deleteSalesman(req: Request, res: Response) {
         })
         .catch((reason) => res.status(400).send(reason))
 }
-
-export async function readAllSalesman(req: Request, res: Response) {
-    // await SalesmanModel.findOne({ id: req.params.id })
-    await SalesmanModel.find()
-        .then((value) => {
-            if (value === null) {
-                res.status(404).send({ message: `No salesman found` });
-            } else {
-                res.status(200).send(value)
-            }
-        })
-        .catch((reason) => res.status(400).send(reason))
-}
