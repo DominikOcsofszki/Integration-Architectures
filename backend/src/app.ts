@@ -11,11 +11,11 @@ import { User } from "./model/User"
 import apiRouter from './api';
 import { login } from "./api/user/auth-api";
 import { MongoConnector } from "./connector/mongo-connector"
-import {getItemsFromHRM} from "./connector/hrm-connector";
-import {getItemsCRX} from "./connector/crx-connector";
-import {crxProductURL} from "./connector/tools-connector";
+import { getItemsFromHRM } from "./connector/hrm-connector";
+import { getItemsCRX } from "./connector/crx-connector";
+import { crxProductURL } from "./connector/tools-connector";
 
-require('dotenv').config({path: "./environment/.env"});
+require('dotenv').config({ path: "./environment/.env" });
 
 const upload = multer();
 const app = express();

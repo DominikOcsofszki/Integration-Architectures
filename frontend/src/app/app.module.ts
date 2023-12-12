@@ -18,6 +18,8 @@ import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
 import { ExamplePageComponent } from './pages/example-page/example-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import {MatTableModule} from '@angular/material/table';
+import { BonusViewSalesmanComponent } from './pages/bonus-view-salesman/bonus-view-salesman.component';
+import { PendingSheetsComponent } from './pages/pending-sheets/pending-sheets.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,9 @@ import {MatTableModule} from '@angular/material/table';
         LandingPageComponent,
         MenuBarComponent,
         ExamplePageComponent,
-        NotFoundPageComponent
+        NotFoundPageComponent,
+        BonusViewSalesmanComponent,
+        PendingSheetsComponent
     ],
     imports: [
         BrowserModule,
