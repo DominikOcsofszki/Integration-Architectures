@@ -7,7 +7,7 @@ export async function getItemsCRX(fullUrl: string) {
     };
     const config = { headers: { 'Accept': 'application/json' }, auth: credentials, };
     const itemsReturnedAsJson = await axios.get(fullUrl, config);
-    return itemsReturnedAsJson.data.objects;
+    return itemsReturnedAsJson.data;
 }
 
 // //For testing purposes

@@ -30,10 +30,12 @@ export class MongoConnector {
             this.initDb(this.db);
             app.set('db', this.db);
             app.listen(environment.port, () => {
-                console.log('Webserver started.');
+                console.log('Webserver started');
+                // logger.info('Webserver started');
             });
         });
-        console.log("App is running");
+        console.log('App is running');
+        // logger.info("App is running");
 
         
     }   
