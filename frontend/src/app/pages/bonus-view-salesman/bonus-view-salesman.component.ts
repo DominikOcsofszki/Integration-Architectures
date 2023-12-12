@@ -14,10 +14,13 @@ export class BonusViewSalesmanComponent {
   OneBonusComputationSheet: any;
 
   ngOnInit(): void {
-    this.OneBonusComputationSheet = new BonusComputationSheetModel(this.salesman[0]);
+    this.OneBonusComputationSheet = new BonusComputationSheetModel(this.salesman[0],
+    );
     // this.fetchBonusSheetSalesman(); //ToDo add again after DB is ready
   }
-  //Waiting for entries in DB!!!
+  // constructor(private bonusService: BonusService) { }
+
+  // // Waiting for entries in DB!!!
   // fetchBonusSheetSalesman(): void {
   //   this.bonusService.getPendingSalesman().subscribe((response): void => {
   //     if (response.status === 200) {
