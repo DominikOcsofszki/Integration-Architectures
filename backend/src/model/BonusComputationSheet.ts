@@ -1,16 +1,6 @@
 import mongoose from "mongoose";
 
-export interface BonusComputationSheetI {
-    socialPerformanceEvaluation: SocialPerformanceEvaluation;
-    orderEvaluation: OrderEvaluation;
-    salesmanId: number;
-    totalBonus: number;
-    yearOfEvaluation: number;
-    id: number;
-    status: Status;
-    comment?: string;
-}
-class BonusComputationSheet implements BonusComputationSheetI {
+export class BonusComputationSheet {
     socialPerformanceEvaluation: SocialPerformanceEvaluation;
     orderEvaluation: OrderEvaluation;
     salesmanId: number;
@@ -20,43 +10,29 @@ class BonusComputationSheet implements BonusComputationSheetI {
     status: Status;
     comment?: string;
 
-    constructor(salesmanId: number, yearOfEvaluation: number, id: number) {
+    constructor(salesmanId: number, yearOfEvaluation: number, id: number, totalBonus: number, socialPerformanceEvaluation: SocialPerformanceEvaluation, orderEvaluation: OrderEvaluation, comment?: string) {
         this.salesmanId = salesmanId;
         this.yearOfEvaluation = yearOfEvaluation;
         this.id = id;
-        this.totalBonus = 0;
+        this.totalBonus = totalBonus;
         this.status = "incomplete";
-        this.socialPerformanceEvaluation = new SocialPerformanceEvaluation([]);
-        this.orderEvaluation = new OrderEvaluation([]);
+        this.socialPerformanceEvaluation = socialPerformanceEvaluation;
+        this.orderEvaluation = orderEvaluation;
+        this.comment = comment;
     }
 }
 
-export interface OrderEvaluationI {
-    orders: [Order];
-    bonussum: number;
-}
-
-class OrderEvaluation implements OrderEvaluationI {
+export class OrderEvaluation {
     orders: [Order];
     bonussum: number;
 
-    constructor(orders: [Order]) {
+    constructor(orders: [Order], bonussum: number) {
         this.orders = orders;
-        this.bonussum = 0;
+        this.bonussum = bonussum;
     }
 }
 
-export interface OrderI {
-    productname: string;
-    client: string;
-    clientRanking: ClientRanking;
-    bonus: number;
-    itemamount: number;
-    comment?: string;
-    price: number;
-}
-
-class Order implements OrderI {
+export class Order {
     productname: string;
     client: string;
     clientRanking: ClientRanking;
@@ -65,21 +41,18 @@ class Order implements OrderI {
     comment?: string;
     price: number;
 
-    constructor(productname: string, client: string, clientRanking: ClientRanking, bonus: number, itemamount: number, price: number) {
+    constructor(productname: string, client: string, clientRanking: ClientRanking, bonus: number, itemamount: number, price: number, comment?: string) {
         this.productname = productname;
         this.client = client;
         this.clientRanking = clientRanking;
         this.bonus = bonus;
         this.itemamount = itemamount;
         this.price = price;
+        this.comment = comment;
     }
 }
 
-export interface SocialPerformanceEvaluationI {
-    socialAttributes: [SocialAttribute]
-    bonussum: number;
-}
-class SocialPerformanceEvaluation implements SocialPerformanceEvaluationI {
+export class SocialPerformanceEvaluation {
     socialAttributes: [SocialAttribute];
     bonussum: number;
 
@@ -89,25 +62,19 @@ class SocialPerformanceEvaluation implements SocialPerformanceEvaluationI {
     }
 }
 
-export interface SocialAttributeI {
-    comment?: string;
-    targetValue: number;
-    actualValue: number;
-    socialAttributeName: string;
-    bonus: number;
-}
-class SocialAttribute implements SocialAttributeI {
+export class SocialAttribute {
     comment?: string;
     targetValue: number;
     actualValue: number;
     socialAttributeName: string;
     bonus: number;
 
-    constructor(targetValue: number, actualValue: number, socialAttributeName: string) {
+    constructor(targetValue: number, actualValue: number, socialAttributeName: string, bonus: number, comment?: string) {
         this.targetValue = targetValue;
         this.actualValue = actualValue;
         this.socialAttributeName = socialAttributeName;
-        this.bonus = 0;
+        this.bonus = bonus;
+        this.comment = comment;
     }
 }
 const SocialAttributeSchema = new mongoose.Schema({

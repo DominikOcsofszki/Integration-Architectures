@@ -3,11 +3,6 @@ import { orderEvaluationBonus } from "../bonus-calculation-service";
 
 /**
  * Creates an Order for an OrderEvaluation. Bonus is calculated and comment is an empty string
- * @param productname
- * @param client
- * @param clientRanking
- * @param itemamount
- * @param price
  */
 export function createOrder(
     productname: string,
@@ -21,14 +16,13 @@ export function createOrder(
         price,
         itemamount
     );
-    const order: Order = {
-        productname: productname,
-        client: client,
-        clientRanking: clientRanking,
-        itemamount: itemamount,
-        price: price,
-        bonus: bonus,
-        comment: "",
-    };
+    const order = new Order(
+        productname,
+        client,
+        clientRanking,
+        itemamount,
+        price,
+        bonus
+    );
     console.log(order);
 }
