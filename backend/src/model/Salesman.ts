@@ -6,7 +6,12 @@ export class Salesman {
     lastname: String;
     department: String;
 
-    constructor(id: number, firstName: String, lastName: String, department: String) {
+    constructor(
+        id: number,
+        firstName: String,
+        lastName: String,
+        department: String
+    ) {
         this.id = id;
         this.firstname = firstName;
         this.lastname = lastName;
@@ -18,15 +23,15 @@ export class Salesman {
         id:${this.id},
         firstName: ${this.firstname},
         lastName: ${this.lastname},
-        email:${this.department}`;
+        department:${this.department}`;
     }
 }
 
 export const SalesmanSchema = new mongoose.Schema({
-    id: {type: Number, required: true, unique: true},
-    firstname: {type: String, required: true},
-    lastname: {type: String, required: true},
-    department: {type: String, required: true},
+    id: { type: Number, required: true, unique: true },
+    firstname: { type: String, required: true },
+    lastname: { type: String, required: true },
+    department: { type: String, required: true },
 });
 
 export const SalesmanModel = mongoose.model("Salesman", SalesmanSchema);

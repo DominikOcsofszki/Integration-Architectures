@@ -5,7 +5,10 @@ export async function getItemsCRX(fullUrl: string) {
         username: `${process.env.CRX_USERNAME}`,
         password: `${process.env.CRX_PASSWORD}`,
     };
-    const config = { headers: { 'Accept': 'application/json' }, auth: credentials, };
+    const config = {
+        headers: { Accept: "application/json" },
+        auth: credentials,
+    };
     const itemsReturnedAsJson = await axios.get(fullUrl, config);
     return itemsReturnedAsJson.data;
 }
