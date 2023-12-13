@@ -1,13 +1,13 @@
-// const sinon = require('sinon');
-import sinon from 'sinon';
-// const request = require('request');
-import request from 'request';
-// const chai = require('chai');
-import chai from 'chai';
+const sinon = require('sinon');
+const request = require('request');
+const chai = require('chai');
+const mocha = require("mocha")
+
 const should = chai.should();
 var expect = chai.expect;
 
-const hrm = require('../test_enterprise-apps/OrangeHRMTesterWithAxios.js');
+
+// const hrm = require('../test_enterprise-apps/OrangeHRMTesterWithAxios.js');
 
 const base = 'http://localhost:1337';
 
