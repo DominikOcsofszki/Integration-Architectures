@@ -4,7 +4,6 @@ const dbReady: boolean = false;
 
 export async function createSheetsForAllSalesmen(year: number){
     await requestAndStoreSalesmanFromHRM();
-    console.log("hier")
     const salesmanIds: number[] = await getAllSalesmanIdsFromDB();
     if (!dbReady) {
         fillDB(salesmanIds)

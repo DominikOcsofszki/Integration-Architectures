@@ -62,13 +62,14 @@ const connector = new MongoConnector(app);
 
 // Testing of OpenCRX Api
 // getSalesmanFromCRX().then((object) => console.log(object));
-createSheetsForAllSalesmen(2023);
-console.log("2");
 // async function test(){
 //     const items = await getItemsCRX("https://sepp-crm.inf.h-brs.de/opencrx-rest-CRX/org.opencrx.kernel.account1/provider/CRX/segment/Standard/account/L0NTAXG7TQTPM0EBHQA5MAZ7J");
 //     console.log(items);
 // }
 // test();
+
+// Testing of creating BonusComputationSheets
+createSheetsForAllSalesmen(2023);
 
 export const logger = createLogger({
     transports: [new transports.Console()],
