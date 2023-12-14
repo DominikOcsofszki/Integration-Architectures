@@ -18,7 +18,10 @@ const router = Router();
 
 router.get("/pending/sheet", readPendingSheets);
 
-router.post("/pending/sheet/comment/:salesmanId/:yearOfEvaluation", addComments);
+router.post(
+    "/pending/sheet/comment/:salesmanId/:yearOfEvaluation",
+    addComments
+);
 
 router.post("/pending/sheet/sign/:salesmanId/:yearOfEvaluation", signSheet);
 

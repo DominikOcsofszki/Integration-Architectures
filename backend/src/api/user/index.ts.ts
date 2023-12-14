@@ -5,10 +5,10 @@ import { getSelf } from "./user-api";
 
 const router = Router();
 
-router.post('/login', login);
-router.delete('/login', checkAuthorization(["user"]), logout);
-router.get('/login', isLoggedIn);
+router.post("/login", login);
+router.delete("/login", checkAuthorization(["user"]), logout);
+router.get("/login", isLoggedIn);
 
-router.get('/user', checkAuthorization(["user"]), getSelf);
+router.get("/user", checkAuthorization(["user"]), getSelf);
 
 export default router;
