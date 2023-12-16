@@ -5,7 +5,7 @@ import hrRouter from "./hr";
 import ceoRouter from "./ceo";
 import salesmanRouter from "./salesman";
 import adminRouter from "./admin";
-import baseRouter from "./user/index.ts";
+import baseRouter from "./user";
 
 const router = Router();
 

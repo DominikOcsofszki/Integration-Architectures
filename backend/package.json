@@ -1,54 +1,65 @@
 {
-  "name": "backend",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "format": "eslint --ext js,ts,tsx src --fix && prettier --write \"src/**/*.{ts,tsx}\"",
-    "start": "tsc && NODE_ENV=development node ./dist/app.js",
-    "start_win": "tsc && set NODE_ENV=development&& node ./dist/app.js",
-    "start_production": "set NODE_ENV=production&& node ./dist/app.js",
-    "test_unit": "mocha",
-    "coverage": "nyc --all --reporter=cobertura --reporter=text-summary npm run test_unit",
-    "tsc": "tsc"
-  },
-  "mocha": {
-    "exit": true,
-    "recursive": true,
-    "spec": [
-      "./unit-tests/services/"
-    ],
-    "reporter": "cypress-multi-reporters",
-    "reporter-options": "configFile=mocha-reporters-conf.json"
-  },
-  "dependencies": {
-    "axios": "^1.6.2",
-    "cookie-session": "^2.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "~4.18.2",
-    "mongodb": "^5.5.0",
-    "mongoose": "^8.0.0",
-    "multer": "^1.4.5-lts.1",
-    "prettier": "^3.1.1",
-    "winston": "^3.11.0"
-  },
-  "devDependencies": {
-    "@types/cookie-session": "^2.0.47",
-    "@types/cors": "^2.8.16",
-    "@types/express": "^4.17.21",
-    "@types/express-session": "^1.17.10",
-    "@types/multer": "^1.4.10",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
-    "chai": "^4.3.6",
-    "chai-as-promised": "^7.1.1",
-    "chai-exclude": "^2.1.0",
-    "cypress-multi-reporters": "^1.6.1",
-    "eslint": "^8.55.0",
-    "mocha": "^10.0.0",
-    "mocha-junit-reporter": "^2.0.2",
-    "mongo-mock": "^4.1.0",
-    "nyc": "^15.1.0",
-    "typescript": "^5.2.2"
-  }
+    "name": "backend",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "format": "eslint --ext js,ts,tsx src --fix && prettier --write \"src/**/*.{ts,tsx}\"",
+        "start": "tsc && NODE_ENV=development node ./dist/app.js",
+        "start_win": "tsc && set NODE_ENV=development&& node ./dist/app.js",
+        "start_production": "set NODE_ENV=production&& node ./dist/app.js",
+        "test_unit": "mocha",
+        "coverage": "nyc --all --reporter=cobertura --reporter=text-summary npm run test_unit",
+        "tsc": "tsc"
+    },
+    "mocha": {
+        "exit": true,
+        "recursive": true,
+        "spec": [
+            "./test/mock/**"
+        ],
+        "require": "ts-node/register",
+        "reporter": "cypress-multi-reporters",
+        "reporter-options": "configFile=mocha-reporters-conf.json",
+        "timeout": "9000"
+    },
+    "dependencies": {
+        "axios": "^1.6.2",
+        "cookie-session": "^2.0.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "express": "~4.18.2",
+        "mongodb": "^5.5.0",
+        "mongoose": "^8.0.0",
+        "multer": "^1.4.5-lts.1",
+        "prettier": "^3.1.1",
+        "request": "^2.88.2",
+        "sinon": "^17.0.1",
+        "winston": "^3.11.0"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.3.11",
+        "@types/cookie-session": "^2.0.47",
+        "@types/cors": "^2.8.16",
+        "@types/express": "^4.17.21",
+        "@types/express-session": "^1.17.10",
+        "@types/jest": "^29.5.11",
+        "@types/mocha": "^10.0.6",
+        "@types/multer": "^1.4.10",
+        "@types/node": "^20.10.4",
+        "@typescript-eslint/eslint-plugin": "^6.14.0",
+        "@typescript-eslint/parser": "^6.14.0",
+        "chai": "^4.3.10",
+        "chai-as-promised": "^7.1.1",
+        "chai-exclude": "^2.1.0",
+        "cypress-multi-reporters": "^1.6.1",
+        "eslint": "^8.55.0",
+        "jasmine": "^5.1.0",
+        "jest": "^29.7.0",
+        "mocha": "^10.2.0",
+        "mocha-junit-reporter": "^2.0.2",
+        "mongo-mock": "^4.1.0",
+        "nyc": "^15.1.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.3.3"
+    }
 }

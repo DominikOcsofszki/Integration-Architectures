@@ -15,7 +15,7 @@ export async function getItemsFromHRM(fullUrl: string) {
 // }
 // test();
 
-async function getTokenHRM() {
+export async function getTokenHRM() {
     const baseUrl = `${process.env.BASE_URL_HRM}`;
     const qs = require("querystring");
     const body = qs.stringify({
@@ -37,5 +37,7 @@ async function getTokenHRM() {
         throw Error(res.data.error);
     }
     const accessToken = res.data["access_token"];
+    console.log(accessToken);
     return accessToken;
 }
+getTokenHRM();
