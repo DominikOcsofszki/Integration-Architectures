@@ -1,6 +1,7 @@
 
 const sinon = require("sinon");
-const request = require("request");
+// const request = require("request");
+const request = require("axios");
 const chai = require("chai");
 const mocha = require("mocha");
 
@@ -46,8 +47,9 @@ describe("when stubbed", () => {
         res.headers["content-type"].should.contain("application/json");
         body = JSON.parse(body);
         body.status.should.eql("success");
-        body.data.length.should.eql(5);
-        body.data[0].firstName.should.eql("John");
+        body.data.length.should.eql(1);
+        body.data[0].year.should.eql("2012");
+        body.data[0].valud.should.eql("1234");
         done();
       })})})})
 

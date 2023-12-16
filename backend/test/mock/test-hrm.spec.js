@@ -2,8 +2,9 @@ const sinon = require("sinon");
 const request = require("request");
 const chai = require("chai");
 const mocha = require("mocha");
-const getTokken = require("../../src/connector/hrm-connector.ts");
-// import axios from "axios";
+// const getTokken = require("../../src/connector/hrm-connector.ts");
+const getTokken = require("../../dist/connector/hrm-connector.js");
+const axios = require("axios");
 
 const should = chai.should();
 const expect = chai.expect;
@@ -159,15 +160,20 @@ describe("when stubbed", () => {
 //"https://sepp-hrm.inf.h-brs.de/symfony/web/index.php/api/v1/employee/search?unit=2"
 describe("GET /api/v1/employee", () => {
     // beforeAll(() => )
-    it("should return all employee", async (done) => {
+    it("should return all employee",  (done) => {
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        const itemsReturnedAsJson = await axios.get(fullUrl, config);
+        const fullUrl = `${base}/api/v1/employee`;
+        // const itemsReturnedAsJson = await axios.get(fullUrl, config);
+        // const itemsReturnedAsJson = await axios.get(fullUrl, config);
 
         // this.get.yields(null, responseObject, JSON.stringify(responseBody));
         //
-        request.get(`${base}/api/v1/employee`, (err, res, body) => {
+        // request.get(`${base}/api/v1/employee`, (err, res, body) => {
             // there should be a 200 status code
-            res.statusCode.should.eql(200);
+
+          axios.get(fullUrl, config), (err, res, body) => {
+
+            res.statusCode.should,eventually.eql(200);
             // the response should be JSON
             res.headers["content-type"].should.contain("application/json");
             // parse response body
@@ -182,7 +188,7 @@ describe("GET /api/v1/employee", () => {
             // the first object should have the right value for name
             body.data[0].firstName.should.eql("John");
             done();
-        });
+        };
     });
 });
 // });
