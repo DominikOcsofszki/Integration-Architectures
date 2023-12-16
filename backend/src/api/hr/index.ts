@@ -14,8 +14,8 @@ import {
 
 const router = Router();
 
-router.get("/salesman/status/:year", readSalesmanStatus);
-router.get("/salesman/:status/:year", readSalesmanStatus);
+// router.get("/salesman/status/:year", readSalesmanStatus);
+// router.get("/salesman/:status/:year", readSalesmanStatus);
 router.get("/pending/sheet", readPendingSheets);
 router.post("/pending/sheet/sign/:salesmanId/:yearOfEvaluation", signSheet);
 
