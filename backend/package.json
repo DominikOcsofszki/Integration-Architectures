@@ -15,7 +15,8 @@
         "exit": true,
         "recursive": true,
         "spec": [
-            "./test/mock/**"
+            "./test/mock/**",
+            "./test/reachable-services/**"
         ],
         "require": "ts-node/register",
         "reporter": "cypress-multi-reporters",

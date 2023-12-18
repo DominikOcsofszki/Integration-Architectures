@@ -53,3 +53,4 @@
 /backend/coverage
 /backend/results
 backend/.nyc_output
+/node_modules/
