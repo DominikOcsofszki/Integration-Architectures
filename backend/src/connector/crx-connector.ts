@@ -1,9 +1,16 @@
 import axios from "axios";
 
+let environment: any;
+if (process.env.NODE_ENV === "development") {
+    environment = require("../../environment/environment.js").default;
+} else {
+    environment = require("../../environment/environment.prod.js").default;
+}
+
 export async function getItemsCRX(fullUrl: string) {
     const credentials = {
-        username: `${process.env.CRX_USERNAME}`,
-        password: `${process.env.CRX_PASSWORD}`,
+        username: `${environment.env.CRX_USERNAME}`,
+        password: `${environment.env.CRX_PASSWORD}`,
     };
     const config = {
         headers: { Accept: "application/json" },
