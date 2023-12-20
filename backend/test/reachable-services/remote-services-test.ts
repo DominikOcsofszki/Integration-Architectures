@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import {getItemsFromHRM} from "../../src/connector/hrm-connector";
 import {getItemsCRX} from "../../src/connector/crx-connector";
-require("dotenv").config({ path: "./environment/.env" });
 import mongoose from "mongoose";
 import {Salesman, SalesmanModel} from "../../src/model/Salesman";
 

@@ -1,5 +1,12 @@
 import axios from "axios";
 
+let environment: any;
+if (process.env.NODE_ENV === "development") {
+    environment = require("../../environment/environment.js").default;
+} else {
+    environment = require("../../environment/environment.prod.js").default;
+}
+
 export async function getItemsFromHRM(fullUrl: string) {
     const token = await getTokenHRM();
     const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -16,14 +23,14 @@ export async function getItemsFromHRM(fullUrl: string) {
 // test();
 
 export async function getTokenHRM() {
-    const baseUrl = `${process.env.BASE_URL_HRM}`;
+    const baseUrl = `${environment.env.BASE_URL_HRM}`;
     const qs = require("querystring");
     const body = qs.stringify({
         client_id: "api_oauth_id",
         client_secret: "oauth_secret",
         grant_type: "password",
-        username: `${process.env.USER_WEBSITE}`,
-        password: `${process.env.PASSWORD}`,
+        username: `${environment.env.USER_WEBSITE}`,
+        password: `${environment.env.PASSWORD}`,
     });
     const config = {
         headers: {
@@ -40,4 +47,3 @@ export async function getTokenHRM() {
     console.log(accessToken);
     return accessToken;
 }
-getTokenHRM();

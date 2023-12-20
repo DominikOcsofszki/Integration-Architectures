@@ -12,7 +12,14 @@ const environment = {
     },
     corsOrigins: [
         'http://localhost:4200'
-    ]
+    ],
+    env:{
+        USER_WEBSITE:"biwer",
+        PASSWORD:"*Safb02da42Demo$",
+        BASE_URL_HRM:"https://sepp-hrm.inf.h-brs.de/symfony/web/index.php",
+        DB_URL:"mongodb://localhost:27017/intArch",
+        CRX_USERNAME:"guest",
+        CRX_PASSWORD:"guest"}
 };
 
 exports.default = environment;
