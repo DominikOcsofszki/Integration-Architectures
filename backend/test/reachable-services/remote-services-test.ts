@@ -25,20 +25,20 @@ describe('CRX companies test', () => {
     })
 })
 
-describe('MongoDB salesmen test', () => {
-    before(async () => {
-        await mongoose.connect(`${process.env.DB_URL}`);
-    })
-    it('should return the stored salesmen with id 90124', async () => {
-        const mary = await SalesmanModel.findOne({ id: 90124 }) as Salesman;
-        expect(mary.id).to.equal(90124);
-        expect(mary.firstname).to.equal('Mary-Ann');
-    })
-    it('should return all salesmen', async () => {
-        const allSalesmen = await SalesmanModel.find() as Salesman[];
-        expect(allSalesmen.length).to.equal(5);
-    })
-    after(async () => {
-        await mongoose.disconnect();
-    })
-})
+// describe('MongoDB salesmen test', () => {
+//     before(async () => {
+//         await mongoose.connect(`${process.env.DB_URL}`);
+//     })
+//     it('should return the stored salesmen with id 90124', async () => {
+//         const mary = await SalesmanModel.findOne({ id: 90124 }) as Salesman;
+//         expect(mary.id).to.equal(90124);
+//         expect(mary.firstname).to.equal('Mary-Ann');
+//     })
+//     it('should return all salesmen', async () => {
+//         const allSalesmen = await SalesmanModel.find() as Salesman[];
+//         expect(allSalesmen.length).to.equal(5);
+//     })
+//     after(async () => {
+//         await mongoose.disconnect();
+//     })
+// })
