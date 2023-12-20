@@ -23,10 +23,10 @@ export class BonusComputationSheet {
 }
 
 export class OrderEvaluation {
-    orders: [Order];
+    orders: Order[];
     bonussum: number;
 
-    constructor(orders: [Order], bonussum: number) {
+    constructor(orders: Order[], bonussum: number) {
         this.orders = orders;
         this.bonussum = bonussum;
     }
@@ -53,11 +53,12 @@ export class Order {
 }
 
 export class SocialPerformanceEvaluation {
-    socialAttributes: [SocialAttribute];
+    socialAttributes: SocialAttribute[];
     bonussum: number;
 
-    constructor(socialAttributes: [SocialAttribute]) {
+    constructor(socialAttributes: SocialAttribute[]) {
         this.socialAttributes = socialAttributes;
+        // bonus has to be calculated here or given in constructor
         this.bonussum = 0;
     }
 }
@@ -85,7 +86,7 @@ const SocialAttributeSchema = new mongoose.Schema({
     bonus: { type: Number, required: true },
 })
 
-const SocialPerformanceEvaluationSchema = new mongoose.Schema({
+export const SocialPerformanceEvaluationSchema = new mongoose.Schema({
     socialAttributes: { type: [SocialAttributeSchema], required: true },
     bonussum: { type: Number, required: true },
 })

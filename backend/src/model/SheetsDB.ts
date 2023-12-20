@@ -1,85 +1,36 @@
 import mongoose from "mongoose";
-// import { socialAttributeNames } from "./BonusComputationSheet";
+import {SocialAttribute, SocialPerformanceEvaluation, SocialPerformanceEvaluationSchema} from "./BonusComputationSheet";
 
-export interface SocialPerformanceEvaluation {
-    yearOfEvaluation: number;
-    id: number;
-    // status: string; //define it better
-    socialAttributes: [SocialAttribute];
-    bonussum: number;
-}
-export interface SocialPerformanceEvaluation {
-    socialAttributes: [SocialAttribute];
-    bonussum: number;
-}
-
-export interface SocialPerformanceWithId {
-    socialPerformanceEvaluation: SocialPerformanceEvaluation;
-    yearOfEvaluation: number;
+class RandomSocialPerformanceEvaluation {
     salesmanId: number;
-    // status: string; //define it better
-    // socialAttributes: [SocialAttribute]
-    // bonussum: number;
+    year: number;
+    socialPerformanceEvaluation: SocialPerformanceEvaluation;
+
+    constructor(salesmanId: number, year: number, socialPerformanceEvaluation: SocialPerformanceEvaluation) {
+        this.salesmanId = salesmanId;
+        this.year = year;
+        this.socialPerformanceEvaluation = socialPerformanceEvaluation;
+    }
 }
 
-export interface SocialAttribute {
-    comment: string;
-    targetValue: number;
-    actualValue: number;
-    socialAttributeName: string;
-    bonus: number;
-}
-
-const SocialAttributeSchemaFillDB = new mongoose.Schema({
-    comment: { type: String },
-    targetValue: { type: Number, required: true },
-    actualValue: { type: Number, required: true },
-    socialAttributeName: { type: String, required: true },
-    bonus: { type: Number },
+export const RandomSocialPerformanceEvaluationSchema = new mongoose.Schema({
+    salesmanId: { type: Number, required: true },
+    year: { type: Number, required: true },
+    socialPerformanceEvaluation: {type: SocialPerformanceEvaluationSchema, required: true}
 });
 
-const SocialPerformanceEvaluationSchemaFillDB = new mongoose.Schema({
-    socialAttributes: { type: [SocialAttributeSchemaFillDB], required: true },
-    bonussum: { type: Number, required: true },
-});
+export const RandomSocialPerformanceEvaluationModel = mongoose.model("evaluations", RandomSocialPerformanceEvaluationSchema);
 
-export const SheetDB = new mongoose.Schema({
-    id: { type: Number, required: true, unique: true },
-    salesManId: { type: Number, required: true },
-    yearOfEvaluation: { type: Number, required: true },
-    // totalBonus: { type: Number, required: true },
-    // status: { type: String, required: true },
-    socialPerformanceEvaluation: {
-        type: SocialPerformanceEvaluationSchemaFillDB,
-        required: true,
-    },
-});
-
-export const SheetDBModel = mongoose.model("sheetsDBFill", SheetDB);
-
-function randomSocialPerformanceEvaluation(
-    passedId: number
-): SocialPerformanceEvaluation {
-    return {
-        yearOfEvaluation: yearOfSheet(),
-        // status: "null",
-        id: passedId,
-        socialAttributes: generateAllSocialAttributes(),
-        bonussum: 0,
-    };
+function randomSocialPerformanceEvaluation(): SocialPerformanceEvaluation {
+    return new SocialPerformanceEvaluation(generateAllSocialAttributes());
 }
 function yearOfSheet(year: number = 2023): number {
     return year;
 }
 function randomSocialAttribute(socialAttributeName: string): SocialAttribute {
-    return {
-        comment: "null",
-        targetValue: randomIn0to4(),
-        actualValue: randomIn0to4(),
-        socialAttributeName: socialAttributeName,
-        bonus: 0,
-    };
+    return new SocialAttribute(randomIn0to4(), randomIn0to4(), socialAttributeName, 0);
 }
+
 function randomIn0to4(): number {
     return Math.floor(Math.random() * 5);
 }
@@ -92,9 +43,8 @@ function generateAllSocialAttributes(): [SocialAttribute] {
     return socialAttributeNamesArr;
 }
 
-export function generateRandomSheetDB(id: number): SocialPerformanceEvaluation {
-    return randomSocialPerformanceEvaluation(id);
+export function generateRandomSheetDB(id: number, year: number) {
+    const sheet = new RandomSocialPerformanceEvaluation(id, year, randomSocialPerformanceEvaluation());
+    console.log(sheet);
+    new RandomSocialPerformanceEvaluationModel(sheet).save();
 }
-
-const randomSheet = generateRandomSheetDB(10);
-console.log(randomSheet);
