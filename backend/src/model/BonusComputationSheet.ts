@@ -4,17 +4,17 @@ export class BonusComputationSheet {
     socialPerformanceEvaluation: SocialPerformanceEvaluation;
     orderEvaluation: OrderEvaluation;
     salesmanId: number;
-    totalBonus: number;
+    totalBonus: number = 0;
     yearOfEvaluation: number;
-    id: number;
+    id: number; //brauchen wir die?
     status: Status;
     comment?: string;
 
-    constructor(salesmanId: number, yearOfEvaluation: number, id: number, totalBonus: number, socialPerformanceEvaluation: SocialPerformanceEvaluation, orderEvaluation: OrderEvaluation, comment?: string) {
+    constructor(salesmanId: number, yearOfEvaluation: number, id: number, socialPerformanceEvaluation: SocialPerformanceEvaluation, orderEvaluation: OrderEvaluation, comment?: string) {
         this.salesmanId = salesmanId;
         this.yearOfEvaluation = yearOfEvaluation;
         this.id = id;
-        this.totalBonus = totalBonus;
+        this.totalBonus = socialPerformanceEvaluation.bonussum + orderEvaluation.bonussum;
         this.status = "incomplete";
         this.socialPerformanceEvaluation = socialPerformanceEvaluation;
         this.orderEvaluation = orderEvaluation;
@@ -24,11 +24,13 @@ export class BonusComputationSheet {
 
 export class OrderEvaluation {
     orders: Order[];
-    bonussum: number;
+    bonussum: number = 0;
 
-    constructor(orders: Order[], bonussum: number) {
+    constructor(orders: Order[]) {
         this.orders = orders;
-        this.bonussum = bonussum;
+        for (const order of orders){
+            this.bonussum = this.bonussum + order.bonus;
+        }
     }
 }
 
@@ -54,12 +56,13 @@ export class Order {
 
 export class SocialPerformanceEvaluation {
     socialAttributes: SocialAttribute[];
-    bonussum: number;
+    bonussum: number = 0;
 
     constructor(socialAttributes: SocialAttribute[]) {
         this.socialAttributes = socialAttributes;
-        // bonus has to be calculated here or given in constructor
-        this.bonussum = 0;
+        for (const socialAttribute of socialAttributes){
+            this.bonussum = this.bonussum + socialAttribute.bonus;
+        }
     }
 }
 

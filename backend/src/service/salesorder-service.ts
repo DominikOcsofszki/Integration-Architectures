@@ -4,7 +4,6 @@ import {Order, OrderEvaluation} from "../model/BonusComputationSheet";
 
 export async function createOrderEvaluation(salesmanId: number): Promise<OrderEvaluation> {
     const orders: Order[] = [];
-    let bonusSum: number = 0;
 
     const salesOrders = await findSalesOrdersForSalesman(salesmanId);
     const allCustomers = await getAllCustomersFromCRX();
@@ -28,13 +27,12 @@ export async function createOrderEvaluation(salesmanId: number): Promise<OrderEv
                     price
                 );
                 orders.push(order);
-                bonusSum += order.bonus;
             }
         } catch {
             console.log("No positions found");
         }
     }
-    return new OrderEvaluation(orders, bonusSum);
+    return new OrderEvaluation(orders);
 }
 
 /**

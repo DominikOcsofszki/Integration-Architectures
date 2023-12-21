@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import {SocialAttribute, SocialPerformanceEvaluation, SocialPerformanceEvaluationSchema} from "./BonusComputationSheet";
 
-class RandomSocialPerformanceEvaluation {
+export class RandomSocialPerformanceEvaluation {
     salesmanId: number;
     year: number;
     socialPerformanceEvaluation: SocialPerformanceEvaluation;
