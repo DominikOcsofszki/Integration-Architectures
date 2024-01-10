@@ -6,7 +6,7 @@
         "format": "eslint --ext js,ts,tsx src --fix && prettier --write \"src/**/*.{ts,tsx}\"",
         "start": "tsc && NODE_ENV=development node ./dist/app.js",
         "start_win": "tsc && set NODE_ENV=development&& node ./dist/app.js",
-        "start_production": "set NODE_ENV=production&& node ./dist/app.js",
+        "start_production": "tsc && set NODE_ENV=production&& node ./dist/app.js",
         "test_unit": "mocha",
         "coverage": "nyc --all --reporter=cobertura --reporter=text-summary npm run test_unit",
         "tsc": "tsc"

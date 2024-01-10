@@ -79,6 +79,6 @@ const connector = new MongoConnector(app);
 // createSheetsForAllSalesmen(2023);
 // createOrderEvaluation(90124);
 
-export const logger = createLogger({
-    transports: [new transports.Console()],
-});
+// export const logger = createLogger({
+//     transports: [new transports.Console()],
+// });
