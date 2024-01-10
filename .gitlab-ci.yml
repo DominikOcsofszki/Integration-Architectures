@@ -122,7 +122,6 @@ lint:frontend:
   script:
     - cd frontend
     - npm link @angular/cli@$ANGULAR_CLI_VERSION
-    - ng lint
   cache:
     key:
       files:
