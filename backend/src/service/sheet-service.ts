@@ -12,7 +12,7 @@ import {
 } from "../model/BonusComputationSheet";
 import { Document } from "mongoose";
 
-const dbReady: boolean = false;
+const dbReady: boolean = true;
 
 export async function createSheetsForAllSalesmen(year: number) {
     await requestAndStoreSalesmanFromHRM();
