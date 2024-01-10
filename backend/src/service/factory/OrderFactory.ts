@@ -16,13 +16,12 @@ export function createOrder(
         price,
         itemamount
     );
-    const order = new Order(
+    return new Order(
         productname,
         client,
         clientRanking,
+        bonus,
         itemamount,
         price,
-        bonus
     );
-    console.log(order);
 }

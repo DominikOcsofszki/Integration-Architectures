@@ -1,13 +1,15 @@
 import { getItemsCRX } from "../connector/crx-connector";
 import { createOrder } from "./factory/OrderFactory";
+import {Order, OrderEvaluation} from "../model/BonusComputationSheet";
 
-export async function createOrderEvaluation(salesmanId: number) {
+export async function createOrderEvaluation(salesmanId: number): Promise<OrderEvaluation> {
+    const orders: Order[] = [];
+
     const salesOrders = await findSalesOrdersForSalesman(salesmanId);
     const allCustomers = await getAllCustomersFromCRX();
     for (const salesOrder of salesOrders) {
         const client = findClientNameForSalesorder(salesOrder, allCustomers);
         const clientRanking = getClientRankingForClient(client, allCustomers);
-        // console.log(salesOrder.name + ' Client: ' + client + ' ClientRanking: ' + clientRanking);
 
         const positions = await getPositionsOfSalesOrder(salesOrder);
 
@@ -17,19 +19,20 @@ export async function createOrderEvaluation(salesmanId: number) {
                 const itemAmount = position.quantity;
                 const productUrl = position["product"]["@href"] as string;
                 const productname = await getProductnameOfPostion(productUrl);
-                // console.log('price: ' + price + ' itemAmount: ' + itemAmount + ' productname: ' + productname);
-                createOrder(
+                const order = createOrder(
                     productname,
                     client,
                     clientRanking as 1 | 2 | 3 | 4 | 5,
                     itemAmount,
                     price
                 );
+                orders.push(order);
             }
         } catch {
-            // console.log("No positions found");
+            console.log("No positions found");
         }
     }
+    return new OrderEvaluation(orders);
 }
 
 /**
