@@ -2,7 +2,7 @@ const environment = {
     production: true,
     port: 8080,
     defaultAdminPassword: 'c3uz#3zd',
-    db:{
+    db: {
         host: 'iar-mongo.inf.h-brs.de',
         port: 27017,
         username: 'erasmux',
@@ -11,15 +11,16 @@ const environment = {
         name: 'erasmux'
     },
     corsOrigins: [
-        'http://iar-frontend.inf.h-brs.de'
+        'http://iar-frontend.inf.h-brs.de/erasmux'
     ],
-    env:{
-    USER_WEBSITE:"biwer",
-    PASSWORD:"*Safb02da42Demo$",
-    BASE_URL_HRM:"https://sepp-hrm.inf.h-brs.de/symfony/web/index.php",
-    DB_URL:"mongodb://localhost:27017/intArch",
-    CRX_USERNAME:"guest",
-    CRX_PASSWORD:"guest"}
+    env: {
+        USER_WEBSITE: "biwer",
+        PASSWORD: "*Safb02da42Demo$",
+        BASE_URL_HRM: "https://sepp-hrm.inf.h-brs.de/symfony/web/index.php",
+        DB_URL: "mongodb://localhost:27017/intArch",
+        CRX_USERNAME: "guest",
+        CRX_PASSWORD: "guest"
+    }
 };
 
 exports.default = environment;
