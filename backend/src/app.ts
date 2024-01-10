@@ -57,7 +57,6 @@ app.use(
         credentials: true,
     })
 );
-
 //const apiRouter = require('./routes/api-routes'); //get api-router from routes/api
 app.use("/api", apiRouter); //mount api-router at path "/api"
 // !!!! attention all middlewares, mounted after the router wont be called for any requests
