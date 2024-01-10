@@ -77,7 +77,7 @@ const connector = new MongoConnector(app);
 // test();
 
 // Testing creation of BonusComputationSheets
-createSheetsForAllSalesmen(2023);
+// createSheetsForAllSalesmen(2023);
 // createOrderEvaluation(90124);
 
 export const logger = createLogger({
