@@ -16,6 +16,7 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+Session.vim
 
 # compiled output
 /frontend/dist
