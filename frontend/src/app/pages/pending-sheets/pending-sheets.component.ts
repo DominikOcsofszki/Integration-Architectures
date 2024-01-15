@@ -32,12 +32,12 @@ export class PendingSheetsComponent implements OnInit {
                 }
             });
     }
-        fetchRestPendingSalesman(): void {
+    fetchRestPendingSalesman(): void {
         this.pendingSalesmanService
-            .getPendingSalesman()
+            .getNotPendingSalesman()
             .subscribe((response): void => {
                 if (response.status === 200) {
-                    this.pendingSalesman = response.body;
+                    this.restSalesmen = response.body;
                 }
             });
     }

@@ -16,4 +16,11 @@ export class PendingSalesmanService {
             environment.apiEndpoint + '/api/hr/sheets/pending',
             { observe: 'response', withCredentials: true });
     }
+
+    getNotPendingSalesman(): Observable<HttpResponse<Salesman[]>> {
+        return this.http.get<Salesman[]>(
+            environment.apiEndpoint + '/api/hr/sheets/notpending',
+            { observe: 'response', withCredentials: true });
+    }
+
 }

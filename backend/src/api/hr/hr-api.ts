@@ -108,7 +108,7 @@ export async function readPendingValues(req: Request, res: Response) {
 
 export async function readNotPendingValues(req: Request, res: Response) {
     try {
-        const pendingSheets = await BonusComputationSheetModel.find({ status: "incomplete" });
+        const pendingSheets = await BonusComputationSheetModel.find().where("status").ne("pending-hr");
         console.log(pendingSheets);
         const outputList: { salesmanId: number, firstname: string, lastname: string, year: number, status: string, bonus: number }[] = [];
         for (let sheet of pendingSheets) {
