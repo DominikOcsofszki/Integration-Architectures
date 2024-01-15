@@ -11,7 +11,7 @@ import { PendingSalesmanService } from '../../services/pending-saleman.service';
     styleUrls: ['./pending-sheets.component.css'],
 })
 export class PendingSheetsComponent implements OnInit {
-    displayedColumns = ['id', 'firstname', 'lastname', 'department', 'status'];
+    displayedColumns = ['Salesman', 'Firstname', 'Lastname', 'year' , 'bonus', 'status'];
 
     pendingSalesman: Salesman[] = [];
     // pendingSalesman: Salesman[] = [new Salesman(1, 'John', 'Doe', 'Sales')];
@@ -30,7 +30,7 @@ export class PendingSheetsComponent implements OnInit {
         //     new Salesman(8, 'Jane', 'Smith', 'Sales'),
         // ];
         //
-        this.fetchPendingSalesman(); //ToDo add again after DB is ready
+        this.fetchPendingSalesman(); // ToDo add again after DB is ready
     }
     // Waiting for entries in DB!!!
     fetchPendingSalesman(): void {
