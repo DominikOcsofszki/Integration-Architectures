@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 export class Salesman {
     id: number;
-    firstname: String;
-    lastname: String;
-    department: String;
+    firstname: string;
+    lastname: string;
+    department: string;
 
     constructor(
         id: number,
-        firstName: String,
-        lastName: String,
-        department: String
+        firstName: string,
+        lastName: string,
+        department: string
     ) {
         this.id = id;
         this.firstname = firstName;
