@@ -7,18 +7,18 @@ import { Salesman } from '../models/Salesman';
 @Injectable({
     providedIn: 'root'
 })
-export class PendingSalesmanService {
+export class HRService {
 
     constructor(private http: HttpClient) { }
 
-    getPendingSalesman(): Observable<HttpResponse<Salesman[]>> {
-        return this.http.get<Salesman[]>(
+    getPendingSheets(): Observable<HttpResponse<[]>> {
+        return this.http.get<[]>(
             environment.apiEndpoint + '/api/hr/sheets/pending',
             { observe: 'response', withCredentials: true });
     }
 
-    getNotPendingSalesman(): Observable<HttpResponse<Salesman[]>> {
-        return this.http.get<Salesman[]>(
+    getNotPendingSheets(): Observable<HttpResponse<[]>> {
+        return this.http.get<[]>(
             environment.apiEndpoint + '/api/hr/sheets/notpending',
             { observe: 'response', withCredentials: true });
     }
