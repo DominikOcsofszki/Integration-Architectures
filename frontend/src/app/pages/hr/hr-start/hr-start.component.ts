@@ -9,5 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./hr-start.component.css']
 })
 export class HrStartComponent {
-
+    startBonusCalculation(){
+        //
+    }
 }
