@@ -1,4 +1,4 @@
-function socialPerformanceBonus(targetValue: number, actualValue: number) {
+export function socialPerformanceBonus(targetValue: number, actualValue: number) {
     const objectMap: { [key: number]: number } = {
         "-5": 0,
         "-4": 0,
@@ -22,5 +22,3 @@ export function orderEvaluationBonus(
 ) {
     return ((price * nrOfItems) / 10) * (1 + (5 - clientRanking) / 10);
 }
-
-//ToDo finish classes for Calculation first: Evaluation, Performance

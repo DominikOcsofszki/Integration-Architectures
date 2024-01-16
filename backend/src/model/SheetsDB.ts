@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import {SocialAttribute, SocialPerformanceEvaluation, SocialPerformanceEvaluationSchema} from "./BonusComputationSheet";
+import {socialPerformanceBonus} from "../service/bonus-calculation-service";
+
 
 export class RandomSocialPerformanceEvaluation {
     salesmanId: number;
@@ -28,13 +30,24 @@ function yearOfSheet(year: number = 2023): number {
     return year;
 }
 function randomSocialAttribute(socialAttributeName: string): SocialAttribute {
-    return new SocialAttribute(randomIn0to4(), randomIn0to4(), socialAttributeName, 0);
+    const targetValue = randomIn0to4();
+    const actualValue = randomIn0to4();
+    return new SocialAttribute(targetValue, actualValue, socialAttributeName, socialPerformanceBonus(targetValue, actualValue));
 }
 
 function randomIn0to4(): number {
     return Math.floor(Math.random() * 5);
 }
-const socialAttributeNames: string[] = ["1", "2", "3", "4", "5"];
+const socialAttributeNames: string[] =
+    [
+        "Leadership Competence",
+        "Openness to Employee",
+        "Social Behavior to Employee",
+        "Attitude towards Client",
+        "Communication Skills",
+        "Integrity to Company"
+    ];
+
 function generateAllSocialAttributes(): [SocialAttribute] {
     const socialAttributeNamesArr: any = [];
     socialAttributeNames.forEach((element) => {

@@ -14,7 +14,7 @@ import {Connection, Document} from "mongoose";
 const dbReady: boolean = true;
 
 export async function createSheetsForAllSalesmen(year: number, db: Connection) {
-    await requestAndStoreSalesmanFromHRM();
+    await requestAndStoreSalesmanFromHRM(db);
     const salesmanIds: number[] = await getAllSalesmanIdsFromDB();
     if (!dbReady) {
         fillDB(salesmanIds, year);
