@@ -1,50 +1,116 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-export interface BonusComputationSheet {
+export type Status =
+    | 'incomplete'
+    | 'pending-hr'
+    | 'pending-ceo'
+    | 'pending-salesman'
+    | 'finished';
+
+export type ClientRanking = 1 | 2 | 3 | 4 | 5;
+
+export class BonusComputationSheet {
+    id: number; //brauchen wir die?
+    salesmanId: number;
+    yearOfEvaluation: number;
+    totalBonus: number = 0;
+    status: Status;
     socialPerformanceEvaluation: SocialPerformanceEvaluation;
     orderEvaluation: OrderEvaluation;
-    salesManId: number;
-    totalBonus: number;
-    yearOfEvaluation: number;
-    id: number;
-    status: string; //define it better
-}
-// export class BonusComputationSheet {
-//     socialPerformanceEvaluation: SocialPerformanceEvaluation;
-//     orderEvaluation: OrderEvaluation;
-//     salesManId: number;
-//     totalBonus: number;
-//     yearOfEvaluation: number;
-//     id: number;
-//     status: string; //define it better
-// }
+    comment?: string;
 
-export interface OrderEvaluation {
-    orders: [Order];
-    bonussum: number;
+    constructor(
+        salesmanId: number,
+        yearOfEvaluation: number,
+        id: number,
+        socialPerformanceEvaluation: SocialPerformanceEvaluation,
+        orderEvaluation: OrderEvaluation,
+        comment?: string
+    ) {
+        this.salesmanId = salesmanId;
+        this.yearOfEvaluation = yearOfEvaluation;
+        this.id = id;
+        this.totalBonus =
+            socialPerformanceEvaluation.bonussum + orderEvaluation.bonussum;
+        this.status = 'incomplete';
+        this.socialPerformanceEvaluation = socialPerformanceEvaluation;
+        this.orderEvaluation = orderEvaluation;
+        this.comment = comment;
+    }
 }
 
-export interface Order {
+export class OrderEvaluation {
+    orders: Order[];
+    bonussum: number = 0;
+
+    constructor(orders: Order[]) {
+        this.orders = orders;
+        for (const order of orders) {
+            this.bonussum = this.bonussum + order.bonus;
+        }
+    }
+}
+
+export class Order {
     productname: string;
     client: string;
-    clientRanking: 1 | 2 | 3 | 4 | 5;
+    clientRanking: ClientRanking;
     bonus: number;
     itemamount: number;
-    comment: string;
+    comment?: string;
     price: number;
+
+    constructor(
+        productname: string,
+        client: string,
+        clientRanking: ClientRanking,
+        bonus: number,
+        itemamount: number,
+        price: number,
+        comment?: string
+    ) {
+        this.productname = productname;
+        this.client = client;
+        this.clientRanking = clientRanking;
+        this.bonus = bonus;
+        this.itemamount = itemamount;
+        this.price = price;
+        this.comment = comment;
+    }
 }
 
-export interface SocialPerformanceEvaluation {
-    socialAttributes: [SocialAttribute]
-    bonussum: number;
+export class SocialPerformanceEvaluation {
+    socialAttributes: SocialAttribute[];
+    bonussum: number = 0;
+
+    constructor(socialAttributes: SocialAttribute[]) {
+        this.socialAttributes = socialAttributes;
+        for (const socialAttribute of socialAttributes) {
+            this.bonussum = this.bonussum + socialAttribute.bonus;
+        }
+    }
 }
 
-export interface SocialAttribute {
-    comment: string;
+export class SocialAttribute {
+    comment?: string;
     targetValue: number;
     actualValue: number;
     socialAttributeName: string;
     bonus: number;
+
+    constructor(
+        targetValue: number,
+        actualValue: number,
+        socialAttributeName: string,
+        bonus: number,
+        comment?: string
+    ) {
+        this.targetValue = targetValue;
+        this.actualValue = actualValue;
+        this.socialAttributeName = socialAttributeName;
+        this.bonus = bonus;
+        this.comment = comment;
+    }
 }
 
 const SocialAttributeSchema = new mongoose.Schema({
@@ -53,12 +119,12 @@ const SocialAttributeSchema = new mongoose.Schema({
     actualValue: { type: Number, required: true },
     socialAttributeName: { type: String, required: true },
     bonus: { type: Number, required: true },
-})
+});
 
 const SocialPerformanceEvaluationSchema = new mongoose.Schema({
     socialAttributes: { type: [SocialAttributeSchema], required: true },
     bonussum: { type: Number, required: true },
-})
+});
 
 const OrderSchema = new mongoose.Schema({
     productname: { type: String, required: true },
@@ -68,15 +134,12 @@ const OrderSchema = new mongoose.Schema({
     itemamount: { type: Number, required: true },
     comment: { type: String },
     price: { type: Number, required: true },
-
-})
+});
 
 const OrderEvaluationSchema = new mongoose.Schema({
     orders: { type: [OrderSchema], required: true },
     bonussum: { type: Number, required: true },
-})
-
-
+});
 
 export const BonusComputationSheetSchema = new mongoose.Schema({
     id: { type: Number, required: true, unique: true },
@@ -84,10 +147,14 @@ export const BonusComputationSheetSchema = new mongoose.Schema({
     yearOfEvaluation: { type: Number, required: true },
     totalBonus: { type: Number, required: true },
     status: { type: String, required: true },
-    socialPerformanceEvaluation: { type: SocialPerformanceEvaluationSchema, required: true },
+    socialPerformanceEvaluation: {
+        type: SocialPerformanceEvaluationSchema,
+        required: true,
+    },
     orderEvaluation: { type: OrderEvaluationSchema, required: true },
 });
 
-
-export const BonusComputationSheetModel = mongoose.model("sheets", BonusComputationSheetSchema);
-
+export const BonusComputationSheetModel = mongoose.model(
+    'sheets',
+    BonusComputationSheetSchema
+);
