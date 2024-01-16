@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 // import { PeopleDemoService } from '../../services/people-demo.service';
 // import { ExampleDatapoint } from '../../interfaces/example-datapoint';
 import { Salesman } from '../../../models/Salesman';
-import { PendingSalesmanService } from '../../../services/pending-saleman.service';
+import {HRService} from '../../../services/hr-service';
 import { MatTableModule } from '@angular/material/table';
 @Component({
     selector: 'app-pending-sheets',
@@ -16,10 +16,10 @@ import { MatTableModule } from '@angular/material/table';
 export class PendingSheetsComponent implements OnInit {
     displayedColumns = ['salesman', 'firstname', 'lastname', 'year' , 'bonus', 'status'];
 
-    pendingSalesman: Salesman[] = [];
-    restSalesmen: Salesman[] = [];
+    pendingSheets: [] = [];
+    restSheets: [] = [];
 
-    constructor(private pendingSalesmanService: PendingSalesmanService) {}
+    constructor(private hrService: HRService) {}
 
     ngOnInit(): void {
         this.fetchPendingSalesman(); // ToDo add again after DB is ready
@@ -27,22 +27,21 @@ export class PendingSheetsComponent implements OnInit {
     }
     // Waiting for entries in DB!!!
     fetchPendingSalesman(): void {
-        this.pendingSalesmanService
-            .getPendingSalesman()
+        this.hrService
+            .getPendingSheets()
             .subscribe((response): void => {
                 if (response.status === 200) {
-                    this.pendingSalesman = response.body;
+                    this.pendingSheets = response.body;
                 }
             });
     }
     fetchRestPendingSalesman(): void {
-        this.pendingSalesmanService
-            .getNotPendingSalesman()
+        this.hrService
+            .getNotPendingSheets()
             .subscribe((response): void => {
                 if (response.status === 200) {
-                    this.restSalesmen = response.body;
+                    this.restSheets = response.body;
                 }
             });
     }
-
 }

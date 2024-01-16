@@ -16,31 +16,33 @@ import { HrStartComponent } from './pages/hr/hr-start/hr-start.component';
   If a new page should also show up in the menu bar, you need to add it there too.
   Look at: frontend/src/app/components/menu-bar/menu-bar.component.ts
  */
-export function echoo() {
 
-    console.log("hi")
-}
 export const ROUTING = {
-    hrRouting: {
+    hr: {
         PendingSheetsComponent: 'hr/pending',
         HrStartComponent: 'hr/start',
         BonusViewSalesmanComponent: '',
     },
 
-    allRouting: {
+    all: {
         LoginPageComponent: 'login',
         NotFoundPageComponent: '**'
     },
+
     ceo: {
+
+    },
+
+    salesman: {
 
     }
 }
 const routes: Routes = [
-    { path: ROUTING.allRouting.LoginPageComponent, component: LoginPageComponent },
-    { path: ROUTING.hrRouting.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
-    { path: ROUTING.hrRouting.HrStartComponent, component: HrStartComponent, canActivate: [AuthGuardService] },
-    { path: ROUTING.hrRouting.BonusViewSalesmanComponent, component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
-    { path: ROUTING.allRouting.NotFoundPageComponent, component: NotFoundPageComponent }
+    { path: ROUTING.all.LoginPageComponent, component: LoginPageComponent },
+    { path: ROUTING.hr.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.hr.HrStartComponent, component: HrStartComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.hr.BonusViewSalesmanComponent, component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.all.NotFoundPageComponent, component: NotFoundPageComponent }
     // these entries are matched from top to bottom => not found should be the last entry
 ];
 // const routes: Routes = [
