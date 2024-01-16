@@ -8,8 +8,8 @@ describe('PendingSheetsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PendingSheetsComponent]
-    });
+    imports: [PendingSheetsComponent]
+});
     fixture = TestBed.createComponent(PendingSheetsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

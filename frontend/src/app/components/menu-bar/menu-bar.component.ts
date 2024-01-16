@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive, RouterLink } from '@angular/router';
 import { User } from '../../models/User';
 import { UserService } from '../../services/user.service';
+import { MatButtonModule } from '@angular/material/button';
+import { NgFor, NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
     selector: 'app-menu-bar',
     templateUrl: './menu-bar.component.html',
-    styleUrls: ['./menu-bar.component.css']
+    styleUrls: ['./menu-bar.component.css'],
+    standalone: true,
+    imports: [MatToolbarModule, MatIconModule, NgFor, MatButtonModule, RouterLinkActive, RouterLink, NgIf]
 })
 export class MenuBarComponent implements OnInit {
 
@@ -17,9 +23,7 @@ export class MenuBarComponent implements OnInit {
     This array holds the definition of the menu's buttons.
    */
     buttons = [
-        { title: 'Welcome', routerLink: '' }, // the tile is the text on the button, the routerLink specifies, where it will navigate
-        { title: 'Example', routerLink: 'example' },
-        { title: 'HR-Pending', routerLink: 'hr/pending' }, //ToDo check naming?
+        { title: 'HR-Pending', routerLink: 'hr/pending' }, // ToDo check naming?
         { title: 'HR-Sheet', routerLink: 'hr/sheet' },
         { title: 'HR-Start', routerLink: 'hr/start' },
     ];

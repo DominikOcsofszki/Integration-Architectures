@@ -3,10 +3,13 @@ import * as jsPDFAll from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Salesman } from 'src/app/models/Salesman';
 import { BonusComputationSheet, BonusComputationSheetSchema, BonusComputationSheetModel } from 'src/app/models/BonusComputationSheet';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
     selector: 'app-bonus-view-salesman',
     templateUrl: './bonus-view-salesman.component.html',
-    styleUrls: ['./bonus-view-salesman.component.css']
+    styleUrls: ['./bonus-view-salesman.component.css'],
+    standalone: true,
+    imports: [MatButtonModule]
 })
 export class BonusViewSalesmanComponent {
     title = "HR"
