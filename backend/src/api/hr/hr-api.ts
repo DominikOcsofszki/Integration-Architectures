@@ -1,7 +1,7 @@
 import { BonusComputationSheetModel } from "../../model/BonusComputationSheet";
 import { Request, Response } from "express";
 import { Salesman, SalesmanModel } from "../../model/Salesman";
-import {createSheetsForAllSalesmen} from "../../service/sheet-service";
+import { createSheetsForAllSalesmen } from "../../service/sheet-service";
 
 export async function readSheetStatus(req: Request, res: Response) {
     await BonusComputationSheetModel.find({})
@@ -26,7 +26,14 @@ export async function readPendingSheets(req: Request, res: Response) {
 }
 
 export async function readNotPendingSheets(req: Request, res: Response) {
-    await BonusComputationSheetModel.find({ $or: [{ status: "incomplete" }, { status: "pending-ceo" }, { status: "pending-salesman" }, { status: "finished" }] })
+    await BonusComputationSheetModel.find({
+        $or: [
+            { status: "incomplete" },
+            { status: "pending-ceo" },
+            { status: "pending-salesman" },
+            { status: "finished" },
+        ],
+    })
         .then((value) => {
             res.status(200).send(value);
         })
@@ -55,7 +62,7 @@ export async function signSheet(req: Request, res: Response) {
 }
 
 export async function getSheetByIdAndYear(req: Request, res: Response) {
-    await BonusComputationSheetModel.find({
+    await BonusComputationSheetModel.findOne({
         salesmanId: req.params.salesmanId,
         yearOfEvaluation: req.params.yearOfEvaluation,
     })
@@ -66,7 +73,9 @@ export async function getSheetByIdAndYear(req: Request, res: Response) {
 }
 
 export async function getSheetsById(req: Request, res: Response) {
-    await BonusComputationSheetModel.find({ salesmanId: req.params.salesmanId })
+    await BonusComputationSheetModel.find({
+        salesmanId: req.params.salesmanId,
+    })
         .then((value) => {
             res.status(200).send(value);
         })
@@ -93,36 +102,72 @@ export async function getAllSheets(req: Request, res: Response) {
 
 export async function readPendingValues(req: Request, res: Response) {
     try {
-        const pendingSheets = await BonusComputationSheetModel.find({ status: "pending-hr" });
+        const pendingSheets = await BonusComputationSheetModel.find({
+            status: "pending-hr",
+        });
         console.log(pendingSheets);
-        const outputList: { salesmanId: number, firstname: string, lastname: string, year: number, status: string, bonus: number }[] = [];
+        const outputList: {
+            salesmanId: number;
+            firstname: string;
+            lastname: string;
+            year: number;
+            status: string;
+            bonus: number;
+        }[] = [];
         for (let sheet of pendingSheets) {
-            const currentSalesman = await SalesmanModel.findOne({ id: sheet.salesmanId }) as unknown as Salesman;
+            const currentSalesman = (await SalesmanModel.findOne({
+                id: sheet.salesmanId,
+            })) as unknown as Salesman;
             console.log(currentSalesman);
-            outputList.push({ salesmanId: currentSalesman.id, firstname: currentSalesman.firstname, lastname: currentSalesman.lastname, year: sheet.yearOfEvaluation, status: sheet.status, bonus: sheet.totalBonus })
+            outputList.push({
+                salesmanId: currentSalesman.id,
+                firstname: currentSalesman.firstname,
+                lastname: currentSalesman.lastname,
+                year: sheet.yearOfEvaluation,
+                status: sheet.status,
+                bonus: sheet.totalBonus,
+            });
         }
         res.status(200).send(outputList);
     } catch (reason) {
-        res.status(400).send(reason)
+        res.status(400).send(reason);
     }
 }
 
 export async function readNotPendingValues(req: Request, res: Response) {
     try {
-        const notPendingSheets = await BonusComputationSheetModel.find().where("status").ne("pending-hr");
-        const outputList: { salesmanId: number, firstname: string, lastname: string, year: number, status: string, bonus: number }[] = [];
+        const notPendingSheets = await BonusComputationSheetModel.find()
+            .where("status")
+            .ne("pending-hr");
+        const outputList: {
+            salesmanId: number;
+            firstname: string;
+            lastname: string;
+            year: number;
+            status: string;
+            bonus: number;
+        }[] = [];
         for (let sheet of notPendingSheets) {
-            const currentSalesman = await SalesmanModel.findOne({ id: sheet.salesmanId }) as unknown as Salesman;
-            outputList.push({ salesmanId: currentSalesman.id, firstname: currentSalesman.firstname, lastname: currentSalesman.lastname, year: sheet.yearOfEvaluation, status: sheet.status, bonus: sheet.totalBonus })
+            const currentSalesman = (await SalesmanModel.findOne({
+                id: sheet.salesmanId,
+            })) as unknown as Salesman;
+            outputList.push({
+                salesmanId: currentSalesman.id,
+                firstname: currentSalesman.firstname,
+                lastname: currentSalesman.lastname,
+                year: sheet.yearOfEvaluation,
+                status: sheet.status,
+                bonus: sheet.totalBonus,
+            });
         }
         res.status(200).send(outputList);
     } catch (reason) {
-        res.status(400).send(reason)
+        res.status(400).send(reason);
     }
 }
 
-export async function startBonusCalculation(req: Request, res: Response){
-    createSheetsForAllSalesmen(parseInt(req.params.year), req.app.get('db'))
+export async function startBonusCalculation(req: Request, res: Response) {
+    createSheetsForAllSalesmen(parseInt(req.params.year), req.app.get("db"))
         .then(() => res.status(200).send())
         .catch((reason) => res.status(400).send(reason));
 }

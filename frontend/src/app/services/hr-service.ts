@@ -5,22 +5,22 @@ import { environment } from '../../../environments/environment';
 import { Salesman } from '../models/Salesman';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class HRService {
-
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {}
 
     getPendingSheets(): Observable<HttpResponse<[]>> {
         return this.http.get<[]>(
             environment.apiEndpoint + '/api/hr/sheets/pending',
-            { observe: 'response', withCredentials: true });
+            { observe: 'response', withCredentials: true }
+        );
     }
 
     getNotPendingSheets(): Observable<HttpResponse<[]>> {
         return this.http.get<[]>(
             environment.apiEndpoint + '/api/hr/sheets/notpending',
-            { observe: 'response', withCredentials: true });
+            { observe: 'response', withCredentials: true }
+        );
     }
-
 }

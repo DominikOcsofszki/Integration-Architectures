@@ -11,7 +11,7 @@ const router = Router();
 
 router.use("", baseRouter);
 
-router.use("/hr", checkAuthorization(["hr"]), hrRouter);
+router.use("/hr", hrRouter);
 
 router.use("/ceo", checkAuthorization(["ceo"]), ceoRouter);
 
