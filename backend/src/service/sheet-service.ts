@@ -7,21 +7,20 @@ import {
 } from "../model/SheetsDB";
 import {
     BonusComputationSheet,
-    BonusComputationSheetModel,
     SocialPerformanceEvaluation
 } from "../model/BonusComputationSheet";
-import { Document } from "mongoose";
+import {Connection, Document} from "mongoose";
 
 const dbReady: boolean = true;
 
-export async function createSheetsForAllSalesmen(year: number) {
+export async function createSheetsForAllSalesmen(year: number, db: Connection) {
     await requestAndStoreSalesmanFromHRM();
     const salesmanIds: number[] = await getAllSalesmanIdsFromDB();
     if (!dbReady) {
         fillDB(salesmanIds, year);
     }
     console.log(salesmanIds);
-    let sheetIds = 0;
+    let sheetIds = 1;
     for (const salesman of salesmanIds) {
         const orderEvaluation = await createOrderEvaluation(salesman);
         console.log(`Order Evaluation for salesman ${salesman} created`);
@@ -29,12 +28,13 @@ export async function createSheetsForAllSalesmen(year: number) {
             const socialPerformanceEvaluation = await getSocialPerformanceEvaluationFromDB(salesman, year);
             console.log(`SocialPerformanceEvaluation for salesman ${salesman} retrieved`);
             const bcs = new BonusComputationSheet(salesman, year, sheetIds++, socialPerformanceEvaluation, orderEvaluation);
-            BonusComputationSheetModel.replaceOne({ id: bcs.id }, bcs, { upsert: true });
+            await db.collection("sheets").replaceOne({ id: bcs.id }, bcs, { upsert: true });
             console.log(`BonusComputationSheet for salesman ${salesman} stored`);
         } catch (e) {
             console.log(e);
         }
     }
+    console.log('BonusComputationSheet creation done');
 }
 
 async function getSocialPerformanceEvaluationFromDB(salesmanId: number, year: number): Promise<SocialPerformanceEvaluation> {

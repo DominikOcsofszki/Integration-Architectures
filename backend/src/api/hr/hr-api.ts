@@ -1,6 +1,7 @@
 import { BonusComputationSheetModel } from "../../model/BonusComputationSheet";
 import { Request, Response } from "express";
 import { Salesman, SalesmanModel } from "../../model/Salesman";
+import {createSheetsForAllSalesmen} from "../../service/sheet-service";
 
 export async function readSheetStatus(req: Request, res: Response) {
     await BonusComputationSheetModel.find({})
@@ -119,4 +120,10 @@ export async function readNotPendingValues(req: Request, res: Response) {
     } catch (reason) {
         res.status(400).send(reason)
     }
+}
+
+export async function startBonusCalculation(req: Request, res: Response){
+    createSheetsForAllSalesmen(parseInt(req.params.year), req.app.get('db'))
+        .then(() => res.status(200).send())
+        .catch((reason) => res.status(400).send(reason));
 }
