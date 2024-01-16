@@ -3,13 +3,13 @@ const environment = {
     port: 8080,
     defaultAdminPassword: '5$c3inw%',
     db: {
-        host: '127.0.0.1',
-        port: 27017,
-        username: '',
-        password: '',
-        authSource: 'admin',
-        name: 'intArch'
-    },
+      host: 'iar-mongo.inf.h-brs.de',
+      port: 27017,
+      username: 'erasmux',
+      password: 'erasmux!',
+      authSource: 'erasmux',
+      name: 'erasmux'
+  },
     corsOrigins: [
         'http://localhost:4200'
     ],
@@ -23,3 +23,12 @@ const environment = {
 };
 
 exports.default = environment;
+
+// db: {
+//   host: '127.0.0.1',
+//   port: 27017,
+//   username: '',
+//   password: '',
+//   authSource: 'admin',
+//   name: 'intArch'
+// },
