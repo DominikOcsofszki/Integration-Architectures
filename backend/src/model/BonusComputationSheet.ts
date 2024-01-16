@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
 export class BonusComputationSheet {
+    id: number; //brauchen wir die?
+    salesmanId: number;
+    yearOfEvaluation: number;
+    totalBonus: number = 0;
+    status: Status;
     socialPerformanceEvaluation: SocialPerformanceEvaluation;
     orderEvaluation: OrderEvaluation;
-    salesmanId: number;
-    totalBonus: number = 0;
-    yearOfEvaluation: number;
-    id: number; //brauchen wir die?
-    status: Status;
     comment?: string;
 
     constructor(salesmanId: number, yearOfEvaluation: number, id: number, socialPerformanceEvaluation: SocialPerformanceEvaluation, orderEvaluation: OrderEvaluation, comment?: string) {

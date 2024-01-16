@@ -9,7 +9,7 @@ import {
     getSheetByIdAndYear,
     getSheetsById,
     getSheetsByYear,
-    getAllSheets, readPendingValues, readNotPendingSheets, readNotPendingValues,
+    getAllSheets, readPendingValues, readNotPendingSheets, readNotPendingValues, startBonusCalculation,
 } from "./hr-api";
 
 const router = Router();
@@ -25,5 +25,6 @@ router.get("/sheet/year/:yearOfEvaluation/", getSheetsByYear);
 router.get("/sheet", getAllSheets);
 router.get("/sheets/pending", readPendingValues);
 router.get("/sheets/notpending", readNotPendingValues);
+router.post("/sheets/start/:year", startBonusCalculation);
 
 export default router;

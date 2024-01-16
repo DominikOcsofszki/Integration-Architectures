@@ -44,6 +44,6 @@ export async function getTokenHRM() {
         throw Error(res.data.error);
     }
     const accessToken = res.data["access_token"];
-    console.log(accessToken);
+    // console.log(accessToken);
     return accessToken;
 }
