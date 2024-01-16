@@ -26,6 +26,7 @@
     "jspdf": "^2.5.1",
     "mongoose": "^8.0.3",
     "mongose": "^0.0.2-security",
+    "ng": "^0.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.13.0"
@@ -37,7 +38,7 @@
     "@angular-eslint/eslint-plugin-template": "16.0.2",
     "@angular-eslint/schematics": "16.0.2",
     "@angular-eslint/template-parser": "^16.0.2",
-    "@angular/cli": "^16.0.2",
+    "@angular/cli": "^16.2.11",
     "@angular/compiler-cli": "^16.0.2",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^18.16.0",

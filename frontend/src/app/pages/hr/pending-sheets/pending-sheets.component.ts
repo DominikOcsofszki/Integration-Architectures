@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 // ..... change to open Salemen
 // import { PeopleDemoService } from '../../services/people-demo.service';
 // import { ExampleDatapoint } from '../../interfaces/example-datapoint';
-import { Salesman } from '../../models/Salesman';
-import { PendingSalesmanService } from '../../services/pending-saleman.service';
+import { Salesman } from '../../../models/Salesman';
+import { PendingSalesmanService } from '../../../services/pending-saleman.service';
 import { MatTableModule } from '@angular/material/table';
 @Component({
     selector: 'app-pending-sheets',
