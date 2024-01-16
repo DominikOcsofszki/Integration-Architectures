@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive, RouterLink } from '@angular/router';
 import { User } from '../../models/User';
 import { UserService } from '../../services/user.service';
+import { MatButtonModule } from '@angular/material/button';
+import { NgFor, NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
     selector: 'app-menu-bar',
     templateUrl: './menu-bar.component.html',
-    styleUrls: ['./menu-bar.component.css']
+    styleUrls: ['./menu-bar.component.css'],
+    standalone: true,
+    imports: [MatToolbarModule, MatIconModule, NgFor, MatButtonModule, RouterLinkActive, RouterLink, NgIf]
 })
 export class MenuBarComponent implements OnInit {
 

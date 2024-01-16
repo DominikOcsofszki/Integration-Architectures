@@ -5,10 +5,13 @@ import { Component, OnInit } from '@angular/core';
 // import { ExampleDatapoint } from '../../interfaces/example-datapoint';
 import { Salesman } from '../../models/Salesman';
 import { PendingSalesmanService } from '../../services/pending-saleman.service';
+import { MatTableModule } from '@angular/material/table';
 @Component({
     selector: 'app-pending-sheets',
     templateUrl: './pending-sheets.component.html',
     styleUrls: ['./pending-sheets.component.css'],
+    standalone: true,
+    imports: [MatTableModule],
 })
 export class PendingSheetsComponent implements OnInit {
     displayedColumns = ['salesman', 'firstname', 'lastname', 'year' , 'bonus', 'status'];

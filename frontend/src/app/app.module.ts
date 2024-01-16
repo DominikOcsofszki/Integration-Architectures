@@ -22,17 +22,7 @@ import { BonusViewSalesmanComponent } from './pages/bonus-view-salesman/bonus-vi
 import { PendingSheetsComponent } from './pages/pending-sheets/pending-sheets.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginPageComponent,
-        LoginComponent,
-        LandingPageComponent,
-        MenuBarComponent,
-        ExamplePageComponent,
-        NotFoundPageComponent,
-        BonusViewSalesmanComponent,
-        PendingSheetsComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         AppRouting,
@@ -44,7 +34,15 @@ import { PendingSheetsComponent } from './pages/pending-sheets/pending-sheets.co
         MatCardModule,
         MatToolbarModule,
         MatIconModule,
-        MatTableModule
+        MatTableModule,
+        LoginPageComponent,
+        LoginComponent,
+        LandingPageComponent,
+        MenuBarComponent,
+        ExamplePageComponent,
+        NotFoundPageComponent,
+        BonusViewSalesmanComponent,
+        PendingSheetsComponent
     ],
     providers: [],
     bootstrap: [AppComponent]
