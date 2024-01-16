@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgFor, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ROUTING } from '../../app.routing';
+
 
 @Component({
     selector: 'app-menu-bar',
@@ -23,9 +25,9 @@ export class MenuBarComponent implements OnInit {
     This array holds the definition of the menu's buttons.
    */
     buttons = [
-        { title: 'HR-Pending', routerLink: 'hr/pending' }, // ToDo check naming?
+        { title: 'HR-Pending', routerLink: ROUTING.hrRouting.PendingSheetsComponent}, // ToDo check naming?
         { title: 'HR-Sheet', routerLink: 'hr/sheet' },
-        { title: 'HR-Start', routerLink: 'hr/start' },
+        { title: 'HR-Start', routerLink: '' },
     ];
 
     /**
