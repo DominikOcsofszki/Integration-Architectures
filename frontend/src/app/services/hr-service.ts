@@ -23,4 +23,8 @@ export class HRService {
             { observe: 'response', withCredentials: true });
     }
 
+    startBonusCalculation(year: number){
+        console.log(year);
+        return this.http.post(`${environment.apiEndpoint}/api/hr/sheets/start/${year}`, {});
+    }
 }
