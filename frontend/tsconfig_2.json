@@ -4,14 +4,14 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
-    "sourceMap": false,
+    "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "System",
+    "module": "ES2022",
     "lib": [
       "ES2022",
       "dom"
@@ -19,5 +19,3 @@
     "useDefineForClassFields": false
   }
 }
-    // "module": "es2020",
-
