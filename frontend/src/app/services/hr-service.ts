@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import {HttpClient, HttpHandler, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Salesman } from '../models/Salesman';
@@ -24,8 +24,11 @@ export class HRService {
         );
     }
 
-    startBonusCalculation(year: number){
-        console.log(year);
-        return this.http.post(`${environment.apiEndpoint}/api/hr/sheets/start/${year}`, {});
+    startBonusCalculation(year: number): Observable<HttpResponse<[]>>{
+        return this.http.post<[]>(
+            `${environment.apiEndpoint}/api/hr/sheets/start/${year}`,
+            {},
+            {observe: 'response', withCredentials: true}
+        );
     }
 }
