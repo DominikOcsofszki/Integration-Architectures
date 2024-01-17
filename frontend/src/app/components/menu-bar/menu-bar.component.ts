@@ -25,7 +25,7 @@ export class MenuBarComponent implements OnInit {
     This array holds the definition of the menu's buttons.
    */
     buttons = [
-        { title: 'HR-Pending', routerLink: ROUTING.hr.PendingSheetsComponent},
+        { title: 'HR-Sheets', routerLink: ROUTING.hr.PendingSheetsComponent},
         { title: 'HR-Sheet', routerLink: ROUTING.hr.BonusViewSalesmanComponent }, // Todo change naming
         { title: 'HR-Start', routerLink: ROUTING.hr.HrStartComponent },
     ];
