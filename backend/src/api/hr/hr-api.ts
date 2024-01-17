@@ -105,7 +105,6 @@ export async function readPendingValues(req: Request, res: Response) {
         const pendingSheets = await BonusComputationSheetModel.find({
             status: "pending-hr",
         });
-        console.log(pendingSheets);
         const outputList: {
             salesmanId: number;
             firstname: string;
@@ -118,7 +117,6 @@ export async function readPendingValues(req: Request, res: Response) {
             const currentSalesman = (await SalesmanModel.findOne({
                 id: sheet.salesmanId,
             })) as unknown as Salesman;
-            console.log(currentSalesman);
             outputList.push({
                 salesmanId: currentSalesman.id,
                 firstname: currentSalesman.firstname,

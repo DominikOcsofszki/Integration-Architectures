@@ -1,1 +1,5 @@
-<p>hr-start works!</p>
+<p>Click here to start the Bonus Computation Sheet process!</p>
+
+<button (click)="startCalculation()">Start Bonus Calculation</button>
+<p></p>
+<p *ngIf="calculationResult$ | async as result">{{ result }}</p>
