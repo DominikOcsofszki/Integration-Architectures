@@ -9,6 +9,7 @@ import { PendingSheetsComponent } from './pages/hr/pending-sheets/pending-sheets
 import { HrStartComponent } from './pages/hr/hr-start/hr-start.component';
 
 export const ROUTING = {
+    // routingToSheet:{},
     hr: {
         PendingSheetsComponent: 'hr/pending',
         HrStartComponent: 'hr/start',
@@ -32,6 +33,7 @@ const routes: Routes = [
     { path: ROUTING.all.LoginPageComponent, component: LoginPageComponent },
     { path: ROUTING.hr.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.HrStartComponent, component: HrStartComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.hr.BonusViewSalesmanComponent+':id', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.BonusViewSalesmanComponent, component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.all.NotFoundPageComponent, component: NotFoundPageComponent }
     // these entries are matched from top to bottom => not found should be the last entry

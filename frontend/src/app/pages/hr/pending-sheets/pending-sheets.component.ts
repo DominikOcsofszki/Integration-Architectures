@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Salesman } from '../../../models/Salesman';
 import {HRService} from '../../../services/hr-service';
 import { MatTableModule } from '@angular/material/table';
+import { ROUTING } from 'src/app/app.routing';
 @Component({
     selector: 'app-pending-sheets',
     templateUrl: './pending-sheets.component.html',
@@ -19,6 +20,7 @@ export class PendingSheetsComponent implements OnInit {
     pendingSheets: [] = [];
     restSheets: [] = [];
 
+    routeToSheet = ROUTING
     constructor(private hrService: HRService) {}
 
     ngOnInit(): void {
@@ -44,4 +46,11 @@ export class PendingSheetsComponent implements OnInit {
                 }
             });
     }
+    onClick() {
+        console.log("from click")
+    }
+
+
+
+
 }

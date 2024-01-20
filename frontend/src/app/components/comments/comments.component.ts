@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,14 +16,25 @@ import { Salesman } from 'src/app/models/Salesman';
     styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
-    id:number = 91338;
+    @Input()id:number;
+    _id:number = 91338;
     year:number = 2023;
-    OneBonusComputationSheet: BonusComputationSheet;
+    fetchedBonusComputationSheet: BonusComputationSheet;
     salesman: Salesman;
+
+    // async ngOnInit() {
+    //     console.log("ngoninit")
+    //     const body =      await this.getSheetFromIdAndYear(this.id, this.year).then(x => console.log(x));
+    //     // console.log(body)
+    //     // this.fetchedBonusComputationSheet =      await            body.data
+    //     // const body2 = await this.getSalesmanFromSalesmanID(this.fetchedBonusComputationSheet.salesmanId)
+    //     // this.salesman = await body2.data;
+    // }
+
     async ngOnInit() {
         this.getSheetFromIdAndYear(this.id, this.year).then(
-            (res) => {this.OneBonusComputationSheet = res.data
-                console.log(this.OneBonusComputationSheet);
+            (res) => {this.fetchedBonusComputationSheet = res.data
+                console.log(this.fetchedBonusComputationSheet);
                 this.getSalesmanFromSalesmanID(this.id).then(
             (res) => {this.salesman = res.data
                 console.log(this.salesman);
@@ -31,15 +42,8 @@ export class CommentsComponent implements OnInit {
 
             }
         );
-        // this.fetchBonusSheetSalesman(); //ToDo add again after DB is ready
     }
 
-    // async getSheetExample(): Promise<AxiosResponse> {
-    //     return await axios.get(
-    //         environment.apiEndpoint + `/api/hr/sheet/${91338}/${2023}`,
-    //         { withCredentials: true }
-    //     );
-    // }
     async getSheetFromIdAndYear(id:number, year:number): Promise<AxiosResponse> {
         return await axios.get(
             environment.apiEndpoint + `/api/hr/sheet/${id}/${year}`,

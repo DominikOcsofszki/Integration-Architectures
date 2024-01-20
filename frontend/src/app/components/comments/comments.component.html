@@ -11,32 +11,59 @@
     </mat-form-field>
     <mat-form-field class="example-full-width">
         <mat-label>Employee ID </mat-label>
-        <input matInput disabled value={{OneBonusComputationSheet.salesmanId}}>
+        <input matInput disabled value={{fetchedBonusComputationSheet.salesmanId}}>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
         <mat-label>Department </mat-label> <!-- ToDo ADD DEPARTMENT -->
-        <input matInput disabled value={{OneBonusComputationSheet.status}}>
+        <input matInput disabled value={{fetchedBonusComputationSheet.status}}>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
         <mat-label>Year of Performance</mat-label>
-        <input matInput disabled value={{OneBonusComputationSheet.yearOfEvaluation}}>
+        <input matInput disabled value={{fetchedBonusComputationSheet.yearOfEvaluation}}>
     </mat-form-field>
+
     <table class="example-full-width" cellspacing="0">
         <tr>
-            <td><mat-form-field class="example-full-width">
-                    <mat-label>First name</mat-label>
-                    <input matInput>
-                </mat-form-field></td>
-            <td><mat-form-field class="example-full-width">
-                    <mat-label>Long Last Name That Will Be Truncated</mat-label>
-                    <input matInput>
-                </mat-form-field></td>
-            <td><mat-form-field class="example-full-width">
-                    <mat-label>Long Last Name That Will Be Truncated</mat-label>
-                    <input matInput>
-                </mat-form-field></td>
+            <td>
+            <mat-form-field class="example-full-width">
+                <mat-label>Order Evaluation Bonus </mat-label>
+                <input matInput disabled value={{fetchedBonusComputationSheet.orderEvaluation.bonussum}}>
+            </mat-form-field>
+            </td>
+            <!-- <td> -->
+            <!-- <mat-form-field class="example-full-width"> -->
+            <!--     <mat-label>comment </mat-label> -->
+            <!--     <input matInput  value={{fetchedBonusComputationSheet}}> -->
+            <!-- </mat-form-field> -->
+            <!-- </td> -->
+        </tr>
+    </table>
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+            <mat-form-field class="example-full-width">
+                <mat-label>Social Performance Bonus </mat-label>
+                <input matInput disabled value={{fetchedBonusComputationSheet.socialPerformanceEvaluation.bonussum}}>
+            </mat-form-field>
+            </td>
+        </tr>
+    </table>
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+            <mat-form-field class="example-full-width">
+                <mat-label>totalBonus </mat-label>
+                <input matInput disabled value={{fetchedBonusComputationSheet.totalBonus}}>
+            </mat-form-field>
+            </td>
+            <td>
+            <mat-form-field class="example-full-width">
+                <mat-label>comment </mat-label>
+                <input matInput  value={{fetchedBonusComputationSheet.comment}}>
+            </mat-form-field>
+            </td>
         </tr>
     </table>
 
