@@ -10,12 +10,16 @@ import { MatButtonModule } from '@angular/material/button';
 import axios from 'axios';
 import { AxiosResponse } from 'axios';
 import { environment } from 'environments/environment';
+
+import {CommentsComponent} from '../../../components/comments/comments.component'
+
+
 @Component({
     selector: 'app-bonus-view-salesman',
     templateUrl: './bonus-view-salesman.component.html',
     styleUrls: ['./bonus-view-salesman.component.css'],
     standalone: true,
-    imports: [MatButtonModule],
+    imports: [MatButtonModule,CommentsComponent],
 })
 export class BonusViewSalesmanComponent {
     title = 'HR';
