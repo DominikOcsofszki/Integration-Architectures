@@ -11,34 +11,26 @@ import axios from 'axios';
 import { AxiosResponse } from 'axios';
 import { environment } from 'environments/environment';
 
-import {CommentsComponent} from '../../../components/comments/comments.component'
-
+import { CommentsComponent } from '../../../components/comments/comments.component'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-bonus-view-salesman',
     templateUrl: './bonus-view-salesman.component.html',
     styleUrls: ['./bonus-view-salesman.component.css'],
     standalone: true,
-    imports: [MatButtonModule,CommentsComponent],
+    imports: [MatButtonModule, CommentsComponent],
 })
 export class BonusViewSalesmanComponent {
-    title = 'HR';
-    salesman: Salesman = new Salesman(1, 'John', 'Doe', 'Sales'); //ToDo delete after DB is ready
-    OneBonusComputationSheet: BonusComputationSheet;
+    constructor(private route: ActivatedRoute) { }
 
-    async ngOnInit() {
-        this.getPendingSalesman().then(
-            (res) => (this.OneBonusComputationSheet = res.data)
-        );
-        console.log(this.OneBonusComputationSheet);
-        // this.fetchBonusSheetSalesman(); //ToDo add again after DB is ready
-    }
-
-    async getPendingSalesman(): Promise<AxiosResponse> {
-        return await axios.get(
-            environment.apiEndpoint + `/api/hr/sheet/${91338}/${2023}`,
-            { withCredentials: true }
-        );
+    title = 'Bonus Computation Sheet';
+    id : number;
+    year:number;
+    ngOnInit() {
+        this.id = Number(this.route.snapshot.paramMap.get('id'));
+        this.year = Number(this.route.snapshot.paramMap.get('year'));
+        console.log(this.id)
     }
 
     generatePdf(data, id: number) {

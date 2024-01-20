@@ -1,25 +1,19 @@
 <h1> {{title}}</h1>
 
 
-<button (click)="generatePdf(contentToConvert, 99)">Generate PDF</button>
 
 <div>
-    <button id="prev">prev</button>
+    <!-- <button id="prev">prev</button> -->
 
     <div #contentToConvert>
-        <app-comments [id]="91338"></app-comments>
-        <!-- <div class="salesman"> -->
-        <!--     <p>The Api is needed, since we do not have a class for mongoRecords</p> -->
-        <!--     {{OneBonusComputationSheet.salesmanId}} -->
-        <!--     {{OneBonusComputationSheet.yearOfEvaluation}} -->
-        <!--     {{OneBonusComputationSheet.status}} -->
-        <!--     {{OneBonusComputationSheet.totalBonus}} -->
-        <!-- </div> -->
+        <!-- <app-comments [id]="91338"></app-comments> -->
+        <app-comments [id]=id [year]=year></app-comments>
     </div>
 
-    <button id="next">next</button>
+    <!-- <button id="next">next</button> -->
     <div><button mat-raised-button color="primary">
             Sign
         </button></div>
 </div>
 
+<button (click)="generatePdf(contentToConvert, 99)">Generate PDF</button>

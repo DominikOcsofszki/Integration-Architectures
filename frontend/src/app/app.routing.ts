@@ -33,6 +33,7 @@ const routes: Routes = [
     { path: ROUTING.all.LoginPageComponent, component: LoginPageComponent },
     { path: ROUTING.hr.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.HrStartComponent, component: HrStartComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.hr.BonusViewSalesmanComponent+':year/:id', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.BonusViewSalesmanComponent+':id', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.BonusViewSalesmanComponent, component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.all.NotFoundPageComponent, component: NotFoundPageComponent }
