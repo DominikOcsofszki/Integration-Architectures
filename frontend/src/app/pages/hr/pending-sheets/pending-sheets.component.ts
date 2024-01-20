@@ -7,6 +7,7 @@ import { Salesman } from '../../../models/Salesman';
 import {HRService} from '../../../services/hr-service';
 import { MatTableModule } from '@angular/material/table';
 import { ROUTING } from 'src/app/app.routing';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-pending-sheets',
     templateUrl: './pending-sheets.component.html',
@@ -21,7 +22,7 @@ export class PendingSheetsComponent implements OnInit {
     restSheets: [] = [];
 
     routeToSheet = ROUTING
-    constructor(private hrService: HRService) {}
+    constructor(private hrService: HRService,private router: Router) {}
 
     ngOnInit(): void {
         this.fetchPendingSalesman(); // ToDo add again after DB is ready
@@ -46,8 +47,9 @@ export class PendingSheetsComponent implements OnInit {
                 }
             });
     }
-    onClick() {
-        console.log("from click")
+    openLinkSheet(id:number, year:number) {
+        console.log(id, year)
+        this.router.navigateByUrl(year+"/"+id);
     }
 
 
