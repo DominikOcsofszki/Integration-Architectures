@@ -29,7 +29,11 @@ export class BonusViewSalesmanComponent {
     year:number;
     ngOnInit() {
         this.id = Number(this.route.snapshot.paramMap.get('id'));
+        this.title = this.id ? this.title : "http://localhost:4200/2023/91338";
+        this.id = this.id ? this.id : 91338; //TODO remove demo data later
         this.year = Number(this.route.snapshot.paramMap.get('year'));
+
+        this.year = this.year ? this.year : 2023 //TODO remove demo data later
         console.log(this.id)
     }
 

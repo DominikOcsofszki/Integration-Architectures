@@ -16,8 +16,8 @@ import { Salesman } from 'src/app/models/Salesman';
     styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
-    @Input()id:number;
-    @Input()year:number;
+    @Input()id:number = 91338
+    @Input()year:number = 2023;
     // _id:number = 91338;
     // year:number = 2023;
     fetchedBonusComputationSheet: BonusComputationSheet;
