@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import * as jsPDFAll from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Salesman } from 'src/app/models/Salesman';
@@ -14,23 +14,39 @@ import { environment } from 'environments/environment';
 import { CommentsComponent } from '../../../components/comments/comments.component'
 import { ActivatedRoute } from '@angular/router';
 import { SheetServiceService } from 'src/app/services/sheet-service.service';
-import { NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
+// import {pipe} from '
+
+import { CommonModule } from '@angular/common';
+
+import { ChangeDetectorRef } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
+import { Observable } from 'rxjs';
+import { SheetComponent } from 'src/app/components/sheet/sheet.component';
+
 
 @Component({
     selector: 'app-bonus-view-salesman',
     templateUrl: './bonus-view-salesman.component.html',
     styleUrls: ['./bonus-view-salesman.component.css'],
     standalone: true,
-    imports: [MatButtonModule, CommentsComponent, NgIf],
+    imports: [MatButtonModule, CommentsComponent, NgIf, AsyncPipe, SheetComponent],
+      changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class BonusViewSalesmanComponent {
+    @ViewChildren(CommentsComponent) commentsComponent!: CommentsComponent;
+
+
+
     constructor(private route: ActivatedRoute, private sheetService: SheetServiceService) { }
 
     title = 'Bonus Computation Sheet';
-    id : number;
-    year:number;
-    fetchedBonusComputationSheet: BonusComputationSheet;
-
+    id: number;
+    year: number;
+    fetchedBonusComputationSheetObservable: Observable<BonusComputationSheet>;
+    // fetchedBonusComputationSheet: Observable<BonusComputationSheet>;
+    salesman: Salesman;
     ngOnInit() {
         this.id = Number(this.route.snapshot.paramMap.get('id'));
         this.title = this.id ? this.title : "http://localhost:4200/2023/91338";
@@ -38,12 +54,22 @@ export class BonusViewSalesmanComponent {
         this.year = Number(this.route.snapshot.paramMap.get('year'));
         this.year = this.year ? this.year : 2023 //TODO remove demo data later
         console.log(this.id)
-         this.sheetService.getSheetFromIdAndYear(this.year,this.id).subscribe((data) => {
-             this.fetchedBonusComputationSheet = data.body;
-         });
+        // this.fetchedBonusComputationSheetObservable = this.sheetService.getSheetFromIdAndYear(this.id, this.year)//.subscribe((fetchedBonusComputationSheet) => {
+            // this.fetchedBonusComputationSheet = fetchedBonusComputationSheet;
+            // this.updateChildView();
 
-
+            console.log("inside sth")
+            // console.log(this.fetchedBonusComputationSheet);
+            // console.log(this.id)
+            // console.log(this.year)
+        // });
     }
+    // updateChildView() {
+    //     if (this.commentsComponent) {
+    //         console.log("call updateChildView")
+    //         this.commentsComponent.updateView();
+    //     }
+    // }
 
     generatePdf(data, id: number) {
         html2canvas(data, { allowTaint: true }).then((canvas) => {

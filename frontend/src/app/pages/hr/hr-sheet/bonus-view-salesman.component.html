@@ -1,19 +1,14 @@
 <h1> {{title}}</h1>
-
-
-
 <div>
-
     <div #contentToConvert>
-        <app-comments [id]=id [year]=year [fetchedBonusComputationSheet]=fetchedBonusComputationSheet
-            ></app-comments>
-            <!-- *ngIf=fetchedBonusComputationSheet></app-comments> -->
-    </div>
 
-    <!-- <button id="next">next</button> -->
-    <div><button mat-raised-button color="primary">
-            Sign
-        </button></div>
+        <app-sheet [id]=id [year]=year></app-sheet>
+        <app-comments [id]=id [year]=year
+            ></app-comments>
+
+            <!-- [fetchedBonusComputationSheet]="fetchedBonusComputationSheet" -->
+
+    </div>
 </div>
 
 <button (click)="generatePdf(contentToConvert, 99)">Generate PDF</button>

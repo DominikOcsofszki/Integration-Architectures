@@ -7,6 +7,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { BonusViewSalesmanComponent } from './pages/hr/hr-sheet/bonus-view-salesman.component';
 import { PendingSheetsComponent } from './pages/hr/pending-sheets/pending-sheets.component';
 import { HrStartComponent } from './pages/hr/hr-start/hr-start.component';
+import { SheetComponent } from './components/sheet/sheet.component';
 
 export const ROUTING = {
     // routingToSheet:{},
@@ -18,7 +19,8 @@ export const ROUTING = {
 
     all: {
         LoginPageComponent: 'login',
-        NotFoundPageComponent: '**'
+        NotFoundPageComponent: '**',
+        TESTING: 'testing'
     },
 
     ceo: {
@@ -30,6 +32,7 @@ export const ROUTING = {
     }
 }
 const routes: Routes = [
+    {path: ROUTING.all.TESTING, component : SheetComponent},
     { path: ROUTING.all.LoginPageComponent, component: LoginPageComponent },
     { path: ROUTING.hr.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.HrStartComponent, component: HrStartComponent, canActivate: [AuthGuardService] },

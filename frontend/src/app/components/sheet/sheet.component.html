@@ -9,31 +9,31 @@
     </mat-form-field>
     <mat-form-field class="example-full-width">
         <mat-label>Employee ID </mat-label>
-        <input matInput disabled value={{fetchedBonusComputationSheet.salesmanId}}>
+        <input matInput disabled value={{bonusComputationSheet.salesmanId}}>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
         <mat-label>Department </mat-label> <!-- ToDo ADD DEPARTMENT -->
-        <input matInput disabled value={{fetchedBonusComputationSheet.status}}>
+        <input matInput disabled value={{bonusComputationSheet.status}}>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
         <mat-label>Year of Performance</mat-label>
-        <input matInput disabled value={{fetchedBonusComputationSheet.yearOfEvaluation}}>
+        <input matInput disabled value={{bonusComputationSheet.yearOfEvaluation}}>
     </mat-form-field>
 
     <table class="example-full-width" cellspacing="0">
         <tr>
             <td>
-            <mat-form-field class="example-full-width">
-                <mat-label>Order Evaluation Bonus </mat-label>
-                <input matInput disabled value={{fetchedBonusComputationSheet.orderEvaluation.bonussum}}>
-            </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Order Evaluation Bonus </mat-label>
+                    <input matInput disabled value={{bonusComputationSheet.orderEvaluation.bonussum}}>
+                </mat-form-field>
             </td>
             <!-- <td> -->
             <!-- <mat-form-field class="example-full-width"> -->
             <!--     <mat-label>comment </mat-label> -->
-            <!--     <input matInput  value={{fetchedBonusComputationSheet}}> -->
+            <!--     <input matInput  value={{bonusComputationSheet}}> -->
             <!-- </mat-form-field> -->
             <!-- </td> -->
         </tr>
@@ -41,30 +41,30 @@
     <table class="example-full-width" cellspacing="0">
         <tr>
             <td>
-            <mat-form-field class="example-full-width">
-                <mat-label>Social Performance Bonus </mat-label>
-                <input matInput disabled value={{fetchedBonusComputationSheet.socialPerformanceEvaluation.bonussum}}>
-            </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Social Performance Bonus </mat-label>
+                    <input matInput disabled value={{bonusComputationSheet.socialPerformanceEvaluation.bonussum}}>
+                </mat-form-field>
             </td>
         </tr>
     </table>
     <table class="example-full-width" cellspacing="0">
         <tr>
             <td>
-            <mat-form-field class="example-full-width">
-                <mat-label>totalBonus </mat-label>
-                <input matInput disabled value={{fetchedBonusComputationSheet.totalBonus}}>
-            </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>totalBonus </mat-label>
+                    <input matInput disabled value={{bonusComputationSheet.totalBonus}}>
+                </mat-form-field>
             </td>
             <td>
-            <mat-form-field class="example-full-width">
-                <mat-label>comment </mat-label>
-                <input matInput  value={{fetchedBonusComputationSheet.comment}}>
-            </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>comment </mat-label>
+                    <input matInput value={{bonusComputationSheet.comment}}>
+                </mat-form-field>
             </td>
         </tr>
     </table>
-<!-- <button (click)="refresh()">Refresh</button> -->
+    <!-- <button (click)="refresh()">Refresh</button> -->
     <!-- <p> -->
     <!--   <mat-form-field class="example-full-width"> -->
     <!--     <mat-label>Address</mat-label> -->
@@ -93,3 +93,4 @@
     <!-- </tr></table> -->
 </form>
 
+<div><button mat-raised-button color="primary" (click) = "signCurrentSheet()">Sign</button></div>
