@@ -3,11 +3,11 @@
 
 
 <div>
-    <!-- <button id="prev">prev</button> -->
 
     <div #contentToConvert>
-        <!-- <app-comments [id]="91338"></app-comments> -->
-        <app-comments [id]=id [year]=year></app-comments>
+        <app-comments [id]=id [year]=year [fetchedBonusComputationSheet]=fetchedBonusComputationSheet
+            ></app-comments>
+            <!-- *ngIf=fetchedBonusComputationSheet></app-comments> -->
     </div>
 
     <!-- <button id="next">next</button> -->

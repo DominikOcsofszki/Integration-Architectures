@@ -13,28 +13,36 @@ import { environment } from 'environments/environment';
 
 import { CommentsComponent } from '../../../components/comments/comments.component'
 import { ActivatedRoute } from '@angular/router';
+import { SheetServiceService } from 'src/app/services/sheet-service.service';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-bonus-view-salesman',
     templateUrl: './bonus-view-salesman.component.html',
     styleUrls: ['./bonus-view-salesman.component.css'],
     standalone: true,
-    imports: [MatButtonModule, CommentsComponent],
+    imports: [MatButtonModule, CommentsComponent, NgIf],
 })
 export class BonusViewSalesmanComponent {
-    constructor(private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute, private sheetService: SheetServiceService) { }
 
     title = 'Bonus Computation Sheet';
     id : number;
     year:number;
+    fetchedBonusComputationSheet: BonusComputationSheet;
+
     ngOnInit() {
         this.id = Number(this.route.snapshot.paramMap.get('id'));
         this.title = this.id ? this.title : "http://localhost:4200/2023/91338";
         this.id = this.id ? this.id : 91338; //TODO remove demo data later
         this.year = Number(this.route.snapshot.paramMap.get('year'));
-
         this.year = this.year ? this.year : 2023 //TODO remove demo data later
         console.log(this.id)
+         this.sheetService.getSheetFromIdAndYear(this.year,this.id).subscribe((data) => {
+             this.fetchedBonusComputationSheet = data.body;
+         });
+
+
     }
 
     generatePdf(data, id: number) {

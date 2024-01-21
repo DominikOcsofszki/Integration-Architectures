@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,6 +7,7 @@ import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
 import { environment } from 'environments/environment';
 import axios, { AxiosResponse } from 'axios';
 import { Salesman } from 'src/app/models/Salesman';
+import { SheetServiceService } from 'src/app/services/sheet-service.service';
 
 @Component({
     selector: 'app-comments',
@@ -16,22 +17,22 @@ import { Salesman } from 'src/app/models/Salesman';
     styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
-    @Input()id:number = 91338
-    @Input()year:number = 2023;
-    // _id:number = 91338;
-    // year:number = 2023;
-    fetchedBonusComputationSheet: BonusComputationSheet;
+    @Input() id: number = 91338
+    @Input() year: number = 2023;
+    @Input() fetchedBonusComputationSheet: BonusComputationSheet;
     salesman: Salesman;
 
-    // async ngOnInit() {
-    //     console.log("ngoninit")
-    //     const body =      await this.getSheetFromIdAndYear(this.id, this.year).then(x => console.log(x));
-    //     // console.log(body)
-    //     // this.fetchedBonusComputationSheet =      await            body.data
-    //     // const body2 = await this.getSalesmanFromSalesmanID(this.fetchedBonusComputationSheet.salesmanId)
-    //     // this.salesman = await body2.data;
-    // }
+    constructor(private sheetService: SheetServiceService) { }
 
+    ngOnChanges() {
+        console.log("changed detected")
+    }
+    // ngOnInit() {
+    //     this.sheetService.getSheetFromIdAndYear(this.id, this.year).subscribe((data) => {
+    //         this.fetchedBonusComputationSheet = data.body;
+    //         console.log(this.fetchedBonusComputationSheet)
+    //     });
+    // };
     async ngOnInit() {
         this.getSheetFromIdAndYear(this.id, this.year).then(
             (res) => {this.fetchedBonusComputationSheet = res.data
@@ -52,8 +53,8 @@ export class CommentsComponent implements OnInit {
         );
     }
 
-// router.get("/salesman/:id", readSalesman);
-    async getSalesmanFromSalesmanID(id:number): Promise<AxiosResponse> {
+    // router.get("/salesman/:id", readSalesman);
+    async getSalesmanFromSalesmanID(id: number): Promise<AxiosResponse> {
         return await axios.get(
             environment.apiEndpoint + `/api/admin/salesman/${id}`,
             { withCredentials: true }
