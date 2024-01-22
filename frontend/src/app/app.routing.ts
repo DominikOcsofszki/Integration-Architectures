@@ -7,17 +7,10 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { BonusViewSalesmanComponent } from './pages/hr/hr-sheet/bonus-view-salesman.component';
 import { PendingSheetsComponent } from './pages/hr/pending-sheets/pending-sheets.component';
 import { HrStartComponent } from './pages/hr/hr-start/hr-start.component';
-/*
-  This array holds the relation of paths and components which angular router should resolve.
-
-  If you want add a new page with a separate path/subdirectory you should register it here.
-  It is also possible to read parameters from the path they have to be specified with ':' in the path.
-
-  If a new page should also show up in the menu bar, you need to add it there too.
-  Look at: frontend/src/app/components/menu-bar/menu-bar.component.ts
- */
+import { SheetComponent } from './components/sheet/sheet.component';
 
 export const ROUTING = {
+    // routingToSheet:{},
     hr: {
         PendingSheetsComponent: 'hr/pending',
         HrStartComponent: 'hr/start',
@@ -26,7 +19,8 @@ export const ROUTING = {
 
     all: {
         LoginPageComponent: 'login',
-        NotFoundPageComponent: '**'
+        NotFoundPageComponent: '**',
+        TESTING: 'testing'
     },
 
     ceo: {
@@ -38,21 +32,16 @@ export const ROUTING = {
     }
 }
 const routes: Routes = [
+    {path: ROUTING.all.TESTING, component : SheetComponent},
     { path: ROUTING.all.LoginPageComponent, component: LoginPageComponent },
     { path: ROUTING.hr.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.HrStartComponent, component: HrStartComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.hr.BonusViewSalesmanComponent+':year/:id', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.hr.BonusViewSalesmanComponent+':id', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.BonusViewSalesmanComponent, component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.all.NotFoundPageComponent, component: NotFoundPageComponent }
     // these entries are matched from top to bottom => not found should be the last entry
 ];
-// const routes: Routes = [
-//     { path: 'login', component: LoginPageComponent },
-//     { path: 'hr/pending', component: PendingSheetsComponent, canActivate: [AuthGuardService] },
-//     { path: 'hr/start', component: HrStartComponent, canActivate: [AuthGuardService] },
-//     { path: '', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
-//     { path: '**', component: NotFoundPageComponent }
-//     // these entries are matched from top to bottom => not found should be the last entry
-// ];
 
 @NgModule({
     imports: [
