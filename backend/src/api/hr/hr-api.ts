@@ -1,4 +1,9 @@
-import { BonusComputationSheetModel } from "../../model/BonusComputationSheet";
+import {
+    BonusComputationSheetModel,
+    OrderEvaluation,
+    SocialPerformanceEvaluation,
+    Status
+} from "../../model/BonusComputationSheet";
 import { Request, Response } from "express";
 import { Salesman, SalesmanModel } from "../../model/Salesman";
 import { createSheetsForAllSalesmen } from "../../service/sheet-service";
@@ -62,14 +67,27 @@ export async function signSheet(req: Request, res: Response) {
 }
 
 export async function getSheetByIdAndYear(req: Request, res: Response) {
-    await BonusComputationSheetModel.findOne({
-        salesmanId: req.params.salesmanId,
-        yearOfEvaluation: req.params.yearOfEvaluation,
-    })
-        .then((value) => {
-            res.status(200).send(value);
-        })
-        .catch((reason) => res.status(400).send(reason));
+    try {
+        const sheet = await BonusComputationSheetModel.findOne({
+            salesmanId: req.params.salesmanId,
+            yearOfEvaluation: req.params.yearOfEvaluation,
+        });
+        const salesman = await SalesmanModel.findOne({id: req.params.salesmanId});
+        if (sheet !== null && salesman !== null){
+            const sheetWithSalesman = {
+                salesman: salesman,
+                yearOfEvaluation: sheet.yearOfEvaluation,
+                totalBonus: sheet.totalBonus,
+                status: sheet.status,
+                socialPerformanceEvaluation: sheet.socialPerformanceEvaluation,
+                orderEvaluation: sheet.orderEvaluation,
+                comment: sheet.comment
+            };
+            res.status(200).send(sheetWithSalesman);
+        }
+    } catch (reason){
+        res.status(400).send(reason);
+    }
 }
 
 export async function getSheetsById(req: Request, res: Response) {
