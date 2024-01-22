@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-// ..... change to open Salemen
-// import { PeopleDemoService } from '../../services/people-demo.service';
-// import { ExampleDatapoint } from '../../interfaces/example-datapoint';
-import { Salesman } from '../../../models/Salesman';
 import { HRService } from '../../../services/hr-service';
 import { MatTableModule } from '@angular/material/table';
-import { ROUTING } from 'src/app/app.routing';
 import { Router } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { forkJoin } from 'rxjs';
@@ -19,33 +14,33 @@ import {SheetSummary} from "../../../models/SheetSummary";
     imports: [MatTableModule, MatProgressBarModule],
 })
 export class PendingSheetsComponent implements OnInit {
+
+    constructor(private hrService: HRService, private router: Router) { }
     displayedColumns = ['salesman', 'firstname', 'lastname', 'year', 'bonus', 'status'];
 
     pendingSheets: SheetSummary[] = [];
     restSheets: SheetSummary[] = [];
 
-    routeToSheet = ROUTING
     finishedPercentage : number;
-    constructor(private hrService: HRService, private router: Router) { }
 
     ngOnInit(): void {
         this.fetchPendingSalesman(); // ToDo add again after DB is ready
         this.fetchRestPendingSalesman(); // ToDo add again after DB is ready
-        this.calcFinishedPercentage();
+        this.calculatePercentage();
     }
 
-    calcFinishedPercentage(): void {
-        forkJoin([
-            this.hrService.getPendingSheets(), // Assuming this returns an Observable
-            this.hrService.getNotPendingSheets() // Assuming this returns an Observable
-        ]).subscribe(([pendingSheetsResponse, restSheetsResponse]) => {
-            if (pendingSheetsResponse.status === 200 && restSheetsResponse.status === 200) {
-                this.pendingSheets = pendingSheetsResponse.body;
-                this.restSheets = restSheetsResponse.body;
-                this.finishedPercentage = this.calculatePercentage();
-            }
-        });
-    }
+    // calcFinishedPercentage(): void {
+    //     forkJoin([
+    //         this.hrService.getPendingSheets(), // Assuming this returns an Observable
+    //         this.hrService.getNotPendingSheets() // Assuming this returns an Observable
+    //     ]).subscribe(([pendingSheetsResponse, restSheetsResponse]) => {
+    //         if (pendingSheetsResponse.status === 200 && restSheetsResponse.status === 200) {
+    //             this.pendingSheets = pendingSheetsResponse.body;
+    //             this.restSheets = restSheetsResponse.body;
+    //             this.finishedPercentage = this.calculatePercentage();
+    //         }
+    //     });
+    // }
 
     calculatePercentage(): number {
         const pendingSheetsLength = this.pendingSheets.length;
