@@ -8,14 +8,10 @@ import {
 import * as jsPDFAll from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Salesman } from 'src/app/models/Salesman';
-import {
-    BonusComputationSheet,
-    BonusComputationSheetModel,
-} from 'src/app/models/BonusComputationSheet';
+import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
 import { MatButtonModule } from '@angular/material/button';
 import { CommentsComponent } from '../../../components/comments/comments.component';
 import { ActivatedRoute } from '@angular/router';
-import { SheetServiceService } from 'src/app/services/sheet-service.service';
 import { AsyncPipe, NgIf } from '@angular/common';
 // import {pipe} from '
 

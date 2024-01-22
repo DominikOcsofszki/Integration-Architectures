@@ -7,7 +7,6 @@ import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
 import { environment } from 'environments/environment';
 import axios, { AxiosResponse } from 'axios';
 import { Salesman } from 'src/app/models/Salesman';
-import { SheetServiceService } from 'src/app/services/sheet-service.service';
 
 @Component({
     selector: 'app-comments',
@@ -21,8 +20,6 @@ export class CommentsComponent implements OnInit {
     @Input() year: number = 2023;
     @Input() fetchedBonusComputationSheet: BonusComputationSheet;
     salesman: Salesman;
-
-    constructor(private sheetService: SheetServiceService) { }
 
     ngOnChanges() {
         console.log("changed detected")
