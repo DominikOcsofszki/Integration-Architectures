@@ -9,20 +9,22 @@ import {
     getSheetByIdAndYear,
     getSheetsById,
     getSheetsByYear,
-    getAllSheets, readPendingValues, readNotPendingSheets, readNotPendingValues, startBonusCalculation,
+    getAllSheets,
+    readPendingValues,
+    readNotPendingSheets,
+    readNotPendingValues,
+    startBonusCalculation,
 } from "./hr-api";
 
 const router = Router();
 
-//router.get("/salesman/status/:year", readSalesmanStatus);
-//router.get("/salesman/:status/:year", readSalesmanStatus);
-// router.get("/pending/sheet", readPendingSheets);
 router.post("/pending/sheet/sign/:salesmanId/:yearOfEvaluation", signSheet);
 
 router.get("/sheet/:salesmanId/:yearOfEvaluation/", getSheetByIdAndYear);
-router.get("/sheet/:salesmanId/", getSheetsById);
-router.get("/sheet/year/:yearOfEvaluation/", getSheetsByYear);
+//router.get("/sheet/:salesmanId/", getSheetsById);
+//router.get("/sheet/year/:yearOfEvaluation/", getSheetsByYear);
 router.get("/sheet", getAllSheets);
+
 router.get("/sheets/pending", readPendingValues);
 router.get("/sheets/notpending", readNotPendingValues);
 router.post("/sheets/start/:year", startBonusCalculation);
