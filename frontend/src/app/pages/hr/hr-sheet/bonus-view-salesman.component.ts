@@ -13,7 +13,6 @@ import { environment } from 'environments/environment';
 
 import { CommentsComponent } from '../../../components/comments/comments.component'
 import { ActivatedRoute } from '@angular/router';
-import { SheetServiceService } from 'src/app/services/sheet-service.service';
 import { AsyncPipe, NgIf } from '@angular/common';
 // import {pipe} from '
 
@@ -39,7 +38,7 @@ export class BonusViewSalesmanComponent {
 
 
 
-    constructor(private route: ActivatedRoute, private sheetService: SheetServiceService) { }
+    constructor(private route: ActivatedRoute) { }
 
     title = 'Bonus Computation Sheet';
     id: number;
