@@ -1,14 +1,8 @@
 <h1> {{title}}</h1>
 <div>
     <div #contentToConvert>
-
         <app-sheet [id]=id [year]=year></app-sheet>
-        <app-comments [id]=id [year]=year
-            ></app-comments>
-
-            <!-- [fetchedBonusComputationSheet]="fetchedBonusComputationSheet" -->
-
     </div>
 </div>
 
-<button (click)="generatePdf(contentToConvert, 99)">Generate PDF</button>
+<button (click)="generatePdf(contentToConvert, id)">Generate PDF</button>
