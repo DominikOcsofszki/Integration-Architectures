@@ -9,8 +9,8 @@ import { MatTableModule } from '@angular/material/table';
 import { ROUTING } from 'src/app/app.routing';
 import { Router } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { log } from 'console';
 import { forkJoin } from 'rxjs';
+import {SheetSummary} from "../../../models/SheetSummary";
 @Component({
     selector: 'app-pending-sheets',
     templateUrl: './pending-sheets.component.html',
@@ -21,8 +21,8 @@ import { forkJoin } from 'rxjs';
 export class PendingSheetsComponent implements OnInit {
     displayedColumns = ['salesman', 'firstname', 'lastname', 'year', 'bonus', 'status'];
 
-    pendingSheets: [] = [];
-    restSheets: [] = [];
+    pendingSheets: SheetSummary[] = [];
+    restSheets: SheetSummary[] = [];
 
     routeToSheet = ROUTING
     finishedPercentage : number;
@@ -78,8 +78,4 @@ export class PendingSheetsComponent implements OnInit {
         console.log(id, year)
         this.router.navigateByUrl(year + "/" + id);
     }
-
-
-
-
 }

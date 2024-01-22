@@ -4,7 +4,6 @@ import html2canvas from 'html2canvas';
 import { Salesman } from 'src/app/models/Salesman';
 import {
     BonusComputationSheet,
-    BonusComputationSheetModel,
 } from 'src/app/models/BonusComputationSheet';
 import { MatButtonModule } from '@angular/material/button';
 import axios from 'axios';
