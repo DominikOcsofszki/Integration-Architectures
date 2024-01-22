@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject,OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Salesman } from 'src/app/models/Salesman';
 import {BonusComputationSheet} from 'src/app/models/BonusComputationSheet';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Observable } from 'rxjs';
 import { SheetComponent } from 'src/app/components/sheet/sheet.component';
+import { GeneratePdfService } from 'src/app/services/generate-pdf.service';
 
 
 @Component({
@@ -20,11 +21,13 @@ import { SheetComponent } from 'src/app/components/sheet/sheet.component';
 
 })
 export class BonusViewSalesmanComponent {
-    @ViewChildren(CommentsComponent) commentsComponent!: CommentsComponent;
+    private route= inject(ActivatedRoute);
+    private generatePdfService = inject(GeneratePdfService);
+    // @ViewChildren(CommentsComponent) commentsComponent!: CommentsComponent;
 
 
 
-    constructor(private route: ActivatedRoute) { }
+    // constructor() { }
 
     title = 'Bonus Computation Sheet';
     id: number;
@@ -41,7 +44,7 @@ export class BonusViewSalesmanComponent {
     }
 
     generatePdf(data, id: number) {
-
+        this.generatePdfService.generatePdf(data,id);
     }
 
 }
