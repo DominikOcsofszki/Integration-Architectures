@@ -38,10 +38,10 @@ export class MenuBarComponent implements OnInit {
         { title: 'admin-logs', routerLink: ROUTING.admin.LogsComponent },
     ];
     buttons_ceo = [
-        { title: 'CEO-Sheets', routerLink: ROUTING.hr.PendingSheetsComponent },
+        { title: 'CEO-Sheets', routerLink: ROUTING.ceo.PendingSheetsComponent },
     ];
         buttons_salesman = [
-        { title: 'salesman-Sheet', routerLink: ROUTING.hr.BonusViewSalesmanComponent },
+        { title: 'salesman-Sheet', routerLink: ROUTING.salesman.Sheet },
     ];
 
     // buttons = this.buttons_hr

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { RouterOutlet } from '@angular/router';
 import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
 import { NgIf } from '@angular/common';
+import { Role, User } from './models/User';
+import { UserService } from './services/user.service';
 
 @Component({
     selector: 'app-root',
@@ -11,15 +13,21 @@ import { NgIf } from '@angular/common';
     standalone: true,
     imports: [NgIf, MenuBarComponent, RouterOutlet]
 })
+
 export class AppComponent implements OnInit {
 
+    private authService = inject(AuthService)
+    private userService = inject(UserService)
+    // constructor(private authService: AuthService) {}
     isLoggedIn: boolean;
+    currentLoggedInUserRole: Role;
 
-    constructor(private authService: AuthService) {
-    }
 
     ngOnInit(): void {
         this.authService.subscribeLoginChange((newState: boolean): void => { this.isLoggedIn = newState; });
         this.authService.isLoggedIn().subscribe();
+        this.userService.getOwnUser().subscribe(
+            user => this.currentLoggedInUserRole=user.role
+        );
     }
 }

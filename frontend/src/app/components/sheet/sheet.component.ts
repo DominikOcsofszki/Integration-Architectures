@@ -11,6 +11,7 @@ import { TableComponent } from './table/table.component';
 import { TableOrderComponent } from './table-order/table-order.component';
 import { ROUTING } from 'src/app/app.routing';
 import {Router} from "@angular/router"
+import { Role } from 'src/app/models/User';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class SheetComponent implements OnInit {
     bonusComputationSheet: BonusComputationSheet;
     @Input() id: number;
     @Input() year: number;
+    @Input() roleLoggedIn: Role;
     constructor(private sheetServiceService: SheetServiceService) { }
 
     ngOnInit() {
@@ -35,8 +37,7 @@ export class SheetComponent implements OnInit {
             });
     }
     signCurrentSheet() {
-        this.sheetServiceService.signSheetFromSalesmanIdAndYear(this.id, this.year);
-        //TODO msg or sth, who got signed
-        this.router.navigate([ROUTING.hr.PendingSheetsComponent])
+        this.sheetServiceService.signSheetFromSalesmanIdAndYear(this.id, this.year, this.roleLoggedIn);
+        // this.router.navigate([ROUTING.hr.PendingSheetsComponent])
     }
 }

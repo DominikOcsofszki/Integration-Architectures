@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
 import { UserService } from 'src/app/services/user.service';
+import { Role } from 'src/app/models/User';
 
 @Injectable({
     providedIn: 'root'
@@ -21,30 +22,11 @@ export class SheetServiceService {
             { observe: 'response', withCredentials: true })
             .pipe(map(res => res.body));
     }
-    // fetchSalesmanSalesmanID(id: number): Observable<Salesman> { //TODO change to hr, some issue with rights or so not working
-    //     return this.http.get<Salesman>(environment.apiEndpoint + `/api/admin/salesman/${id}`,
-    //         { observe: 'response', withCredentials: true })
-    //         .pipe(map(res => res.body));
-    // }
-    signSheetFromSalesmanIdAndYear(salesmanId: number, yearOfEvaluation: number): void {
-        this.userService.getOwnUser().subscribe(user => {
-            console.log(user.role);
+    signSheetFromSalesmanIdAndYear(salesmanId: number, yearOfEvaluation: number, userRole:Role): void {
             this.http.post(
-                environment.apiEndpoint + `/api/${user.role}/pending/sheet/sign/${salesmanId}/${yearOfEvaluation}`,
+                environment.apiEndpoint + `/api/${userRole}/pending/sheet/sign/${salesmanId}/${yearOfEvaluation}`,
                 { withCredentials: true }).subscribe((res) => console.log(res))
-        });
     }
 }
 
-
-// router.post("/pending/sheet/sign/:salesmanId/:yearOfEvaluation", signSheet);
-
-// router.get("/sheet/:salesmanId/:yearOfEvaluation/", getSheetByIdAndYear);
-// router.get("/sheet/:salesmanId/", getSheetsById);
-// router.get("/sheet/year/:yearOfEvaluation/", getSheetsByYear);
-// router.get("/sheet", getAllSheets);
-// router.get("/sheets/pending", readPendingValues);
-// router.get("/sheets/notpending", readNotPendingValues);
-// router.post("/sheets/start/:year", startBonusCalculation);
-//
 

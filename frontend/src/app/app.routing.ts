@@ -8,44 +8,44 @@ import { BonusViewSalesmanComponent } from './pages/hr/hr-sheet/bonus-view-sales
 import { PendingSheetsComponent } from './pages/hr/pending-sheets/pending-sheets.component';
 import { HrStartComponent } from './pages/hr/hr-start/hr-start.component';
 import { SheetComponent } from './components/sheet/sheet.component';
+import { LogsComponent } from './pages/admin/logs/logs.component';
 
 export const ROUTING = {
-    // routingToSheet:{},
+    all: {
+        LoginPageComponent: 'login',
+        NotFoundPageComponent: '**',
+    },
     hr: {
         PendingSheetsComponent: 'hr',
-        // PendingSheetsComponent: 'hr/pending',
         HrStartComponent: 'hr/start',
-        BonusViewSalesmanComponent: 'hr',
+        Sheet: 'hr/sheet/:year/:id'
     },
 
     admin: {
         LogsComponent: 'admin'
     },
 
-    all: {
-        LoginPageComponent: 'login',
-        NotFoundPageComponent: '**',
-    },
-
     ceo: {
         PendingSheetsComponent: 'ceo',
+        Sheet: 'ceo/sheet/:year/:id'
     },
 
     salesman: {
-        // PendingSheetsComponent: 'salesman/pending',
-        PendingSheetsComponent: 'salesman',
+        Sheet: 'salesman/sheet/:year/:id',
     }
 }
 const routes: Routes = [
     { path: ROUTING.all.LoginPageComponent, component: LoginPageComponent },
-
+    { path: ROUTING.admin.LogsComponent, component: LogsComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.ceo.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
-    { path: ROUTING.admin.LogsComponent, component: BonusViewSalesmanComponent, canMatch: [AuthGuardService] },
+    //
+    { path: ROUTING.hr.Sheet , component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.ceo.Sheet , component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.HrStartComponent, component: HrStartComponent, canActivate: [AuthGuardService] },
-    { path: ROUTING.hr.BonusViewSalesmanComponent + ':year/:id', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
-    { path: ROUTING.hr.BonusViewSalesmanComponent + ':id', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
-    { path: ROUTING.hr.BonusViewSalesmanComponent, component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
-    { path: ROUTING.all.NotFoundPageComponent, component: NotFoundPageComponent }
+
+    { path: ROUTING.all.NotFoundPageComponent, component: NotFoundPageComponent, canActivate: [AuthGuardService] },
+    { path: '**', redirectTo: '/login', pathMatch: 'full' },
     // these entries are matched from top to bottom => not found should be the last entry
 ];
 

@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Credentials } from '../models/Credentials';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, Observer } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { UserService } from './user.service';
+import { Role } from '../models/User';
 
 /**
  * Services specify logic, which is instantiated singularly -> it is shared between components
@@ -13,12 +15,22 @@ import { environment } from '../../../environments/environment';
     providedIn: 'root',
 })
 export class AuthService {
+    // constructor(private http: HttpClient) {}
+    private userService = inject(UserService);
+    private http = inject(HttpClient);
     loggedIn = false;
+    currentLoggedInUserRole: Role;
     authPreCheck = false;
     listeners: ((param: boolean) => void)[] = [];
 
-    constructor(private http: HttpClient) {}
 
+    setUpCurrentUserRole() {
+        this.userService.getOwnUser().subscribe(
+            user => {this.currentLoggedInUserRole = user.role,
+            console.log(this.currentLoggedInUserRole);
+            }
+        );
+    }
     /**
      * returns the current login state
      */
