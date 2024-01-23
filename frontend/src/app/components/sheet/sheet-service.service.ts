@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
+import { UserService } from 'src/app/services/user.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
 export class SheetServiceService {
 
     //TODO refactor for depending on logged in user use admin/hr/ceo/salesman
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private userService: UserService) { }
 
     fetchSheetFromSalesmanIdYear(salesmanId: number, yearOfEvaluation: number): Observable<BonusComputationSheet> {
         return this.http.get<BonusComputationSheet>(
@@ -26,10 +27,12 @@ export class SheetServiceService {
     //         .pipe(map(res => res.body));
     // }
     signSheetFromSalesmanIdAndYear(salesmanId: number, yearOfEvaluation: number): void {
-        // router.post("/pending/sheet/sign/:salesmanId/:yearOfEvaluation", signSheet);
-        this.http.post(
-            environment.apiEndpoint + `/api/hr/pending/sheet/sign/${salesmanId}/${yearOfEvaluation}`,
-            { withCredentials: true }).subscribe((res) => console.log(res))
+        this.userService.getOwnUser().subscribe(user => {
+            console.log(user.role);
+            this.http.post(
+                environment.apiEndpoint + `/api/${user.role}/pending/sheet/sign/${salesmanId}/${yearOfEvaluation}`,
+                { withCredentials: true }).subscribe((res) => console.log(res))
+        });
     }
 }
 
