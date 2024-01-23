@@ -1,0 +1,39 @@
+<button (click) = "printBonusSheet()">click for console log</button>
+    <!-- displayedColumns = ['productname', 'client', 'clientRanking', 'itemamount', 'bonus','comment']; -->
+<table mat-table class="mat-elevation-z8 cdk-table"
+    [dataSource]="bonusComputationSheet.orderEvaluation.orders">
+
+    <ng-container matColumnDef="productname">
+        <th mat-header-cell *matHeaderCellDef>productname</th>
+        <td mat-cell *matCellDef="let order">{{order.productname}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="client">
+        <th mat-header-cell *matHeaderCellDef>client</th>
+        <td mat-cell *matCellDef="let  order">{{order.client}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="clientRanking">
+        <th mat-header-cell *matHeaderCellDef>clientRanking</th>
+        <td mat-cell *matCellDef="let  order">{{order.clientRanking}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="itemamount">
+        <th mat-header-cell *matHeaderCellDef>itemamount</th>
+        <td mat-cell *matCellDef="let  order">{{order.itemamount}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="bonus">
+        <th mat-header-cell *matHeaderCellDef>bonus</th>
+        <td mat-cell *matCellDef="let  order">{{order.bonus}}</td>
+    </ng-container>
+    <ng-container matColumnDef="comment">
+        <th mat-header-cell *matHeaderCellDef>comment</th>
+        <td mat-cell *matCellDef="let  order">{{order.comment}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+

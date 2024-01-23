@@ -9,6 +9,18 @@ export type Status =
 
 export type ClientRanking = 1 | 2 | 3 | 4 | 5;
 
+//this added from backend DB-Sheets
+export const socialAttributeNames: string[] =
+    [
+        "Leadership Competence",
+        "Openness to Employee",
+        "Social Behavior to Employee",
+        "Attitude towards Client",
+        "Communication Skills",
+        "Integrity to Company"
+    ];
+//////////////////////////////////////////
+
 export class BonusComputationSheet {
     // id: number; //brauchen wir die?
     // salesmanId: number;

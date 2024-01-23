@@ -15,11 +15,13 @@ import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
 // import { HttpClient } from '@angular/common/http';
 // import { map } from 'rxjs/operators';
 import { SheetServiceService } from './sheet-service.service';
+import { TableComponent } from './table/table.component';
+import { TableOrderComponent } from './table-order/table-order.component';
 
 @Component({
     selector: 'app-sheet',
     standalone: true,
-    imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule],
+    imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule,TableComponent,TableOrderComponent],
     templateUrl: './sheet.component.html',
     styleUrls: ['./sheet.component.css'],
     // changeDetection: ChangeDetectionStrategy.OnPush

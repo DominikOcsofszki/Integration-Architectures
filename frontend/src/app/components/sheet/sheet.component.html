@@ -1,3 +1,4 @@
+
 <form class="example-form">
     <mat-form-field class="example-full-width">
         <mat-label>First Name</mat-label>
@@ -22,28 +23,24 @@
         <input matInput disabled value={{bonusComputationSheet.yearOfEvaluation}}>
     </mat-form-field>
 
-    <table class="example-full-width" cellspacing="0">
-        <tr>
-            <td>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Order Evaluation Bonus </mat-label>
-                    <input matInput disabled value={{bonusComputationSheet.orderEvaluation.bonussum}}>
-                </mat-form-field>
-            </td>
-            <!-- <td> -->
-            <!-- <mat-form-field class="example-full-width"> -->
-            <!--     <mat-label>comment </mat-label> -->
-            <!--     <input matInput  value={{bonusComputationSheet}}> -->
-            <!-- </mat-form-field> -->
-            <!-- </td> -->
-        </tr>
-    </table>
+    <app-table [bonusComputationSheet]=bonusComputationSheet></app-table>
     <table class="example-full-width" cellspacing="0">
         <tr>
             <td>
                 <mat-form-field class="example-full-width">
                     <mat-label>Social Performance Bonus </mat-label>
                     <input matInput disabled value={{bonusComputationSheet.socialPerformanceEvaluation.bonussum}}>
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+    <app-table-order [bonusComputationSheet]=bonusComputationSheet></app-table-order>
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Order Evaluation Bonus </mat-label>
+                    <input matInput disabled value={{bonusComputationSheet.orderEvaluation.bonussum}}>
                 </mat-form-field>
             </td>
         </tr>
@@ -59,7 +56,7 @@
             <td>
                 <mat-form-field class="example-full-width">
                     <mat-label>comment </mat-label>
-                    <input matInput value={{bonusComputationSheet.comment}}>
+                    <input matInput disabled value={{bonusComputationSheet.comment}}>
                 </mat-form-field>
             </td>
         </tr>
