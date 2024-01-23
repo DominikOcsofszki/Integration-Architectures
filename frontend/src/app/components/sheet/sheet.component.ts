@@ -38,6 +38,6 @@ export class SheetComponent implements OnInit {
     }
     signCurrentSheet() {
         this.sheetServiceService.signSheetFromSalesmanIdAndYear(this.id, this.year, this.roleLoggedIn);
-        // this.router.navigate([ROUTING.hr.PendingSheetsComponent])
+        this.router.navigate([ROUTING.hr.PendingSheetsComponent])//TODO change to proper routing on role
     }
 }
