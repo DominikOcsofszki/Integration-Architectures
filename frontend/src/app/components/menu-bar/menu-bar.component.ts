@@ -31,24 +31,17 @@ export class MenuBarComponent implements OnInit {
    // TODO: Edit the router to the proper ROUTING
     buttons_hr = [
         { title: 'HR-Sheets', routerLink: ROUTING.hr.PendingSheetsComponent },
-        { title: 'HR-Sheet', routerLink: ROUTING.hr.BonusViewSalesmanComponent }, // Todo change naming
         { title: 'HR-Start', routerLink: ROUTING.hr.HrStartComponent },
     ];
 
     buttons_admin = [
-        { title: 'admin-Sheets', routerLink: ROUTING.hr.PendingSheetsComponent },
-        { title: 'admin-Sheet', routerLink: ROUTING.hr.BonusViewSalesmanComponent }, // Todo change naming
-        { title: 'admin-Start', routerLink: ROUTING.hr.HrStartComponent },
+        { title: 'admin-logs', routerLink: ROUTING.admin.LogsComponent },
     ];
     buttons_ceo = [
         { title: 'CEO-Sheets', routerLink: ROUTING.hr.PendingSheetsComponent },
-        { title: 'CEO-Sheet', routerLink: ROUTING.hr.BonusViewSalesmanComponent }, // Todo change naming
-        { title: 'CEO-Start', routerLink: ROUTING.hr.HrStartComponent },
     ];
         buttons_salesman = [
-        { title: 'salesman-Sheets', routerLink: ROUTING.hr.PendingSheetsComponent },
-        { title: 'salesman-Sheet', routerLink: ROUTING.hr.BonusViewSalesmanComponent }, // Todo change naming
-        { title: 'salesman-Start', routerLink: ROUTING.hr.HrStartComponent },
+        { title: 'salesman-Sheet', routerLink: ROUTING.hr.BonusViewSalesmanComponent },
     ];
 
     // buttons = this.buttons_hr
