@@ -4,7 +4,6 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, Observer } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { User } from '../models/User';
 
 /**
  * Services specify logic, which is instantiated singularly -> it is shared between components
@@ -19,15 +18,7 @@ export class AuthService {
     listeners: ((param: boolean) => void)[] = [];
 
     constructor(private http: HttpClient) {}
-    /**
-     * retrieves the login state from backend
-     */
-    getLoggedInUser(): Observable<HttpResponse<User>> {
-        return this.http.get<User>(
-            environment.apiEndpoint + `/api/user`,
-            { withCredentials: true, observe: 'response'}
-        );
-    }
+
     /**
      * returns the current login state
      */

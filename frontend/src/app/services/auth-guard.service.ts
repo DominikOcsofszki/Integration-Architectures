@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {AuthService} from './auth.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import { UserService } from './user.service';
+import { Role, User } from '../models/User';
 
 /**
  * this service implements the CanActivate interface
@@ -12,7 +14,7 @@ import {map} from 'rxjs/operators';
     providedIn: 'root'
 })
 export class AuthGuardService {
-
+    private userService = inject(UserService);
     constructor(private authService: AuthService, private router: Router) { }
 
     canActivate(): Observable<boolean> {
@@ -26,5 +28,12 @@ export class AuthGuardService {
                     return state;
                 })
             );
+    }
+    canMatch(): Observable<boolean> {
+        const checkRole = 'hr';
+        return this.userService.getOwnUser().pipe(map(
+            (user:User) => user.role === checkRole)
+        );
+
     }
 }

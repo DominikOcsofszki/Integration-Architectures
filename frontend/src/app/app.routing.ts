@@ -12,35 +12,35 @@ import { SheetComponent } from './components/sheet/sheet.component';
 export const ROUTING = {
     // routingToSheet:{},
     hr: {
-        PendingSheetsComponent: '',
+        PendingSheetsComponent: 'hr',
         // PendingSheetsComponent: 'hr/pending',
         HrStartComponent: 'hr/start',
-        BonusViewSalesmanComponent: '',
+        BonusViewSalesmanComponent: 'hr',
     },
 
     admin: {
-        LogsComponent: 'admin/logs'
+        LogsComponent: 'admin'
     },
 
     all: {
         LoginPageComponent: 'login',
         NotFoundPageComponent: '**',
-        TESTING: 'testing'
     },
 
     ceo: {
-        // PendingSheetsComponent: 'ceo/pending',
-        PendingSheetsComponent: '',
+        PendingSheetsComponent: 'ceo',
     },
 
     salesman: {
         // PendingSheetsComponent: 'salesman/pending',
-        PendingSheetsComponent: '',
+        PendingSheetsComponent: 'salesman',
     }
 }
 const routes: Routes = [
     { path: ROUTING.all.LoginPageComponent, component: LoginPageComponent },
+
     { path: ROUTING.hr.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.admin.LogsComponent, component: BonusViewSalesmanComponent, canMatch: [AuthGuardService] },
     { path: ROUTING.hr.HrStartComponent, component: HrStartComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.BonusViewSalesmanComponent + ':year/:id', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.BonusViewSalesmanComponent + ':id', component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
