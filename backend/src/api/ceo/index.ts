@@ -34,5 +34,6 @@ router.post(
 );
 
 router.post("/pending/sheet/sign/:salesmanId/:yearOfEvaluation", signSheet);
-
+// from hr:
+// router.post("/pending/sheet/sign/:salesmanId/:yearOfEvaluation", signSheet);
 export default router;
