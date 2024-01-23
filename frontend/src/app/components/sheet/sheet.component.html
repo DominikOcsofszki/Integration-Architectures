@@ -15,12 +15,19 @@
 
     <mat-form-field class="example-full-width">
         <mat-label>Department </mat-label> <!-- ToDo ADD DEPARTMENT -->
-        <input matInput disabled value={{bonusComputationSheet.status}}>
+        <input matInput disabled value={{bonusComputationSheet.salesman.department}}>
     </mat-form-field>
+
+
 
     <mat-form-field class="example-full-width">
         <mat-label>Year of Performance</mat-label>
         <input matInput disabled value={{bonusComputationSheet.yearOfEvaluation}}>
+    </mat-form-field>
+
+     <mat-form-field class="example-full-width">
+        <mat-label>Status </mat-label> <!-- ToDo ADD DEPARTMENT -->
+        <input matInput disabled value={{bonusComputationSheet.status}}>
     </mat-form-field>
 
     <app-table [bonusComputationSheet]=bonusComputationSheet></app-table>

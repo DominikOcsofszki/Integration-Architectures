@@ -20,11 +20,11 @@ export class SheetServiceService {
             { observe: 'response', withCredentials: true })
             .pipe(map(res => res.body));
     }
-    fetchSalesmanSalesmanID(id: number): Observable<Salesman> { //TODO change to hr, some issue with rights or so not working
-        return this.http.get<Salesman>(environment.apiEndpoint + `/api/admin/salesman/${id}`,
-            { observe: 'response', withCredentials: true })
-            .pipe(map(res => res.body));
-    }
+    // fetchSalesmanSalesmanID(id: number): Observable<Salesman> { //TODO change to hr, some issue with rights or so not working
+    //     return this.http.get<Salesman>(environment.apiEndpoint + `/api/admin/salesman/${id}`,
+    //         { observe: 'response', withCredentials: true })
+    //         .pipe(map(res => res.body));
+    // }
     signSheetFromSalesmanIdAndYear(salesmanId: number, yearOfEvaluation: number): void {
         // router.post("/pending/sheet/sign/:salesmanId/:yearOfEvaluation", signSheet);
         this.http.post(
