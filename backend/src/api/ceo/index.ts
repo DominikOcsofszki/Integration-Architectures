@@ -12,11 +12,21 @@
 */
 
 import { Router } from "express";
-import { addComments, readPendingSheets, signSheet } from "./ceo-api";
+import {
+    addComments,
+    getSheetByIdAndYear,
+    readNotPendingValues,
+    readPendingSheets,
+    readPendingValues,
+    signSheet
+} from "./ceo-api";
 
 const router = Router();
 
 router.get("/pending/sheet", readPendingSheets);
+router.get("/sheets/pending", readPendingValues);
+router.get("/sheets/notpending", readNotPendingValues);
+router.get("/sheet/:salesmanId/:yearOfEvaluation/", getSheetByIdAndYear);
 
 router.post(
     "/pending/sheet/comment/:salesmanId/:yearOfEvaluation",
