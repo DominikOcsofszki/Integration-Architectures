@@ -39,11 +39,11 @@ export class SheetComponent implements OnInit {
                 this.bonusComputationSheet = res;
                 console.log(this.salesman);
             });
-        this.sheetServiceService.fetchSalesmanSalesmanID(this.id).
-            subscribe((res: Salesman) => {
-                this.salesman = res;
-                console.log(this.salesman);
-            });
+        // this.sheetServiceService.fetchSalesmanSalesmanID(this.id).
+        //     subscribe((res: Salesman) => {
+        //         this.salesman = res;
+        //         console.log(this.salesman);
+        //     });
     }
     signCurrentSheet() {
         this.sheetServiceService.signSheetFromSalesmanIdAndYear(this.id, this.year);

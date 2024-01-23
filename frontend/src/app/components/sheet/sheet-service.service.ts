@@ -11,6 +11,7 @@ import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
 })
 export class SheetServiceService {
 
+    //TODO refactor for depending on logged in user use admin/hr/ceo/salesman
     constructor(private http: HttpClient) { }
 
     fetchSheetFromSalesmanIdYear(salesmanId: number, yearOfEvaluation: number): Observable<BonusComputationSheet> {
@@ -24,10 +25,11 @@ export class SheetServiceService {
             { observe: 'response', withCredentials: true })
             .pipe(map(res => res.body));
     }
-    signSheetFromSalesmanIdAndYear(salesmanId: number, yearOfEvaluation: number):void{
+    signSheetFromSalesmanIdAndYear(salesmanId: number, yearOfEvaluation: number): void {
+        // router.post("/pending/sheet/sign/:salesmanId/:yearOfEvaluation", signSheet);
         this.http.post(
-            environment.apiEndpoint + `/pending/sheet/sign/${salesmanId}/${yearOfEvaluation}`,
-            { withCredentials: true })
+            environment.apiEndpoint + `/api/hr/pending/sheet/sign/${salesmanId}/${yearOfEvaluation}`,
+            { withCredentials: true }).subscribe((res) => console.log(res))
     }
 }
 
