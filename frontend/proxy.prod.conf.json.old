@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "http://iar-backend.inf.h-brs.de/erasmux",
+    "target": "frontend/proxy.conf.json",
     "secure": false,
     "logLevel": "debug"
   }
