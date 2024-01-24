@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Credentials} from '../../models/Credentials';
 import {Router} from '@angular/router';
@@ -8,6 +8,8 @@ import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { UserService } from 'src/app/services/user.service';
+import { ROUTING } from 'src/app/app.routing';
 
 @Component({
     selector: 'app-login',
@@ -17,7 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     imports: [MatFormFieldModule, MatInputModule, FormsModule, NgIf, MatButtonModule]
 })
 export class LoginComponent implements OnInit {
-
+  private userService = inject(UserService);
     // object for input-binding
     credentials: Credentials;
 
@@ -58,6 +60,13 @@ export class LoginComponent implements OnInit {
      * redirects to the landing page
      */
     enterApplication(): void{
-        void this.router.navigate(['']);
+       this.userService.getOwnUser().subscribe(user => {
+           console.log(user.role)
+        if(user.role == "hr")this.router.navigate([ROUTING.hr.PendingSheetsComponent]);
+        if(user.role == "ceo")this.router.navigate([ROUTING.ceo.PendingSheetsComponent]);
+        if(user.role == "salesman")this.router.navigate([ROUTING.salesman.PendingSheetsComponent]);
+        if(user.role == "admin")this.router.navigate([ROUTING.admin.LogsComponent]);
+        // void this.router.navigate(['']);
+       });
     }
 }
