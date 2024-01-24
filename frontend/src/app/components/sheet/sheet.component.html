@@ -1,75 +1,78 @@
 <ng-container *ngIf=bonusComputationSheet>
 
-<button mat-raised-button color="primary" (click) = "signCurrentSheet()">Sign</button>
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-        <mat-label>First Name</mat-label>
-        <input matInput disabled value={{bonusComputationSheet.salesman.firstname}}>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Last Name</mat-label>
-        <input matInput disabled value={{bonusComputationSheet.salesman.lastname}}>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Employee ID </mat-label>
-        <input matInput disabled value={{bonusComputationSheet.salesman.id}}>
-    </mat-form-field>
+    <ng-container *ngIf=ableToSign>
+        <button mat-raised-button color="primary" (click)="signCurrentSheet()">Sign</button>
+    </ng-container>
 
-    <mat-form-field class="example-full-width">
-        <mat-label>Department </mat-label> <!-- ToDo ADD DEPARTMENT -->
-        <input matInput disabled value={{bonusComputationSheet.salesman.department}}>
-    </mat-form-field>
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+            <mat-label>First Name</mat-label>
+            <input matInput disabled value={{bonusComputationSheet.salesman.firstname}}>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput disabled value={{bonusComputationSheet.salesman.lastname}}>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Employee ID </mat-label>
+            <input matInput disabled value={{bonusComputationSheet.salesman.id}}>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Department </mat-label>
+            <input matInput disabled value={{bonusComputationSheet.salesman.department}}>
+        </mat-form-field>
 
 
 
-    <mat-form-field class="example-full-width">
-        <mat-label>Year of Performance</mat-label>
-        <input matInput disabled value={{bonusComputationSheet.yearOfEvaluation}}>
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Year of Performance</mat-label>
+            <input matInput disabled value={{bonusComputationSheet.yearOfEvaluation}}>
+        </mat-form-field>
 
-     <mat-form-field class="example-full-width">
-        <mat-label>Status </mat-label> <!-- ToDo ADD DEPARTMENT -->
-        <input matInput disabled value={{bonusComputationSheet.status}}>
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Status </mat-label>
+            <input matInput disabled value={{bonusComputationSheet.status}}>
+        </mat-form-field>
 
-    <app-table [bonusComputationSheet]=bonusComputationSheet></app-table>
-    <table class="example-full-width" cellspacing="0">
-        <tr>
-            <td>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Social Performance Bonus </mat-label>
-                    <input matInput disabled value={{bonusComputationSheet.socialPerformanceEvaluation.bonussum}}>
-                </mat-form-field>
-            </td>
-        </tr>
-    </table>
-    <app-table-order [bonusComputationSheet]=bonusComputationSheet></app-table-order>
-    <table class="example-full-width" cellspacing="0">
-        <tr>
-            <td>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Order Evaluation Bonus </mat-label>
-                    <input matInput disabled value={{bonusComputationSheet.orderEvaluation.bonussum}}>
-                </mat-form-field>
-            </td>
-        </tr>
-    </table>
-    <table class="example-full-width" cellspacing="0">
-        <tr>
-            <td>
-                <mat-form-field class="example-full-width">
-                    <mat-label>totalBonus </mat-label>
-                    <input matInput disabled value={{bonusComputationSheet.totalBonus}}>
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field class="example-full-width">
-                    <mat-label>comment </mat-label>
-                    <input matInput disabled value={{bonusComputationSheet.comment}}>
-                </mat-form-field>
-            </td>
-        </tr>
-    </table>
-</form>
+        <app-table [bonusComputationSheet]=bonusComputationSheet></app-table>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Social Performance Bonus </mat-label>
+                        <input matInput disabled value={{bonusComputationSheet.socialPerformanceEvaluation.bonussum}}>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <app-table-order [bonusComputationSheet]=bonusComputationSheet></app-table-order>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Order Evaluation Bonus </mat-label>
+                        <input matInput disabled value={{bonusComputationSheet.orderEvaluation.bonussum}}>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>totalBonus </mat-label>
+                        <input matInput disabled value={{bonusComputationSheet.totalBonus}}>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>comment </mat-label>
+                        <input matInput disabled value={{bonusComputationSheet.comment}}>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </form>
 
 </ng-container>

@@ -28,12 +28,15 @@ export class SheetComponent implements OnInit {
     @Input() id: number;
     @Input() year: number;
     @Input() roleLoggedIn: Role;
+    ableToSign:boolean;
     constructor(private sheetServiceService: SheetServiceService) { }
 
     ngOnInit() {
         this.sheetServiceService.fetchSheetFromSalesmanIdYear(this.id, this.year).
             subscribe((res: BonusComputationSheet) => {
                 this.bonusComputationSheet = res;
+                this.ableToSign = this.bonusComputationSheet.status === "pending-hr"
+                console.log(this.ableToSign)
             });
     }
     signCurrentSheet() {
