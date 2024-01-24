@@ -4,17 +4,18 @@ import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {SheetSummary} from "../../../models/SheetSummary";
 import { SheetsComponent } from "../../../components/sheets/sheets.component";
-import { Role } from 'src/app/models/User';
+import { Role, User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
 import { SheetsAllService } from 'src/app/services/sheets-all.service';
 @Component({
-    selector: 'app-pending-sheets',
-    templateUrl: './pending-sheets.component.html',
-    styleUrls: ['./pending-sheets.component.css'],
-    standalone: true,
-    imports: [MatTableModule, MatProgressBarModule, SheetsComponent,SheetsComponent]
+  selector: 'app-salesman-sheets',
+  standalone: true,
+    imports: [MatTableModule, MatProgressBarModule, SheetsComponent,SheetsComponent],
+  templateUrl: './salesman-sheets.component.html',
+  styleUrls: ['./salesman-sheets.component.css']
 })
-export class PendingSheetsComponent implements OnInit {
+
+export class SalesmanSheetsComponent implements OnInit {
     private userService = inject(UserService);
     private sheetsService = inject(SheetsAllService);
     displayedColumns = ['salesman', 'firstname', 'lastname', 'year', 'bonus', 'status'];
@@ -24,9 +25,11 @@ export class PendingSheetsComponent implements OnInit {
     roleLoggedIn: Role;
     finishedPercentage: number;
     percentage:number;
+    user: User;
 
     ngOnInit(): void {
         this.userService.getOwnUser().subscribe(user => {
+            this.user = user;
             this.roleLoggedIn = user.role;
             this.fetchPendingSalesman();
             this.fetchRestPendingSalesman();
@@ -45,7 +48,8 @@ export class PendingSheetsComponent implements OnInit {
     }
     fetchPendingSalesman(): void {
         this.sheetsService
-            .getPendingSheets(this.roleLoggedIn)
+            .getPendingSheetsSalesman(this.user)
+            // .getPendingSheets(this.roleLoggedIn)
             .subscribe((response): void => {
                 if (response.status === 200) {
                     this.pendingSheets = response.body;
@@ -54,7 +58,7 @@ export class PendingSheetsComponent implements OnInit {
     }
     fetchRestPendingSalesman(): void {
         this.sheetsService
-            .getNotPendingSheets(this.roleLoggedIn)
+            .getNotPendingSheetsSalesman(this.user)
             .subscribe((response): void => {
                 if (response.status === 200) {
                     this.restSheets = response.body;

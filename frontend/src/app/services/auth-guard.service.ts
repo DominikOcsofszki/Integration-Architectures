@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserService } from './user.service';
-import { Role, User } from '../models/User';
+import { User } from '../models/User';
 
 /**
  * this service implements the CanActivate interface
@@ -40,7 +40,7 @@ export class AuthGuardService {
     //     );
     // }
 
-    canMatch(checkRole): Observable<boolean> {
+    canMatch(checkRole:any): Observable<boolean> {
         // const checkRole = 'hr';
         // return checkRole ===
         return this.userService.getOwnUser().pipe(map(

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Salesman } from 'src/app/models/Salesman';
 import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
 import { MatButtonModule } from '@angular/material/button';

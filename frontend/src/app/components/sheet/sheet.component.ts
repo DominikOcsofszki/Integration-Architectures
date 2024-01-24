@@ -1,10 +1,10 @@
-import { Salesman } from 'src/app/models/Salesman';
+// import { Salesman } from 'src/app/models/Salesman';
 ////////////////////
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input, OnChanges, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, OnInit, Input,  inject } from '@angular/core';
 import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
 import { SheetServiceService } from './sheet-service.service';
 import { TableComponent } from './table/table.component';
@@ -42,5 +42,6 @@ export class SheetComponent implements OnInit {
         this.sheetServiceService.signSheetFromSalesmanIdAndYear(this.id, this.year, this.roleLoggedIn);
         if(this.roleLoggedIn == "hr")this.router.navigate([ROUTING.hr.PendingSheetsComponent])
         if(this.roleLoggedIn == "ceo")this.router.navigate([ROUTING.ceo.PendingSheetsComponent])
+        if(this.roleLoggedIn == "salesman")this.router.navigate([ROUTING.salesman.PendingSheetsComponent])
     }
 }

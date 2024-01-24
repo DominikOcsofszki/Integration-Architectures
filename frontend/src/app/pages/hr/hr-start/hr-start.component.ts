@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {HRService} from "../../../services/hr-service";
+// import {HRService} from "../../../services/hr-service";
 import {Observable, of} from "rxjs";
+import { SheetsAllService } from 'src/app/services/sheets-all.service';
 
 @Component({
   selector: 'app-hr-start',
@@ -11,13 +12,14 @@ import {Observable, of} from "rxjs";
   styleUrls: ['./hr-start.component.css']
 })
 export class HrStartComponent {
-    constructor(private hrService: HRService) {}
+    private sheetService = inject(SheetsAllService);
+    // constructor(private hrService: HRService) {}
 
     calculationResult$: Observable<string>;
 
     startCalculation(){
         try {
-            this.hrService.startBonusCalculation(2023)
+            this.sheetService.startBonusCalculation(2023)
                 .subscribe((response): void =>{
                     if (response.status === 200){
                         this.calculationResult$ = of(

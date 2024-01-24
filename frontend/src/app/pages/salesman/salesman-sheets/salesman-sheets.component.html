@@ -1,0 +1,8 @@
+<h1> pending sheets:</h1>
+<app-sheets [sheets]="pendingSheets" [roleLoggedIn]="roleLoggedIn"></app-sheets>
+<p> </p>
+<mat-progress-bar mode="determinate" [value]=40></mat-progress-bar>
+<!-- <mat-progress-bar mode="determinate" [value]=finishedPercentage></mat-progress-bar> -->
+
+<h1> rest sheets:</h1>
+<app-sheets [sheets]="restSheets" [roleLoggedIn]=roleLoggedIn></app-sheets>
