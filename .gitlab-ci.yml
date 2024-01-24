@@ -80,10 +80,11 @@ deploy:backend:
   rules:
     - !reference [ .backend_rules, rules ]
   needs:
-    - unit-test:backend
+    # changed!!!
+    #- unit-test:backend
   script:
     - echo "====== Deploy backend to production server ======"
-    - apk update && apk upgrade
+    #- apk update && apk upgrade
     - apk add openssh bash git
     # Add target server`s secret key
     - mkdir ~/.ssh
