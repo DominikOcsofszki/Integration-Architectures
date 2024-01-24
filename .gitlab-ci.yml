@@ -96,13 +96,10 @@ deployearlier-dependencies:backend:
     - echo "Test ssh connection"
     - ssh -o StrictHostKeyChecking=no -T "$TARGET_SERVER_USER@$BACKEND_SERVER_HOST" pm2 status
     # Deploy
-    # - apk add npm
-    # - npm install pm2
-    # added above
     - npm install -g typescript
     - cd backend
     # - npm install
-    - npm run tsc
+    # - npm run tsc
     - cd ..
     - echo "Setup tagged server directories"
     - pm2 deploy backend/ecosystem.config.js production setup 2>&1 || true
