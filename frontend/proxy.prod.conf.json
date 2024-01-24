@@ -1,5 +1,5 @@
 {
-  "/api/*": {
+  "erasmux/api/*": {
     "target": "http://iar-backend.inf.h-brs.de/erasmux",
     "secure": false,
     "logLevel": "debug"
