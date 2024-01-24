@@ -11,6 +11,7 @@ const environment = {
         name: 'erasmux'
     },
     corsOrigins: [
+        'http://localhost:420',
         'http://iar-frontend.inf.h-brs.de'
     ],
     env: {

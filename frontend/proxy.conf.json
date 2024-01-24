@@ -2,6 +2,7 @@
   "/api/*": {
     "target": "http://iar-backend.inf.h-brs.de",
     "secure": false,
-    "logLevel": "debug"
+    "logLevel": "debug",
+    "changeOrigin": true
   }
 }
