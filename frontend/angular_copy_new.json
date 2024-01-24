@@ -71,8 +71,7 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "app:build:production",
-              "proxyConfig": "proxy.prod.conf.json"
+              "browserTarget": "app:build:production"
             },
             "development": {
               "browserTarget": "diarchitect-platform-frontend:build:development",
