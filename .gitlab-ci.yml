@@ -94,6 +94,7 @@ deploy:backend:
     # Deploy
     - npm install -g typescript
     - cd backend
+    - npm install
     - npm run tsc
     - cd ..
     - echo "Setup tagged server directories"
