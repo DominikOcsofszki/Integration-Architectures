@@ -25,7 +25,7 @@ export class AuthGuardService {
             .pipe(
                 map((state): boolean => {
                     if (!state) { // go back to login, if user is not allowed to enter
-                        // void this.router.navigate(['login']); //TODO removed this and put into ROUTING
+                        void this.router.navigate(['login']); //TODO removed this and put into ROUTING
                     }
                     return state;
                 })

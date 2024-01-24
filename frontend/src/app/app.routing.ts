@@ -45,7 +45,7 @@ const routes: Routes = [
     { path: ROUTING.hr.HrStartComponent, component: HrStartComponent, canActivate: [AuthGuardService] },
 
     { path: ROUTING.all.NotFoundPageComponent, component: NotFoundPageComponent, canActivate: [AuthGuardService] },
-    { path: '**', redirectTo: '/login', pathMatch: 'full' },
+    // { path: '**', redirectTo: '/login', pathMatch: 'full' },
     // these entries are matched from top to bottom => not found should be the last entry
 ];
 
