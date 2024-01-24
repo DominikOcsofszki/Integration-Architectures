@@ -1,0 +1,8 @@
+<h1> {{title}}</h1>
+<div>
+    <div #contentToConvert>
+        <app-sheet [id]=id [year]=year [roleLoggedIn]=roleLoggedIn></app-sheet>
+    </div>
+</div>
+
+<button (click)="generatePdf(contentToConvert, id)">Generate PDF</button>

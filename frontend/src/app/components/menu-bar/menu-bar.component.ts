@@ -40,9 +40,9 @@ export class MenuBarComponent implements OnInit {
     buttons_ceo = [
         { title: 'CEO-Sheets', routerLink: ROUTING.ceo.PendingSheetsComponent },
     ];
-        buttons_salesman = [
-        { title: 'salesman-Sheet', routerLink: ROUTING.salesman.Sheet },
-    ];
+    //     buttons_salesman = [
+    //     { title: 'salesman-Sheet', routerLink: ROUTING.salesman.Sheet+"1"+"/"+"1" },
+    // ];
 
     // buttons = this.buttons_hr
     /**
@@ -55,22 +55,13 @@ export class MenuBarComponent implements OnInit {
     constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
 
     setUpNavbar(){
-        switch(this.loggedInRole) {
-            case "hr": {
-                this.buttons =this.buttons_hr
-                break;
-            }
-            case "ceo": {
-                this.buttons =this.buttons_ceo
-                break;
-            }
-            case "salesman": {
-                this.buttons = this.buttons_salesman;
-            }
-            case "admin": {
-                this.buttons = this.buttons_admin;
-            }
-        }
+        const yearSalesman = 2023; //TODO get year from somehwere. We could say only the latest is visible for him
+        if(this.loggedInRole ==="hr") this.buttons = this.buttons_hr;
+        if(this.loggedInRole ==="ceo") this.buttons = this.buttons_ceo;
+        // if(this.loggedInRole ==="salesman") this.buttons = this.buttons_salesman;
+        if(this.loggedInRole ==="admin") this.buttons = this.buttons_admin;
+        if(this.loggedInRole ==="salesman") this.buttons = [{ title: 'salesman-Sheet', routerLink: ROUTING.salesman.Sheet+"1"+"/"+"1" }]
+        if(this.loggedInRole ==="salesman") this.buttons = [{ title: 'salesman-Sheet', routerLink: ROUTING.salesman.Sheet+`${yearSalesman}/${this.user.salesmanId}` }]
     }
 
     async ngOnInit() {

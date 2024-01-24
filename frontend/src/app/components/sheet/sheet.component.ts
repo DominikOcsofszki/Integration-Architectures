@@ -20,7 +20,6 @@ import { Role } from 'src/app/models/User';
     imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule,TableComponent,TableOrderComponent],
     templateUrl: './sheet.component.html',
     styleUrls: ['./sheet.component.css'],
-    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SheetComponent implements OnInit {
     private router = inject(Router)
@@ -35,12 +34,13 @@ export class SheetComponent implements OnInit {
         this.sheetServiceService.fetchSheetFromSalesmanIdYear(this.id, this.year).
             subscribe((res: BonusComputationSheet) => {
                 this.bonusComputationSheet = res;
-                this.ableToSign = this.bonusComputationSheet.status === "pending-hr"
+                this.ableToSign = this.bonusComputationSheet.status === "pending-"+this.roleLoggedIn;
                 console.log(this.ableToSign)
             });
     }
     signCurrentSheet() {
         this.sheetServiceService.signSheetFromSalesmanIdAndYear(this.id, this.year, this.roleLoggedIn);
-        this.router.navigate([ROUTING.hr.PendingSheetsComponent])//TODO change to proper routing on role
+        if(this.roleLoggedIn == "hr")this.router.navigate([ROUTING.hr.PendingSheetsComponent])
+        if(this.roleLoggedIn == "ceo")this.router.navigate([ROUTING.ceo.PendingSheetsComponent])
     }
 }

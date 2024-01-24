@@ -9,6 +9,8 @@ import { PendingSheetsComponent } from './pages/hr/pending-sheets/pending-sheets
 import { HrStartComponent } from './pages/hr/hr-start/hr-start.component';
 import { SheetComponent } from './components/sheet/sheet.component';
 import { LogsComponent } from './pages/admin/logs/logs.component';
+import { CeoSheetsComponent } from './pages/ceo/ceo-sheets/ceo-sheets.component';
+import { SalesmanSheetComponent } from './pages/salesman/salesman-sheet/salesman-sheet.component';
 
 export const ROUTING = {
     all: {
@@ -31,17 +33,19 @@ export const ROUTING = {
     },
 
     salesman: {
-        Sheet: 'salesman/sheet/:year/:id',
+        Sheet: 'salesman/sheet/',
+        // Sheet: 'salesman/sheet/:year/:id',
     }
 }
 const routes: Routes = [
     { path: ROUTING.all.LoginPageComponent, component: LoginPageComponent },
     { path: ROUTING.admin.LogsComponent, component: LogsComponent, canActivate: [AuthGuardService] },
-    { path: ROUTING.ceo.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.ceo.PendingSheetsComponent, component: CeoSheetsComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
     //
     { path: ROUTING.hr.Sheet , component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.ceo.Sheet , component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.salesman.Sheet +":year/:id", component: SalesmanSheetComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.HrStartComponent, component: HrStartComponent, canActivate: [AuthGuardService] },
 
     { path: ROUTING.all.NotFoundPageComponent, component: NotFoundPageComponent, canActivate: [AuthGuardService] },
