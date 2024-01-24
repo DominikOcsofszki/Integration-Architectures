@@ -12,7 +12,7 @@ const environment = {
   },
     corsOrigins: [
         'http://localhost:4200',
-        'http://iar-frontend.inf.h-brs.de/erasmux'
+        // 'http://iar-frontend.inf.h-brs.de/erasmux'
     ],
     env:{
         USER_WEBSITE:"biwer",
