@@ -10,8 +10,8 @@ export async function readSheet(req: Request, res: Response) {
         yearOfEvaluation: req.params.yearOfEvaluation,
         status: "pending-salesman",
     })
-        .then((value) => res.status(200).send(value))
-        .catch((reason) => res.status(400).send(reason));
+        .then((value:any) => res.status(200).send(value))
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function signSheet(req: Request, res: Response) {
@@ -24,7 +24,7 @@ export async function signSheet(req: Request, res: Response) {
         },
         { status: "finished" }
     )
-        .then((value) => {
+        .then((value:any) => {
             if (value === null) {
                 res.status(400).send({
                     message: `There exists no BonusComputationSheet for this salesmanId: ${s.user?.salesmanId} for this year: ${req.params.yearOfEvaluation} with the status pending-salesman`,
@@ -33,7 +33,7 @@ export async function signSheet(req: Request, res: Response) {
                 res.status(200).send(value);
             }
         })
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function signSheetUntilFix(req: Request, res: Response) {//TODO fix cookies then change to other on top
@@ -45,7 +45,7 @@ export async function signSheetUntilFix(req: Request, res: Response) {//TODO fix
         },
         { status: "finished" }
     )
-        .then((value) => {
+        .then((value:any) => {
             if (value === null) {
                 res.status(400).send({
                     message: `There exists no BonusComputationSheet for this salesmanId: ${req.params.salesmanId} for this year: ${req.params.yearOfEvaluation} with the status pending-salesman`,
@@ -54,7 +54,7 @@ export async function signSheetUntilFix(req: Request, res: Response) {//TODO fix
                 res.status(200).send(value);
             }
         })
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function readPendingValues(req: Request, res: Response) {
@@ -86,7 +86,7 @@ export async function readPendingValues(req: Request, res: Response) {
             });
         }
         res.status(200).send(outputList);
-    } catch (reason) {
+    } catch (reason:any) {
         res.status(400).send(reason);
     }
 }
@@ -121,7 +121,7 @@ export async function readNotPendingValues(req: Request, res: Response) {
             });
         }
         res.status(200).send(outputList);
-    } catch (reason) {
+    } catch (reason:any) {
         res.status(400).send(reason);
     }
 }

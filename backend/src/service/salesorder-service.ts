@@ -45,7 +45,7 @@ async function getProductnameOfPostion(productUrl: string) {
         product.then((product) => {
             resolve(product["name"]);
         });
-        product.catch((reason) => {
+        product.catch((reason:any) => {
             reject(reason);
         });
     });
@@ -66,7 +66,7 @@ async function getPositionsOfSalesOrder(salesOrder: any) {
                 reject("No positions for salesorder");
             }
         });
-        positions.catch((reason) => {
+        positions.catch((reason:any) => {
             reject(reason);
         });
     });
@@ -136,7 +136,7 @@ export async function getSalesmanFromCRX() {
                 });
                 resolve(salesmanUrls);
             })
-            .catch((reason) => {
+            .catch((reason:any) => {
                 reject(reason);
             });
     });
@@ -155,7 +155,7 @@ async function getSalesordersFromCRX(): Promise<object[]> {
                 const allSalesordersAsList = salesOrders.objects as object[];
                 resolve(allSalesordersAsList);
             })
-            .catch((reason) => {
+            .catch((reason:any) => {
                 reject(reason);
             });
     });
@@ -189,7 +189,7 @@ async function getAllCustomersFromCRX() {
                 const allCustomersAsList = customers.objects;
                 resolve(allCustomersAsList);
             })
-            .catch((reason) => {
+            .catch((reason:any) => {
                 reject(reason);
             });
     });

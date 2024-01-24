@@ -10,24 +10,24 @@ import { createSheetsForAllSalesmen } from "../../service/sheet-service";
 
 export async function readSheetStatus(req: Request, res: Response) {
     await BonusComputationSheetModel.find({})
-        .then((value) => {
+        .then((value:any) => {
             res.status(200).send(
-                value.map((element) => ({
+                value.map((element:any) => ({
                     salesmanId: element.salesmanId,
                     yearOfEvaluation: element.yearOfEvaluation,
                     status: element.status,
                 }))
             );
         })
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function readPendingSheets(req: Request, res: Response) {
     await BonusComputationSheetModel.find({ status: "pending-hr" })
-        .then((value) => {
+        .then((value:any) => {
             res.status(200).send(value);
         })
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function readNotPendingSheets(req: Request, res: Response) {
@@ -39,10 +39,10 @@ export async function readNotPendingSheets(req: Request, res: Response) {
             { status: "finished" },
         ],
     })
-        .then((value) => {
+        .then((value:any) => {
             res.status(200).send(value);
         })
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function signSheet(req: Request, res: Response) {
@@ -54,7 +54,7 @@ export async function signSheet(req: Request, res: Response) {
         },
         { status: "pending-ceo" }
     )
-        .then((value) => {
+        .then((value:any) => {
             if (value === null) {
                 res.status(400).send({
                     message: `There exists no BonusComputationSheet for this salesmanId: ${req.params.salesmanId} for this year: ${req.params.yearOfEvaluation} with the status pending-hr`,
@@ -63,7 +63,7 @@ export async function signSheet(req: Request, res: Response) {
                 res.status(200).send(value);
             }
         })
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function getSheetByIdAndYear(req: Request, res: Response) {
@@ -85,7 +85,7 @@ export async function getSheetByIdAndYear(req: Request, res: Response) {
             };
             res.status(200).send(sheetWithSalesman);
         }
-    } catch (reason){
+    } catch (reason:any){
         res.status(400).send(reason);
     }
 }
@@ -94,28 +94,28 @@ export async function getSheetsById(req: Request, res: Response) {
     await BonusComputationSheetModel.find({
         salesmanId: req.params.salesmanId,
     })
-        .then((value) => {
+        .then((value:any) => {
             res.status(200).send(value);
         })
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function getSheetsByYear(req: Request, res: Response) {
     await BonusComputationSheetModel.find({
         yearOfEvaluation: req.params.yearOfEvaluation,
     })
-        .then((value) => {
+        .then((value:any) => {
             res.status(200).send(value);
         })
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function getAllSheets(req: Request, res: Response) {
     await BonusComputationSheetModel.find({})
-        .then((value) => {
+        .then((value:any) => {
             res.status(200).send(value);
         })
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function readPendingValues(req: Request, res: Response) {
@@ -145,7 +145,7 @@ export async function readPendingValues(req: Request, res: Response) {
             });
         }
         res.status(200).send(outputList);
-    } catch (reason) {
+    } catch (reason:any) {
         res.status(400).send(reason);
     }
 }
@@ -177,7 +177,7 @@ export async function readNotPendingValues(req: Request, res: Response) {
             });
         }
         res.status(200).send(outputList);
-    } catch (reason) {
+    } catch (reason:any) {
         res.status(400).send(reason);
     }
 }
@@ -185,5 +185,5 @@ export async function readNotPendingValues(req: Request, res: Response) {
 export async function startBonusCalculation(req: Request, res: Response) {
     createSheetsForAllSalesmen(parseInt(req.params.year), req.app.get("db"))
         .then(() => res.status(200).send())
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }

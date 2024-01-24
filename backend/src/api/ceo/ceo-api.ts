@@ -8,10 +8,10 @@ import {Salesman, SalesmanModel} from "../../model/Salesman";
 
 export async function readPendingSheets(req: Request, res: Response) {
     await BonusComputationSheetModel.find({ status: "pending-ceo" })
-        .then((value) => {
+        .then((value:any) => {
             res.status(200).send(value);
         })
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function readPendingValues(req: Request, res: Response) {
@@ -41,7 +41,7 @@ export async function readPendingValues(req: Request, res: Response) {
             });
         }
         res.status(200).send(outputList);
-    } catch (reason) {
+    } catch (reason:any) {
         res.status(400).send(reason);
     }
 }
@@ -73,7 +73,7 @@ export async function readNotPendingValues(req: Request, res: Response) {
             });
         }
         res.status(200).send(outputList);
-    } catch (reason) {
+    } catch (reason:any) {
         res.status(400).send(reason);
     }
 }
@@ -96,8 +96,8 @@ export async function addComments(req: Request, res: Response) {
                     },
                 }
             )
-                .then((value) => allResponses.push(value))
-                .catch((reason) => allResponses.push(reason));
+                .then((value:any) => allResponses.push(value))
+                .catch((reason:any) => allResponses.push(reason));
         } else if (comment.type == "SocialAttribute") {
             await BonusComputationSheetModel.updateOne(
                 {
@@ -114,8 +114,8 @@ export async function addComments(req: Request, res: Response) {
                     },
                 }
             )
-                .then((value) => allResponses.push(value))
-                .catch((reason) => allResponses.push(reason));
+                .then((value:any) => allResponses.push(value))
+                .catch((reason:any) => allResponses.push(reason));
         } else {
             await BonusComputationSheetModel.updateOne(
                 {
@@ -125,8 +125,8 @@ export async function addComments(req: Request, res: Response) {
                 },
                 { comment: comment.text }
             )
-                .then((value) => allResponses.push(value))
-                .catch((reason) => allResponses.push(reason));
+                .then((value:any) => allResponses.push(value))
+                .catch((reason:any) => allResponses.push(reason));
         }
     }
     res.status(200).send(allResponses);
@@ -141,7 +141,7 @@ export async function signSheet(req: Request, res: Response) {
         },
         { status: "pending-salesman" }
     )
-        .then((value) => {
+        .then((value:any) => {
             if (value === null) {
                 res.status(400).send({
                     message: `There exists no BonusComputationSheet for this salesmanId: ${req.params.salesmanId} for this year: ${req.params.yearOfEvaluation} with the status pending-ceo`,
@@ -150,7 +150,7 @@ export async function signSheet(req: Request, res: Response) {
                 res.status(200).send(value);
             }
         })
-        .catch((reason) => res.status(400).send(reason));
+        .catch((reason:any) => res.status(400).send(reason));
 }
 
 export async function getSheetByIdAndYear(req: Request, res: Response) {
@@ -172,7 +172,7 @@ export async function getSheetByIdAndYear(req: Request, res: Response) {
             };
             res.status(200).send(sheetWithSalesman);
         }
-    } catch (reason){
+    } catch (reason:any){
         res.status(400).send(reason);
     }
 }
