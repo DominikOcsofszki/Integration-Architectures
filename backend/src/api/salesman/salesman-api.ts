@@ -34,3 +34,24 @@ export async function signSheet(req: Request, res: Response) {
         })
         .catch((reason) => res.status(400).send(reason));
 }
+
+export async function signSheetUntilFix(req: Request, res: Response) {//TODO fix cookies then change to other on top
+    await BonusComputationSheetModel.findOneAndUpdate(
+        {
+            salesmanId: req.params.salesmanId,
+            yearOfEvaluation: req.params.yearOfEvaluation,
+            status: "pending-salesman",
+        },
+        { status: "finished" }
+    )
+        .then((value) => {
+            if (value === null) {
+                res.status(400).send({
+                    message: `There exists no BonusComputationSheet for this salesmanId: ${req.params.salesmanId} for this year: ${req.params.yearOfEvaluation} with the status pending-salesman`,
+                });
+            } else {
+                res.status(200).send(value);
+            }
+        })
+        .catch((reason) => res.status(400).send(reason));
+}

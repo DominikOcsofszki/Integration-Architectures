@@ -22,10 +22,29 @@ export class SheetServiceService {
             { observe: 'response', withCredentials: true })
             .pipe(map(res => res.body));
     }
-    signSheetFromSalesmanIdAndYear(salesmanId: number, yearOfEvaluation: number, userRole:Role): void {
+    signSheetFromSalesmanIdAndYear(salesmanId: number, yearOfEvaluation: number, userRole: Role): void {
+        if (userRole === "salesman") {
+            // this.signsheetSalesmanYear(yearOfEvaluation); //TODO change to this after post-api(cookies) fixed
+            this.signsheetSalesmanYearAndIdUntilPostFix(yearOfEvaluation, salesmanId);
+        } else {
             this.http.post(
                 environment.apiEndpoint + `/api/${userRole}/pending/sheet/sign/${salesmanId}/${yearOfEvaluation}`,
                 { withCredentials: true }).subscribe((res) => console.log(res))
+        }
+    }
+
+
+
+    signsheetSalesmanYear(yearofevaluation: number): void {
+        this.http.post(
+            environment.apiEndpoint + `/api/salesman/pending/sheet/sign/${yearofevaluation}`,
+            { withcredentials: true }).subscribe((res) => console.log(res))
+    }
+
+    signsheetSalesmanYearAndIdUntilPostFix(yearOfEvaluation: number, salesmanId: number): void {//TODO delete after cookies fixed!
+        this.http.post(
+            environment.apiEndpoint + `/api/salesman/pending/sheet/sign/${salesmanId}/${yearOfEvaluation}`,
+            { withCredentials: true }).subscribe((res) => console.log(res))
     }
 }
 
