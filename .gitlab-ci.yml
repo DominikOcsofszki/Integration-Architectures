@@ -79,7 +79,7 @@ deploy:backend:
     https_proxy: "http://www-cache:8080"
   rules:
     - !reference [ .backend_rules, rules ]
-  needs:
+  #needs:
     # changed!!!
     #- unit-test:backend
   script:
