@@ -79,9 +79,8 @@ deploy:backend:
     https_proxy: "http://www-cache:8080"
   rules:
     - !reference [ .backend_rules, rules ]
-  #needs:
-    # changed!!!
-    #- unit-test:backend
+  needs:
+    - unit-test:backend
   script:
     - echo "====== Deploy backend to production server ======"
     #- apk update && apk upgrade
