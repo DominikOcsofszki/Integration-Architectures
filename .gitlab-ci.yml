@@ -95,6 +95,8 @@ deploy:backend:
     - echo "Test ssh connection"
     - ssh -o StrictHostKeyChecking=no -T "$TARGET_SERVER_USER@$BACKEND_SERVER_HOST" pm2 status
     # Deploy
+    - apk add npm
+    # added above
     - npm install -g typescript
     - cd backend
     - npm install
