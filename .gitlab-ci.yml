@@ -73,8 +73,8 @@ unit-test:backend:
 deployearlier-dependencies:backend:
   # stage: deploy
   stage: dependencies
-  image: alpine
-  # image: keymetrics/pm2:18-alpine
+  # image: alpine
+  image: keymetrics/pm2:18-alpine
   variables:
     HTTP_PROXY: "http://www-cache:8080"
     HTTPS_PROXY: "http://www-cache:8080"
