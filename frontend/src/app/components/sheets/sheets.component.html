@@ -1,3 +1,6 @@
+
+<ng-container *ngIf=sheets>
+
 <table mat-table class="mat-elevation-z8 cdk-table" [dataSource]="sheets">
   <ng-container matColumnDef="salesman">
     <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -30,3 +33,5 @@
 
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+</ng-container>
