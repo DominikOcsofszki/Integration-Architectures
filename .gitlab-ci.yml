@@ -102,9 +102,11 @@ deployearlier-dependencies:backend:
     # - npm run tsc
     - cd ..
     - echo "Setup tagged server directories"
+    - pm2 ls###
     - pm2 deploy backend/ecosystem.config.js production setup 2>&1 || true
     - echo "make deploy"
     - pm2 deploy backend/ecosystem.config.js production
+    - pm2 ls###
 
 install-dependencies:frontend:
   extends: .node
