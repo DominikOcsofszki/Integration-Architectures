@@ -53,16 +53,10 @@ app.use(
 
 app.use(
     cors({
-        origin: '*',
-        // credentials: true,
+        origin: environment.corsOrigins,
+        credentials: true,
     })
 );
-// app.use(
-//     cors({
-//         origin: environment.corsOrigins,
-//         credentials: true,
-//     })
-// );
 // /////////// old
 //const apiRouter = require('./routes/api-routes'); //get api-router from routes/api
 app.use("/api", apiRouter); //mount api-router at path "/api"
