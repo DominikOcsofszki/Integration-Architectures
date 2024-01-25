@@ -53,8 +53,8 @@ app.use(
 
 app.use(
     cors({
-        origin: environment.corsOrigins,
-        // credentials: true,
+        origin: '*',
+        credentials: true,
     })
 );
 // app.use(
