@@ -44,7 +44,9 @@ module.exports = {
                 + ' && pm2 startOrRestart ecosystem.config.js --env=production'
                 + ' && pm2 save && cat /home/erasmux/.pm2/dump.pm2'
             + ' && pm2 list'
-            // + ' && pm2 stop  && cat /home/erasmux/.pm2/dump.pm2'
+            + ' && pm2 stop erasmux && cat /home/erasmux/.pm2/dump.pm2'
+            + ' && pm2 list && pm2 list' 
+            + ' && cat /home/erasmux/.pm2/dump.pm2   
         }
     }
 };
