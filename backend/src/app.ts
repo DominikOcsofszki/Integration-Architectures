@@ -54,9 +54,16 @@ app.use(
 app.use(
     cors({
         origin: environment.corsOrigins,
-        credentials: true,
+        // credentials: true,
     })
 );
+// app.use(
+//     cors({
+//         origin: environment.corsOrigins,
+//         credentials: true,
+//     })
+// );
+// /////////// old
 //const apiRouter = require('./routes/api-routes'); //get api-router from routes/api
 app.use("/api", apiRouter); //mount api-router at path "/api"
 // !!!! attention all middlewares, mounted after the router wont be called for any requests
