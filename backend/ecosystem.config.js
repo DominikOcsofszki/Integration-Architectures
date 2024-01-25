@@ -55,6 +55,7 @@ module.exports = {
             ssh_options: 'StrictHostKeyChecking=no',
             path: TARGET_SERVER_APP_PATH,
             'post-deploy': 'cd backend && npm install'
+                + ' && tsc'
                 + ' && pm2 startOrRestart ecosystem.config.js --env=production'
                 + ' && pm2 save'
         }
