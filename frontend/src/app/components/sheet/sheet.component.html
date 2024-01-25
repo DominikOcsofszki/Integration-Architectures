@@ -71,8 +71,13 @@
                         <input matInput disabled value={{bonusComputationSheet.comment}}>
                     </mat-form-field>
                 </td>
+                <ng-container *ngIf=isCeo()>
+                <td>
+                    <input class="example-full-width" type="text" id="" required [formControl]="comment" size="100">
+                </td>
+                </ng-container>
             </tr>
         </table>
     </form>
 
-</ng-container>
+

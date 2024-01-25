@@ -2,7 +2,7 @@
 ////////////////////
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input,  inject } from '@angular/core';
 import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
@@ -17,7 +17,7 @@ import { Role } from 'src/app/models/User';
 @Component({
     selector: 'app-sheet',
     standalone: true,
-    imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule,TableComponent,TableOrderComponent],
+    imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule,TableComponent,TableOrderComponent, ReactiveFormsModule],
     templateUrl: './sheet.component.html',
     styleUrls: ['./sheet.component.css'],
 })
@@ -30,12 +30,20 @@ export class SheetComponent implements OnInit {
     ableToSign:boolean;
     constructor(private sheetServiceService: SheetServiceService) { }
 
+    comment = new FormControl();
+
+    isCeo(){
+        return this.roleLoggedIn === "ceo"
+    }
+
     ngOnInit() {
         this.sheetServiceService.fetchSheetFromSalesmanIdYear(this.id, this.year).
             subscribe((res: BonusComputationSheet) => {
                 this.bonusComputationSheet = res;
                 this.ableToSign = this.bonusComputationSheet.status === "pending-"+this.roleLoggedIn;
                 console.log(this.ableToSign)
+                this.comment.setValue(this.bonusComputationSheet.comment);
+
             });
     }
     signCurrentSheet() {

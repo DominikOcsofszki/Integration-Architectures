@@ -1,5 +1,10 @@
 import {Salesman} from "./Salesman";
 
+export type Comment = {
+    type: "Order" | "SocialAttribute" | "BonusComputationSheet";
+    _id?: String;
+    text: String;
+};
 export type Status =
     | 'pending-hr'
     | 'pending-ceo'
