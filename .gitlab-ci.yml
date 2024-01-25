@@ -85,7 +85,6 @@ deploy:backend:
   # needs:
   #   - unit-test:backend
   script:
-    #new
     - echo "====== Deploy backend to production server ======"
     - apk update && apk upgrade
     - apk add openssh bash git
@@ -96,22 +95,37 @@ deploy:backend:
     - echo "Test ssh connection"
     - ssh -o StrictHostKeyChecking=no -T "$TARGET_SERVER_USER@$BACKEND_SERVER_HOST" pm2 status
     # Deploy
-    - npm install -g typescript
-    - cd backend
-    - npm install
-    - npm install tsc
-    - npm run tsc
-    - cd ..
     - echo "Setup tagged server directories"
-    ###new
-    - pm2 ls
-    ###new
     - pm2 deploy backend/ecosystem.config.js production setup 2>&1 || true
     - echo "make deploy"
     - pm2 deploy backend/ecosystem.config.js production
-    ###new
-    - pm2 ls
-    ###new
+    # #new
+    # - echo "====== Deploy backend to production server ======"
+    # - apk update && apk upgrade
+    # - apk add openssh bash git
+    # # Add target server`s secret key
+    # - mkdir ~/.ssh
+    # - echo $TARGET_SERVER_SECRET_KEY_BASE64 | base64 -d > ~/.ssh/id_rsa
+    # - chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
+    # - echo "Test ssh connection"
+    # - ssh -o StrictHostKeyChecking=no -T "$TARGET_SERVER_USER@$BACKEND_SERVER_HOST" pm2 status
+    # # Deploy
+    # # - npm install -g typescript
+    # # - cd backend
+    # # - npm install
+    # # - npm install tsc
+    # # - npm run tsc
+    # # - cd ..
+    # - echo "Setup tagged server directories"
+    # ###new
+    # - pm2 ls
+    # ###new
+    # - pm2 deploy backend/ecosystem.config.js production setup 2>&1 || true
+    # - echo "make deploy"
+    # - pm2 deploy backend/ecosystem.config.js production
+    # ###new
+    # - pm2 ls
+    # ###new
 
 # install-dependencies:frontend:
 #   extends: .node
