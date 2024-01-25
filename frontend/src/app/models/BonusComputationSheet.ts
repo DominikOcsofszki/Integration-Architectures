@@ -1,7 +1,6 @@
 import {Salesman} from "./Salesman";
 
 export type Status =
-    | 'incomplete'
     | 'pending-hr'
     | 'pending-ceo'
     | 'pending-salesman'

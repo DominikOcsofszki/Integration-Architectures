@@ -21,10 +21,4 @@ export class UserService {
         // use angular's integrated HTTP-client to make a get request; handle the response as a User object :
         return this.http.get<User>(environment.apiEndpoint + '/api/user', { withCredentials: true });
     }
-    // getLoggedInUser(): Observable<HttpResponse<User>> {
-    //     return this.http.get<User>(
-    //         environment.apiEndpoint + `/api/user`,
-    //         { withCredentials: true, observe: 'response'}
-    //     );
-    // }
 }

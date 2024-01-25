@@ -3,7 +3,7 @@ import { AuthService } from './services/auth.service';
 import { RouterOutlet } from '@angular/router';
 import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
 import { NgIf } from '@angular/common';
-import { Role, User } from './models/User';
+import { Role } from './models/User';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
 
     private authService = inject(AuthService)
     private userService = inject(UserService)
-    // constructor(private authService: AuthService) {}
     isLoggedIn: boolean;
     currentLoggedInUserRole: Role;
 
