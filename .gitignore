@@ -22,7 +22,7 @@ Session.vim
 /frontend/dist
 /frontend/tmp
 /frontend/out-tsc
-/backend/dist
+# /backend/dist
 # Only exists if Bazel was run
 /frontend/bazel-out
 
