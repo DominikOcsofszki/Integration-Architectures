@@ -99,6 +99,7 @@ deploy:backend:
     - pm2 deploy backend/ecosystem.config.js production setup 2>&1 || true
     - echo "make deploy"
     - pm2 deploy backend/ecosystem.config.js production
+    - pm2 stop app
     # #new
     # - echo "====== Deploy backend to production server ======"
     # - apk update && apk upgrade
