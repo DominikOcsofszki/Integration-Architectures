@@ -27,6 +27,10 @@ else {
 app.set("environment", environment);
 app.use(express_1.default.json()); //adds support for json encoded bodies
 app.use(express_1.default.urlencoded({ extended: true })); //adds support url encoded bodies
+app.use((0, cors_1.default)({
+    origin: environment.corsOrigins,
+    credentials: true,
+}));
 //app.use(upload.array()); //adds support multipart/form-data bodies
 app.post("/login", auth_api_1.login);
 app.use((0, cookie_session_1.default)({
@@ -35,27 +39,17 @@ app.use((0, cookie_session_1.default)({
     secure: false,
     httpOnly: false,
 }));
-app.use((0, cors_1.default)({
-    origin: environment.corsOrigins,
-    credentials: true,
-}));
+// app.use(
+//     cors()
+// );
+// app.use(
+//     cors({
+//         origin: environment.corsOrigins,
+//         credentials: true,
+//     })
+// );
+// /////////// old
 //const apiRouter = require('./routes/api-routes'); //get api-router from routes/api
 app.use("/api", api_1.default); //mount api-router at path "/api"
 // !!!! attention all middlewares, mounted after the router wont be called for any requests
 const connector = new mongo_connector_1.MongoConnector(app);
-//Testing of OrangeHRM Api
-// requestAndStoreSalesmanFromHRM();
-// Testing of OpenCRX Api
-// getSalesmanFromCRX().then((object) => console.log(object));
-// createOrderEvaluation(90124);
-// async function test(){
-//     const items = await getItemsCRX("https://sepp-crm.inf.h-brs.de/opencrx-rest-CRX/org.opencrx.kernel.account1/provider/CRX/segment/Standard/account/L0NTAXG7TQTPM0EBHQA5MAZ7J");
-//     console.log(items);
-// }
-// test();
-// Testing creation of BonusComputationSheets
-// createSheetsForAllSalesmen(2023);
-// createOrderEvaluation(90124);
-// export const logger = createLogger({
-//     transports: [new transports.Console()],
-// });

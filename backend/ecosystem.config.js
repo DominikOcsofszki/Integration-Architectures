@@ -16,7 +16,7 @@ module.exports = {
         {
             name: 'app',
             // script: 'src/app.js',
-            script: 'dist/app.js',
+            script: './dist/app.js',
 
             env: {
                 NODE_ENV: 'development'
