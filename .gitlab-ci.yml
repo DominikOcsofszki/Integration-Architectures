@@ -99,7 +99,6 @@ deploy:backend:
     - pm2 deploy backend/ecosystem.config.js production setup 2>&1 || true
     - echo "make deploy"
     - pm2 deploy backend/ecosystem.config.js production
-    - cat /home/erasmux/.pm2/dump.pm2
     # #new
     # - echo "====== Deploy backend to production server ======"
     # - apk update && apk upgrade
