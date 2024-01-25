@@ -46,7 +46,7 @@ module.exports = {
             + ' && pm2 list'
             + ' && pm2 stop erasmux && cat /home/erasmux/.pm2/dump.pm2'
             + ' && pm2 list && pm2 list' 
-            + ' && cat /home/erasmux/.pm2/dump.pm2   
+            + ' && cat /home/erasmux/.pm2/dump.pm2' 
         }
     }
 };
