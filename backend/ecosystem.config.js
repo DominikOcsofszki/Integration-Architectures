@@ -42,7 +42,7 @@ module.exports = {
             path: TARGET_SERVER_APP_PATH,
             // 'post-deploy': 'cd backend && pm2 list'
             'post-deploy': 'cd backend && npm install --production'
-                + 'export pm_exec_path=/home/erasmux/app/source/backend/dist/app.js'
+                + 'export pm_exec_path=/home/erasmux/app/source/backend/'
                 // + ' && echo "========================================="'
                 + ' && pm2 startOrRestart ecosystem.config.js --env=production'
                 + ' && pm2 save && cat /home/erasmux/.pm2/dump.pm2'
