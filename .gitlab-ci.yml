@@ -69,10 +69,10 @@ unit-test:backend:
       - backend/node_modules
     policy: pull
 
-# deploy:backend:
-deployearlier-dependencies:backend:
-  # stage: deploy
-  stage: dependencies
+deploy:backend:
+# deployearlier-dependencies:backend:
+  stage: deploy
+  # stage: dependencies
   # image: alpine
   image: keymetrics/pm2:18-alpine
   variables:
