@@ -40,6 +40,7 @@ app.use(express.json()); //adds support for json encoded bodies
 app.use(express.urlencoded({ extended: true })); //adds support url encoded bodies
 app.use(
     cors({
+        // origin: '*',
         origin: environment.corsOrigins,
         credentials: true,
     })
@@ -56,6 +57,7 @@ app.use(
         httpOnly: false,
     })
 );
+// app.listen(8080) //TODO this was added
 
 // app.use(
 //     cors()

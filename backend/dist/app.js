@@ -28,6 +28,7 @@ app.set("environment", environment);
 app.use(express_1.default.json()); //adds support for json encoded bodies
 app.use(express_1.default.urlencoded({ extended: true })); //adds support url encoded bodies
 app.use((0, cors_1.default)({
+    // origin: '*',
     origin: environment.corsOrigins,
     credentials: true,
 }));
@@ -39,6 +40,7 @@ app.use((0, cookie_session_1.default)({
     secure: false,
     httpOnly: false,
 }));
+// app.listen(8080) //TODO this was added
 // app.use(
 //     cors()
 // );

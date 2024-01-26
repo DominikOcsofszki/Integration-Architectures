@@ -1,7 +1,7 @@
 const environment = {
     production: true,
-    // port: 8080,
-    port: 80,
+    port: 8080,
+    // port: 80,
     defaultAdminPassword: 'c3uz#3zd',
     db: {
         host: 'iar-mongo.inf.h-brs.de',
@@ -13,7 +13,7 @@ const environment = {
     },
     corsOrigins: [
         // 'http://localhost:4200',
-        'http://iar-frontend.inf.h-brs.de/erasmux'
+        'http://iar-frontend.inf.h-brs.de'
     ],
     env: {
         USER_WEBSITE: "biwer",

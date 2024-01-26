@@ -76,7 +76,7 @@ exports.SocialPerformanceEvaluationSchema = new mongoose_1.default.Schema({
 const OrderSchema = new mongoose_1.default.Schema({
     productname: { type: String, required: true },
     client: { type: String, required: true },
-    clientRanking: { type: Number, required: true },
+    clientRanking: { type: Number, required: true }, //Ckeck if number 0 < n < 6
     bonus: { type: Number, required: true },
     itemamount: { type: Number, required: true },
     comment: { type: String },
