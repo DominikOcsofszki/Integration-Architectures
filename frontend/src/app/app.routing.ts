@@ -39,6 +39,7 @@ export const ROUTING = {
     }
 }
 const routes: Routes = [
+    { path: '', component: LoginPageComponent },
     { path: ROUTING.all.LoginPageComponent, component: LoginPageComponent },
     { path: "testing", component: CeoSheetComponent },
     { path: ROUTING.admin.LogsComponent, component: LogsComponent, canActivate: [AuthGuardService] },
