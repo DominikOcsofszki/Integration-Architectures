@@ -47,6 +47,7 @@ module.exports = {
                 + ' && pm2 save && cat /home/erasmux/.pm2/dump.pm2'
                 + ' && pm2 list'
                 + ' && echo $pm_exec_path'
+            + ' && pwd && ls'
             // + ' && pm2 stop default && cat /home/erasmux/.pm2/dump.pm2'
             // + ' && pm2 list && pm2 list' 
             // + ' && cat /home/erasmux/.pm2/dump.pm2' 
