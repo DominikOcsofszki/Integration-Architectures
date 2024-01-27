@@ -45,6 +45,7 @@ module.exports = {
             // 'post-deploy': 'cd backend && npm install --production'
             'post-deploy': 'cd backend '
                 + ' && pm2 install typescript '
+                + ' && pm2 install ts-node '
                 + ' && pm2 start src/app.ts --watch'
                 // + ' && pm2 startOrRestart ts-node ecosystem.config.js --env=production'
                 // + ' && pm2 startOrRestart ecosystem.config.js --env=production'
