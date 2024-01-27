@@ -24,7 +24,8 @@ module.exports = {
             },
             env_production: {
                 NODE_ENV: 'production',
-                PORT: 8080
+                // PORT: 8080
+                PORT: 80
             }
         }
     ],
@@ -49,15 +50,10 @@ module.exports = {
                 + ' && npm install pm2 '
                 + ' && npx pm2 install typescript '
                 + ' && npx pm2 install ts-node '
-                + ' && npx pm2 start src/app.ts --watch'
-                // + ' && pm2 startOrRestart ts-node ecosystem.config.js --env=production'
-                // + ' && pm2 startOrRestart ecosystem.config.js --env=production'
+                + ' && npx pm2 startOrRestart src/app.ts --watch'
                 + ' && pm2 save && cat /home/erasmux/.pm2/dump.pm2'
                 + ' && pm2 list'
-                + ' && echo $pm_exec_path'
-            // + ' && pm2 stop default && cat /home/erasmux/.pm2/dump.pm2'
-            // + ' && pm2 list && pm2 list' 
-            // + ' && cat /home/erasmux/.pm2/dump.pm2' 
+                // + ' && echo $pm_exec_path'
         }
     }
 };
