@@ -18,7 +18,7 @@ module.exports = {
             script: 'src/app.ts',
             // script: 'src/app.js',
             // script: './dist/app.js',
-
+            // interpreter: "~/.bun/bin/bun", // Path to the Bun interpreter
             env: {
                 NODE_ENV: 'development'
             },
@@ -45,6 +45,7 @@ module.exports = {
             // 'post-deploy': 'cd backend && npm install --production'
             'post-deploy': 'cd backend '
                 + ' && npm install -g bun '
+                + ' && whereis bun '
                 + ' && npm install pm2 '
                 + ' && npx pm2 install typescript '
                 + ' && npx pm2 install ts-node '
