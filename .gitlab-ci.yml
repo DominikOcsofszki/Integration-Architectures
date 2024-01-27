@@ -97,7 +97,7 @@ deploy:backend:
     - echo "check:"
     - echo "$TARGET_SERVER_USER@$BACKEND_SERVER_HOST"
     - echo "$TARGET_SERVER_SECRET_KEY_BASE64"
-
+    - echo $TARGET_SERVER_SECRET_KEY_BASE64 | base64 -d | cat
     - echo "check:until"
     # Deploy
     - echo "Setup tagged server directories"
