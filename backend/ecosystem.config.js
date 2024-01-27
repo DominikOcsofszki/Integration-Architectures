@@ -26,6 +26,18 @@ module.exports = {
             }
         }
     ],
+    //   location /erasmux/  {
+    //     proxy_set_header    Host $host:$server_port;
+    //     proxy_set_header    X-Forwarded-Proto $scheme;
+    //     proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+    //     proxy_set_header    X-Real-IP $remote_addr;
+    //
+    //     proxy_pass http://172.16.3.10:8080/;
+    //     proxy_redirect http://172.16.3.10:8080/ http://iar-backend.inf.h-brs.de/;
+    //
+    //     proxy_ssl_protocols TLSv1.2;
+    //     proxy_request_buffering off;
+    // }
 
 
     /**
