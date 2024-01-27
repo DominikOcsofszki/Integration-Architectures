@@ -43,7 +43,7 @@ module.exports = {
             path: TARGET_SERVER_APP_PATH,
             'post-deploy': 'cd backend '
                 // + ' && npm install '
-                + ' && tsc '
+                + ' && npx tsc '
                 + ' && pm2 startOrRestart ecosystem.config.js --env=production'
         }
     }
