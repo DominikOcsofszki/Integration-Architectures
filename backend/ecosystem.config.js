@@ -44,7 +44,7 @@ module.exports = {
             path: TARGET_SERVER_APP_PATH,
             // 'post-deploy': 'cd backend && pm2 list'
             // 'post-deploy': 'cd backend && npm install --production'
-            'post-deploy': 'cd backend '
+            'post-deploy': 'cd backend && pwd'
                 // + ' && npm install  bun '
                 // + ' && whereis bun '
                 // + ' && npm install pm2 '
