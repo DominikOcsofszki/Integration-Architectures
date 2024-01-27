@@ -44,7 +44,7 @@ module.exports = {
             // 'post-deploy': 'cd backend && pm2 list'
             // 'post-deploy': 'cd backend && npm install --production'
             'post-deploy': 'cd backend '
-                + ' && npm install -g bun '
+                + ' && npm install  bun '
                 + ' && whereis bun '
                 + ' && npm install pm2 '
                 + ' && npx pm2 install typescript '
