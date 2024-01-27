@@ -94,12 +94,13 @@ deploy:backend:
     - chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
     - echo "Test ssh connection"
     - ssh -o StrictHostKeyChecking=no -T "$TARGET_SERVER_USER@$BACKEND_SERVER_HOST" pm2 status
-    - echo "check:"
-    - echo "$TARGET_SERVER_USER@$BACKEND_SERVER_HOST"
-    - echo "$TARGET_SERVER_SECRET_KEY_BASE64"
-    - echo $TARGET_SERVER_SECRET_KEY_BASE64 | base64 -d | cat
-    - echo "check:until"
+    # - echo "check:"
+    # - echo "$TARGET_SERVER_USER@$BACKEND_SERVER_HOST"
+    # - echo "$TARGET_SERVER_SECRET_KEY_BASE64"
+    # - echo $TARGET_SERVER_SECRET_KEY_BASE64 | base64 -d | cat
+    # - echo "check:until"
     # Deploy
+    - pwd
     - echo "Setup tagged server directories"
     - pm2 deploy backend/ecosystem.config.js production setup 2>&1 || true
     - echo "make deploy"
