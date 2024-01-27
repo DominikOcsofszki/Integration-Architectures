@@ -15,15 +15,16 @@ module.exports = {
     apps: [
         {
             name: 'app',
+            script: 'src/app.ts',
             // script: 'src/app.js',
-            script: './dist/app.js',
+            // script: './dist/app.js',
 
             env: {
                 NODE_ENV: 'development'
             },
             env_production: {
                 NODE_ENV: 'production',
-                // PORT: 8080
+                PORT: 8080
             }
         }
     ],
@@ -41,13 +42,14 @@ module.exports = {
             ssh_options: 'StrictHostKeyChecking=no',
             path: TARGET_SERVER_APP_PATH,
             // 'post-deploy': 'cd backend && pm2 list'
-            'post-deploy': 'cd backend && npm install --production'
+            // 'post-deploy': 'cd backend && npm install --production'
+            'post-deploy': 'cd backend '
                 // + ' && echo "========================================="'
-                + ' && pm2 startOrRestart ecosystem.config.js --env=production'
+                + ' && pm2 startOrRestart ts-node ecosystem.config.js --env=production'
+                // + ' && pm2 startOrRestart ecosystem.config.js --env=production'
                 + ' && pm2 save && cat /home/erasmux/.pm2/dump.pm2'
                 + ' && pm2 list'
                 + ' && echo $pm_exec_path'
-            + ' && pwd && ls'
             // + ' && pm2 stop default && cat /home/erasmux/.pm2/dump.pm2'
             // + ' && pm2 list && pm2 list' 
             // + ' && cat /home/erasmux/.pm2/dump.pm2' 
