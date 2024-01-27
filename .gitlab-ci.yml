@@ -70,9 +70,7 @@ unit-test:backend:
     policy: pull
 
 deploy:backend:
-# deployearlier-dependencies:backend:
-  # stage: deploy
-  stage: dependencies
+  stage: deploy
   # image: alpine
   image: keymetrics/pm2:18-alpine
   variables:
@@ -82,8 +80,8 @@ deploy:backend:
     https_proxy: "http://www-cache:8080"
   rules:
     - !reference [ .backend_rules, rules ]
-  # needs:
-    # - unit-test:backend
+  needs:
+    - unit-test:backend
   script:
     - echo "====== Deploy backend to production server ======"
     - apk update && apk upgrade
