@@ -12,23 +12,22 @@ module.exports = {
      * Application configuration section
      * http://pm2.keymetrics.io/docs/usage/application-declaration/
      */
+ 
     apps: [
         {
             name: 'app',
-            script: 'src/app.ts',
-            // script: 'src/app.js',
-            // script: './dist/app.js',
-            // interpreter: "~/.bun/bin/bun", // Path to the Bun interpreter
+            // script: 'src/app.ts',
+            script: './dist/app.js',
             env: {
                 NODE_ENV: 'development'
             },
             env_production: {
                 NODE_ENV: 'production',
-                // PORT: 8080
-                PORT: 80
+                PORT: 8080
             }
         }
     ],
+
 
     /**
      * Deployment section
@@ -42,19 +41,10 @@ module.exports = {
             repo: REPO,
             ssh_options: 'StrictHostKeyChecking=no',
             path: TARGET_SERVER_APP_PATH,
-            // 'post-deploy': 'cd backend && pm2 list'
-            // 'post-deploy': 'cd backend && npm install --production'
-            'post-deploy': 'cd backend && pwd'
-                // + ' && npm install  bun '
-                // + ' && whereis bun '
-                // + ' && npm install pm2 '
-                // + ' && npx pm2 install typescript '
-                // + ' && npx pm2 install ts-node '
+            'post-deploy': 'cd backend '
+                // + ' && npm install '
+                + ' && tsc '
                 + ' && pm2 startOrRestart ecosystem.config.js --env=production'
-                // + ' && npx pm2 startOrRestart src/app.ts --watch'
-                // + ' && pm2 save && cat /home/erasmux/.pm2/dump.pm2'
-                // + ' && pm2 list'
-                // + ' && echo $pm_exec_path'
         }
     }
 };
