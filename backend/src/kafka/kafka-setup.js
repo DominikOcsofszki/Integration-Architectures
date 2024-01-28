@@ -17,3 +17,9 @@ exports.kafkaConsumer = kafkaConsumer;
 exports.kafkaErasmuxTopic = kafkaErasmuxTopic;
 
 // https://saschaalda.wordpress.com/sepp-software-engineering-deployment-pipeline-hbrs/
+    //
+    //
+    //  run: node kafka-receive.js 
+//  TODO run: node kafka-send.js
+//  TODO: This can be added to all the backend-api calls for logging
+//  TODO: Add an api to get all logs and use that api in the admin/logs (frontend)
