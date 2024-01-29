@@ -132,19 +132,19 @@ export async function addComments(req: Request, res: Response) {
     res.status(200).send(allResponses);
 }
 
-// //////TODO Issues with import, might be js instead of ts or similar
-// const { kafkaErasmuxTopic, kafkaProducer} = require("../../kafka/kafka-setup");
-//
-// const sendMsgToKafka = async (msg:string) => {
-//     // Producing
-//     await kafkaProducer.connect()
-//     await kafkaProducer.send({
-//         topic: kafkaErasmuxTopic,
-//         messages: [
-//             { value: msg},
-//         ],
-//     })
-// }
+// //////TODO: add this to the other apis 
+const { kafkaErasmuxTopic, kafkaProducer} = require("../../kafka/kafka-setup");
+
+const sendMsgToKafka = async (msg:string) => {
+    // Producing
+    await kafkaProducer.connect()
+    await kafkaProducer.send({
+        topic: kafkaErasmuxTopic,
+        messages: [
+            { value: msg},
+        ],
+    })
+}
 
 export async function signSheet(req: Request, res: Response) {
     await BonusComputationSheetModel.findOneAndUpdate(
@@ -163,7 +163,7 @@ export async function signSheet(req: Request, res: Response) {
             } else {
                 res.status(200).send(value);
                 // TODO
-                // sendMsgToKafka(`Ceo approved ${req.params.salesmanId} for the year ${req.params.yearOfEvaluation} //TODO add date`) 
+                sendMsgToKafka(`${new Date().toDateString()}: Ceo approved ${req.params.salesmanId} for the year ${req.params.yearOfEvaluation} `) 
             }
         })
         .catch((reason:any) => res.status(400).send(reason));
