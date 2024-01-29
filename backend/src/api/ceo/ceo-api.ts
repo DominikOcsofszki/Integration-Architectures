@@ -132,9 +132,9 @@ export async function addComments(req: Request, res: Response) {
     res.status(200).send(allResponses);
 }
 
+
 // //////TODO: add this to the other apis 
 const { kafkaErasmuxTopic, kafkaProducer} = require("../../kafka/kafka-setup");
-
 const sendMsgToKafka = async (msg:string) => {
     // Producing
     await kafkaProducer.connect()
@@ -163,7 +163,7 @@ export async function signSheet(req: Request, res: Response) {
             } else {
                 res.status(200).send(value);
                 // TODO
-                sendMsgToKafka(`${new Date().toDateString()}: Ceo approved ${req.params.salesmanId} for the year ${req.params.yearOfEvaluation} `) 
+                sendMsgToKafka(`${new Date().toDateString()}: Ceo approved ${req.params.salesmanId} for the year ${req.params.yearOfEvaluation}`) 
             }
         })
         .catch((reason:any) => res.status(400).send(reason));
