@@ -4,14 +4,14 @@ import {
     Comment,
 } from "../../model/BonusComputationSheet";
 import { UpdateWriteOpResult } from "mongoose";
-import {Salesman, SalesmanModel} from "../../model/Salesman";
+import { Salesman, SalesmanModel } from "../../model/Salesman";
 
 export async function readPendingSheets(req: Request, res: Response) {
     await BonusComputationSheetModel.find({ status: "pending-ceo" })
-        .then((value:any) => {
+        .then((value: any) => {
             res.status(200).send(value);
         })
-        .catch((reason:any) => res.status(400).send(reason));
+        .catch((reason: any) => res.status(400).send(reason));
 }
 
 export async function readPendingValues(req: Request, res: Response) {
@@ -41,7 +41,7 @@ export async function readPendingValues(req: Request, res: Response) {
             });
         }
         res.status(200).send(outputList);
-    } catch (reason:any) {
+    } catch (reason: any) {
         res.status(400).send(reason);
     }
 }
@@ -73,7 +73,7 @@ export async function readNotPendingValues(req: Request, res: Response) {
             });
         }
         res.status(200).send(outputList);
-    } catch (reason:any) {
+    } catch (reason: any) {
         res.status(400).send(reason);
     }
 }
@@ -96,8 +96,8 @@ export async function addComments(req: Request, res: Response) {
                     },
                 }
             )
-                .then((value:any) => allResponses.push(value))
-                .catch((reason:any) => allResponses.push(reason));
+                .then((value: any) => allResponses.push(value))
+                .catch((reason: any) => allResponses.push(reason));
         } else if (comment.type == "SocialAttribute") {
             await BonusComputationSheetModel.updateOne(
                 {
@@ -114,8 +114,8 @@ export async function addComments(req: Request, res: Response) {
                     },
                 }
             )
-                .then((value:any) => allResponses.push(value))
-                .catch((reason:any) => allResponses.push(reason));
+                .then((value: any) => allResponses.push(value))
+                .catch((reason: any) => allResponses.push(reason));
         } else {
             await BonusComputationSheetModel.updateOne(
                 {
@@ -125,26 +125,23 @@ export async function addComments(req: Request, res: Response) {
                 },
                 { comment: comment.text }
             )
-                .then((value:any) => allResponses.push(value))
-                .catch((reason:any) => allResponses.push(reason));
+                .then((value: any) => allResponses.push(value))
+                .catch((reason: any) => allResponses.push(reason));
         }
     }
     res.status(200).send(allResponses);
 }
 
-
-// //////TODO: add this to the other apis 
-const { kafkaErasmuxTopic, kafkaProducer} = require("../../kafka/kafka-setup");
-const sendMsgToKafka = async (msg:string) => {
+// //////TODO: add this to the other apis
+import { kafkaErasmuxTopic, kafkaProducer } from "../../kafka/kafka-setup";
+const sendMsgToKafka = async (msg: string) => {
     // Producing
-    await kafkaProducer.connect()
+    await kafkaProducer.connect();
     await kafkaProducer.send({
         topic: kafkaErasmuxTopic,
-        messages: [
-            { value: msg},
-        ],
-    })
-}
+        messages: [{ value: msg }],
+    });
+};
 
 export async function signSheet(req: Request, res: Response) {
     await BonusComputationSheetModel.findOneAndUpdate(
@@ -155,7 +152,7 @@ export async function signSheet(req: Request, res: Response) {
         },
         { status: "pending-salesman" }
     )
-        .then((value:any) => {
+        .then((value: any) => {
             if (value === null) {
                 res.status(400).send({
                     message: `There exists no BonusComputationSheet for this salesmanId: ${req.params.salesmanId} for this year: ${req.params.yearOfEvaluation} with the status pending-ceo`,
@@ -163,10 +160,14 @@ export async function signSheet(req: Request, res: Response) {
             } else {
                 res.status(200).send(value);
                 // TODO
-                sendMsgToKafka(`${new Date().toDateString()}: Ceo approved ${req.params.salesmanId} for the year ${req.params.yearOfEvaluation}`) 
+                sendMsgToKafka(
+                    `${new Date().toDateString()}: Ceo approved ${
+                        req.params.salesmanId
+                    } for the year ${req.params.yearOfEvaluation}`
+                );
             }
         })
-        .catch((reason:any) => res.status(400).send(reason));
+        .catch((reason: any) => res.status(400).send(reason));
 }
 
 export async function getSheetByIdAndYear(req: Request, res: Response) {
@@ -175,8 +176,10 @@ export async function getSheetByIdAndYear(req: Request, res: Response) {
             salesmanId: req.params.salesmanId,
             yearOfEvaluation: req.params.yearOfEvaluation,
         });
-        const salesman = await SalesmanModel.findOne({id: req.params.salesmanId});
-        if (sheet !== null && salesman !== null){
+        const salesman = await SalesmanModel.findOne({
+            id: req.params.salesmanId,
+        });
+        if (sheet !== null && salesman !== null) {
             const sheetWithSalesman = {
                 salesman: salesman,
                 yearOfEvaluation: sheet.yearOfEvaluation,
@@ -184,12 +187,11 @@ export async function getSheetByIdAndYear(req: Request, res: Response) {
                 status: sheet.status,
                 socialPerformanceEvaluation: sheet.socialPerformanceEvaluation,
                 orderEvaluation: sheet.orderEvaluation,
-                comment: sheet.comment
+                comment: sheet.comment,
             };
             res.status(200).send(sheetWithSalesman);
         }
-    } catch (reason:any){
+    } catch (reason: any) {
         res.status(400).send(reason);
     }
 }
-
