@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 
 import { MatTableModule } from '@angular/material/table'
+import { Role } from 'src/app/models/User';
 
 @Component({
     selector: 'app-table',
@@ -17,7 +18,13 @@ import { MatTableModule } from '@angular/material/table'
 
 export class TableComponent {
     @Input() bonusComputationSheet: BonusComputationSheet;
+    @Input() userRole: Role;
     displayedColumns = ['socialAttributeName', 'targetValue', 'actualValue', 'bonus', 'comment'];
+// socialAttribute: any;
+    isCeo() {
+        console.log(this.userRole)
+        return this.userRole === "ceo"
+    }
 }
 
 

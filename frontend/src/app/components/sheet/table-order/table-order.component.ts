@@ -6,24 +6,30 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 
 import { MatTableModule } from '@angular/material/table'
+import { Role } from 'src/app/models/User';
 
 @Component({
-  selector: 'app-table-order',
-  standalone: true,
+    selector: 'app-table-order',
+    standalone: true,
     imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatTableModule],
-  templateUrl: './table-order.component.html',
-  styleUrls: ['./table-order.component.css']
+    templateUrl: './table-order.component.html',
+    styleUrls: ['./table-order.component.css']
 })
 
-export class TableOrderComponent{
+export class TableOrderComponent {
 
     @Input() bonusComputationSheet: BonusComputationSheet;
-
-    displayedColumns = ['productname', 'client', 'clientRanking', 'itemamount', 'bonus','comment'];
+    @Input() userRole: Role;
+    displayedColumns = ['productname', 'client', 'clientRanking', 'itemamount', 'bonus', 'comment'];
     // displayedColumns = ['productname'];
-    printBonusSheet(){
-    console.log(this.bonusComputationSheet)
+    printBonusSheet() {
+        console.log(this.bonusComputationSheet)
     }
+    isCeo() {
+        console.log(this.userRole)
+        return this.userRole === "ceo"
+    }
+
 }
 
 // export class Order {
