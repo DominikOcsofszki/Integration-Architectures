@@ -32,31 +32,41 @@ export class SheetComponent implements OnInit {
     ableToSign: boolean;
     constructor(private sheetServiceService: SheetServiceService) { }
 
-    comment = new FormControl();
-
-    isCeo() {
-        return this.roleLoggedIn === "ceo"
-    }
-
-    // (yearOfEvaluation: number, salesmanId: number, bonusComputationSheet: BonusComputationSheet)
-    updateComments() {
-        this.updateSheetsService.updateSheetsAsCeo(this.year, this.id, this.bonusComputationSheet);
-    }
-
     ngOnInit() {
         this.sheetServiceService.fetchSheetFromSalesmanIdYear(this.id, this.year).
             subscribe((res: BonusComputationSheet) => {
                 this.bonusComputationSheet = res;
                 this.ableToSign = this.bonusComputationSheet.status === "pending-" + this.roleLoggedIn;
                 console.log(this.ableToSign)
-                this.comment.setValue(this.bonusComputationSheet.comment);
 
             });
     }
+    isCeo() {
+        return this.roleLoggedIn === "ceo"
+    } isHr() {
+        return this.roleLoggedIn === "hr"
+    }
+
+    // (yearOfEvaluation: number, salesmanId: number, bonusComputationSheet: BonusComputationSheet)
+    updateComments() {
+        if (this.isCeo()) {
+            this.updateSheetsService.updateSheetAsCeo(this.year, this.id, this.bonusComputationSheet);
+        }
+        if (this.isHr()) {
+            this.updateSheetsService.updateSheetAsHr(this.year, this.id, this.bonusComputationSheet);
+        }
+    }
+
+
     signCurrentSheet() {
         this.sheetServiceService.signSheetFromSalesmanIdAndYear(this.id, this.year, this.roleLoggedIn);
         if (this.roleLoggedIn == "hr") this.router.navigate([ROUTING.hr.PendingSheetsComponent])
         if (this.roleLoggedIn == "ceo") this.router.navigate([ROUTING.ceo.PendingSheetsComponent])
         if (this.roleLoggedIn == "salesman") this.router.navigate([ROUTING.salesman.PendingSheetsComponent])
+    }
+    updateSheetsApiCall() {
+        //TODO
+        console.log(this.bonusComputationSheet)
+
     }
 }

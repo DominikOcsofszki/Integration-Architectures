@@ -1,7 +1,8 @@
-<form>
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" required [formControl]="name">
+<h1> {{title}}</h1>
+<div>
+    <div #contentToConvert>
+        <app-sheet [id]=id [year]=year [roleLoggedIn]=roleLoggedIn></app-sheet>
     </div>
+</div>
 
-</form>
+<button (click)="generatePdf(contentToConvert, id)">Generate PDF</button>

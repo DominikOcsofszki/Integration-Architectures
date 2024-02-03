@@ -1,10 +1,4 @@
-<!-- comment?: string; -->
-<!-- targetValue: number; -->
-<!-- actualValue: number; -->
-<!-- socialAttributeName: string; -->
-<!-- bonus: number; -->
 
-<!-- displayedColumns = ['socialAttributeName', 'targetValue', 'actualValue', 'bonus', 'comment']; -->
 <table mat-table class="mat-elevation-z8 cdk-table"
     [dataSource]="bonusComputationSheet.socialPerformanceEvaluation.socialAttributes">
 
@@ -20,8 +14,21 @@
 
     <ng-container matColumnDef="actualValue">
         <th mat-header-cell *matHeaderCellDef>actualValue</th>
+        <td mat-cell *matCellDef="let  socialAttribute">
+            <mat-form-field *ngIf=isHr()>
+                <input matInput [(ngModel)]="socialAttribute.actualValue" type="number" required>
+                <!-- (input)="upgradeTODO()"> -->
+            </mat-form-field>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actualValue" *ngIf=!isHr()>
+        <th mat-header-cell *matHeaderCellDef>actualValue</th>
         <td mat-cell *matCellDef="let  socialAttribute">{{socialAttribute.actualValue}}</td>
     </ng-container>
+
+
+
 
 
     <ng-container matColumnDef="bonus">
@@ -33,7 +40,21 @@
         <th mat-header-cell *matHeaderCellDef>comment</th>
         <td mat-cell *matCellDef="let  socialAttribute">{{socialAttribute.comment}}</td>
     </ng-container>
+
+    <ng-container matColumnDef="comment">
+        <th mat-header-cell *matHeaderCellDef>comment</th>
+        <td mat-cell *matCellDef="let  socialAttribute">
+            <mat-form-field *ngIf=isCeo()>
+                <input matInput [(ngModel)]="socialAttribute.comment" type="string" required >
+                <!-- <input matInput [(ngModel)]="socialAttribute.comment" type="string" required (input)="upgradeTODO()"> -->
+            </mat-form-field>
+        </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+
+
 </table>
