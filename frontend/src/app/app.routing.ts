@@ -48,7 +48,7 @@ const routes: Routes = [
     { path: ROUTING.salesman.PendingSheetsComponent, component: SalesmanSheetsComponent, canActivate: [AuthGuardService] },
     //
     { path: ROUTING.hr.Sheet, component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
-    { path: ROUTING.ceo.Sheet, component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
+    { path: ROUTING.ceo.Sheet, component: CeoSheetComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.salesman.Sheet + ":year/:id", component: SalesmanSheetComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.HrStartComponent, component: HrStartComponent, canActivate: [AuthGuardService] },
 

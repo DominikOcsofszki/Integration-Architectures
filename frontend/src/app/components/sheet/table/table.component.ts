@@ -20,10 +20,11 @@ export class TableComponent {
     @Input() bonusComputationSheet: BonusComputationSheet;
     @Input() userRole: Role;
     displayedColumns = ['socialAttributeName', 'targetValue', 'actualValue', 'bonus', 'comment'];
-// socialAttribute: any;
     isCeo() {
-        console.log(this.userRole)
         return this.userRole === "ceo"
+    }
+    isHr() {
+        return this.userRole === "hr"
     }
 }
 

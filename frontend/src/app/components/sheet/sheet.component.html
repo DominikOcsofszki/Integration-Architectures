@@ -72,7 +72,8 @@
                 <td>
                     <mat-form-field class="example-full-width">
                         <mat-label>comment </mat-label>
-                        <input matInput [disabled]=isCeo() value={{bonusComputationSheet.comment}}>
+                        <input matInput [disabled]=!isCeo() [(ngModel)]="bonusComputationSheet.comment">
+                        <!-- <input matInput [disabled]=!isCeo() value={{bonusComputationSheet.comment}}> -->
                     </mat-form-field>
                 </td>
 
