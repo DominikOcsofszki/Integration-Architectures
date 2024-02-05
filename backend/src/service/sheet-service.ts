@@ -10,6 +10,7 @@ import {
     SocialPerformanceEvaluation
 } from "../model/BonusComputationSheet";
 import {Connection, Document} from "mongoose";
+import {getItemsFromHRM, storeBonus} from "../connector/hrm-connector";
 
 const dbReady: boolean = true;
 
@@ -50,5 +51,15 @@ async function getSocialPerformanceEvaluationFromDB(salesmanId: number, year: nu
 function fillDB(salesmanIds: number[], year: number) {
     for (const id of salesmanIds) {
         generateRandomSheetDB(id, year);
+    }
+}
+
+export async function storeBonusInOrangeHRM(salesmanId: number, bonus: number, year: number){
+    const response = await getItemsFromHRM("https://sepp-hrm.inf.h-brs.de/symfony/web/index.php/api/v1/employee/search?unit=2");
+    const salesmen = response.data;
+    for (const salesman of salesmen) {
+        if (salesman.code == salesmanId){
+            await storeBonus(salesman.employeeId, bonus, year);
+        }
     }
 }
