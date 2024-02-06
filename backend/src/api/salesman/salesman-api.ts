@@ -2,6 +2,7 @@ import { Response, Request } from "express";
 import { BonusComputationSheetModel } from "../../model/BonusComputationSheet";
 import { Session } from "../../service/auth-service";
 import { Salesman, SalesmanModel } from "../../model/Salesman";
+import {storeBonusInOrangeHRM} from "../../service/sheet-service";
 
 export async function readSheet(req: Request, res: Response) {
     let s = req.session as Session;
@@ -51,6 +52,11 @@ export async function signSheetUntilFix(req: Request, res: Response) {//TODO fix
                     message: `There exists no BonusComputationSheet for this salesmanId: ${req.params.salesmanId} for this year: ${req.params.yearOfEvaluation} with the status pending-salesman`,
                 });
             } else {
+                try { //Todo: Bei Migration zu anderer Funktion mitnehmen
+                    storeBonusInOrangeHRM(parseInt(req.params.salesmanId), value.totalBonus, value.yearOfEvaluation)
+                } catch (e){
+                    res.status(200).send(e);
+                }
                 res.status(200).send(value);
             }
         })
