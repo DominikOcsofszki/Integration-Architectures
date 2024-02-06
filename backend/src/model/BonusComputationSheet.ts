@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 export class BonusComputationSheet {
-    id: number; //brauchen wir die?
     salesmanId: number;
     yearOfEvaluation: number;
     totalBonus: number = 0;
@@ -20,7 +19,6 @@ export class BonusComputationSheet {
     ) {
         this.salesmanId = salesmanId;
         this.yearOfEvaluation = yearOfEvaluation;
-        this.id = id;
         this.totalBonus =
             socialPerformanceEvaluation.bonussum + orderEvaluation.bonussum;
         this.status = "pending-hr";
@@ -132,7 +130,6 @@ const OrderEvaluationSchema = new mongoose.Schema({
 });
 
 export const BonusComputationSheetSchema = new mongoose.Schema({
-    id: { type: Number, required: true, unique: true },
     salesmanId: { type: Number, required: true },
     yearOfEvaluation: { type: Number, required: true },
     totalBonus: { type: Number, required: true },

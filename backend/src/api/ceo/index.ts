@@ -18,7 +18,8 @@ import {
     readNotPendingValues,
     readPendingSheets,
     readPendingValues,
-    signSheet
+    signSheet,
+    updateSheet,
 } from "./ceo-api";
 
 const router = Router();
@@ -27,6 +28,7 @@ router.get("/pending/sheet", readPendingSheets);
 router.get("/sheets/pending", readPendingValues);
 router.get("/sheets/notpending", readNotPendingValues);
 router.get("/sheet/:salesmanId/:yearOfEvaluation/", getSheetByIdAndYear);
+router.post("/sheet/update", updateSheet);
 
 router.post(
     "/pending/sheet/comment/:salesmanId/:yearOfEvaluation",

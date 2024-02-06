@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+    BonusComputationSheet,
     BonusComputationSheetModel,
     Comment,
 } from "../../model/BonusComputationSheet";
@@ -130,6 +131,26 @@ export async function addComments(req: Request, res: Response) {
         }
     }
     res.status(200).send(allResponses);
+}
+
+export async function updateSheet(req: Request, res: Response) {
+    console.log("update sheet");
+    const updated: any = req.body.sheet;
+    updated.salesmanId = updated.salesman.id;
+    const updatedSheet: BonusComputationSheet = updated;
+    await BonusComputationSheetModel.findOneAndUpdate(
+        {
+            salesmanId: updatedSheet.salesmanId,
+            yearOfEvaluation: updatedSheet.yearOfEvaluation,
+        },
+        updatedSheet
+    )
+        .then((value) => {
+            res.status(200).send(value);
+        })
+        .catch((error) => {
+            res.status(400).send({ message: error });
+        });
 }
 
 // //////TODO: add this to the other apis
