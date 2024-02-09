@@ -46,6 +46,15 @@ export class SheetComponent implements OnInit {
     } isHr() {
         return this.roleLoggedIn === "hr"
     }
+    isSalesman() {
+        return this.roleLoggedIn === "salesman"
+    }
+    declineSheetAsSalesman() {
+        if (this.isSalesman()) {
+            this.updateSheetsService.declineSheetAsSalesman( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
+        }
+
+    }
 
     updateComments() {
         if (this.isCeo()) {

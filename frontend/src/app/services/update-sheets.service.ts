@@ -31,6 +31,17 @@ export class UpdateSheetsService {
             { observe: 'response', withCredentials: true }
         );
     }
+    declineSheetAsSalesman(bonusComputationSheet: BonusComputationSheet): Observable<HttpResponse<[]>> {
+        console.log("inside declineSheetAsSalesman")
+        const body = {
+            sheet : bonusComputationSheet
+        }
+        return this.http.post<[]>(
+            environment.apiEndpoint + `/api/salesman/sheet/decline/`, //TODO implement backend
+            body,
+            { observe: 'response', withCredentials: true }
+        );
+    }
 
 
 
