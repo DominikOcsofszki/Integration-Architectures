@@ -36,9 +36,11 @@ export const ROUTING = {
     salesman: {
         PendingSheetsComponent: 'salesman',
         Sheet: 'salesman/sheet/',
+        // Dashboard: 'salesman/dashboard/',
     }
 }
 const routes: Routes = [
+    // { path: 'test', component: DashComponent, canActivate: [AuthGuardService] },
     { path: '', component: LoginPageComponent },
     { path: ROUTING.all.LoginPageComponent, component: LoginPageComponent },
     { path: "testing", component: CeoSheetComponent },

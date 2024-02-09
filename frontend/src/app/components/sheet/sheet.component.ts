@@ -37,12 +37,16 @@ export class SheetComponent implements OnInit {
             subscribe((res: BonusComputationSheet) => {
                 this.bonusComputationSheet = res;
                 this.ableToSign = this.bonusComputationSheet.status === "pending-" + this.roleLoggedIn;
-                console.log(this.ableToSign)
+                // console.log(this.ableToSign)
 
             });
     }
+    isFinished(){
+        return this.bonusComputationSheet.status === "finished";
+    }
+
     isDeclined() {
-        return true;
+        // return true;
         return this.bonusComputationSheet.declined;
     }
     isCeo() {
