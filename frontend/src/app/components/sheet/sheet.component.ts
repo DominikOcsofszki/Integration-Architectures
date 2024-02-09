@@ -47,13 +47,12 @@ export class SheetComponent implements OnInit {
         return this.roleLoggedIn === "hr"
     }
 
-    // (yearOfEvaluation: number, salesmanId: number, bonusComputationSheet: BonusComputationSheet)
     updateComments() {
         if (this.isCeo()) {
-            this.updateSheetsService.updateSheetAsCeo(this.year, this.id, this.bonusComputationSheet);
+            this.updateSheetsService.updateSheetAsCeo( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
         }
         if (this.isHr()) {
-            this.updateSheetsService.updateSheetAsHr(this.year, this.id, this.bonusComputationSheet);
+            this.updateSheetsService.updateSheetAsHr( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
         }
     }
 
@@ -66,7 +65,7 @@ export class SheetComponent implements OnInit {
     }
     updateSheetsApiCall() {
         //TODO
-        console.log(this.bonusComputationSheet)
+        this.updateComments();
 
     }
 }

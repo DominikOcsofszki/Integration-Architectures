@@ -20,6 +20,7 @@ export class TableOrderComponent {
 
     @Input() bonusComputationSheet: BonusComputationSheet;
     @Input() userRole: Role;
+    @Input() ableToSign: boolean;
     displayedColumns = ['productname', 'client', 'clientRanking', 'itemamount', 'bonus', 'comment'];
     // displayedColumns = ['productname'];
     printBonusSheet() {

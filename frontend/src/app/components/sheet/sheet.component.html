@@ -3,7 +3,7 @@
     <ng-container *ngIf=ableToSign>
         <button mat-raised-button color="primary" (click)="signCurrentSheet()">Sign</button>
     </ng-container>
-    <ng-container *ngIf=isCeo()||isHr()>
+    <ng-container *ngIf=ableToSign&&(isCeo()||isHr())>
         <button mat-raised-button color="primary" (click)="updateSheetsApiCall()">updateSheet</button>
     </ng-container>
 
@@ -39,7 +39,7 @@
         </mat-form-field>
 
 
-        <app-table-order [bonusComputationSheet]=bonusComputationSheet [userRole]=roleLoggedIn></app-table-order>
+        <app-table-order [bonusComputationSheet]=bonusComputationSheet [userRole]=roleLoggedIn [ableToSign]=ableToSign></app-table-order>
         <table class="example-full-width" cellspacing="0">
             <tr>
                 <td>
@@ -51,7 +51,7 @@
             </tr>
         </table>
 
-        <app-table [bonusComputationSheet]=bonusComputationSheet [userRole]=roleLoggedIn></app-table>
+        <app-table [bonusComputationSheet]=bonusComputationSheet [userRole]=roleLoggedIn [ableToSign]=ableToSign></app-table>
 
         <table class="example-full-width" cellspacing="0">
             <tr>
@@ -75,7 +75,7 @@
                 <td>
                     <mat-form-field class="example-full-width">
                         <mat-label>comment </mat-label>
-                        <input matInput [disabled]=!isCeo() [(ngModel)]="bonusComputationSheet.comment">
+                        <input matInput [disabled]=!(isCeo()&&ableToSign) [(ngModel)]="bonusComputationSheet.comment">
                         <!-- <input matInput [disabled]=!isCeo() value={{bonusComputationSheet.comment}}> -->
                     </mat-form-field>
                 </td>

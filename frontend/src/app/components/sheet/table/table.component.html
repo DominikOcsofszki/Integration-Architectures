@@ -15,14 +15,14 @@
     <ng-container matColumnDef="actualValue">
         <th mat-header-cell *matHeaderCellDef>actualValue</th>
         <td mat-cell *matCellDef="let  socialAttribute">
-            <mat-form-field *ngIf=isHr()>
+            <mat-form-field *ngIf=isHr()||ableToSign>
                 <input matInput [(ngModel)]="socialAttribute.actualValue" type="number" required>
                 <!-- (input)="upgradeTODO()"> -->
             </mat-form-field>
         </td>
     </ng-container>
 
-    <ng-container matColumnDef="actualValue" *ngIf=!isHr()>
+    <ng-container matColumnDef="actualValue" *ngIf=!isHr()||!ableToSign>
         <th mat-header-cell *matHeaderCellDef>actualValue</th>
         <td mat-cell *matCellDef="let  socialAttribute">{{socialAttribute.actualValue}}</td>
     </ng-container>
@@ -44,7 +44,7 @@
     <ng-container matColumnDef="comment">
         <th mat-header-cell *matHeaderCellDef>comment</th>
         <td mat-cell *matCellDef="let  socialAttribute">
-            <mat-form-field *ngIf=isCeo()>
+            <mat-form-field *ngIf=isCeo()&&ableToSign>
                 <input matInput [(ngModel)]="socialAttribute.comment" type="string" required >
                 <!-- <input matInput [(ngModel)]="socialAttribute.comment" type="string" required (input)="upgradeTODO()"> -->
             </mat-form-field>

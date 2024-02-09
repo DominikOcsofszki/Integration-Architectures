@@ -19,6 +19,7 @@ import { Role } from 'src/app/models/User';
 export class TableComponent {
     @Input() bonusComputationSheet: BonusComputationSheet;
     @Input() userRole: Role;
+    @Input() ableToSign: boolean;
     displayedColumns = ['socialAttributeName', 'targetValue', 'actualValue', 'bonus', 'comment'];
     isCeo() {
         return this.userRole === "ceo"
