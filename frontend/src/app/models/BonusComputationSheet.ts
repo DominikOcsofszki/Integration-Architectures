@@ -1,10 +1,5 @@
-import {Salesman} from "./Salesman";
+import { Salesman } from './Salesman';
 
-export type Comment = {
-    type: "Order" | "SocialAttribute" | "BonusComputationSheet";
-    _id?: String;
-    text: String;
-};
 export type Status =
     | 'pending-hr'
     | 'pending-ceo'
@@ -14,15 +9,14 @@ export type Status =
 export type ClientRanking = 1 | 2 | 3 | 4 | 5;
 
 //this added from backend DB-Sheets
-export const socialAttributeNames: string[] =
-    [
-        "Leadership Competence",
-        "Openness to Employee",
-        "Social Behavior to Employee",
-        "Attitude towards Client",
-        "Communication Skills",
-        "Integrity to Company"
-    ];
+export const socialAttributeNames: string[] = [
+    'Leadership Competence',
+    'Openness to Employee',
+    'Social Behavior to Employee',
+    'Attitude towards Client',
+    'Communication Skills',
+    'Integrity to Company',
+];
 //////////////////////////////////////////
 
 export class BonusComputationSheet {
@@ -36,7 +30,15 @@ export class BonusComputationSheet {
     orderEvaluation: OrderEvaluation;
     comment?: string;
 
-    constructor(salesman: Salesman, yearOfEvaluation: number, totalBonus: number, status: Status, socialPerformanceEvaluation: SocialPerformanceEvaluation, orderEvaluation: OrderEvaluation, comment: string) {
+    constructor(
+        salesman: Salesman,
+        yearOfEvaluation: number,
+        totalBonus: number,
+        status: Status,
+        socialPerformanceEvaluation: SocialPerformanceEvaluation,
+        orderEvaluation: OrderEvaluation,
+        comment: string
+    ) {
         this.salesman = salesman;
         this.yearOfEvaluation = yearOfEvaluation;
         this.totalBonus = totalBonus;
