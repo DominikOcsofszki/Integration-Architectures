@@ -1,13 +1,18 @@
-import {
-    BonusComputationSheetModel,
-    OrderEvaluation,
-    SocialPerformanceEvaluation,
-    Status
-} from "../../model/BonusComputationSheet";
+// import {
+//     BonusComputationSheetModel,
+//     OrderEvaluation,
+//     SocialPerformanceEvaluation,
+//     Status
+// } from "../../model/BonusComputationSheet";
 import { Request, Response } from "express";
 import { Salesman, SalesmanModel } from "../../model/Salesman";
 import { createSheetsForAllSalesmen } from "../../service/sheet-service";
 
+import {
+    BonusComputationSheet,
+    BonusComputationSheetModel,
+    Comment,
+} from "../../model/BonusComputationSheet";
 export async function readSheetStatus(req: Request, res: Response) {
     await BonusComputationSheetModel.find({})
         .then((value:any) => {
@@ -187,3 +192,29 @@ export async function startBonusCalculation(req: Request, res: Response) {
         .then(() => res.status(200).send())
         .catch((reason:any) => res.status(400).send(reason));
 }
+
+
+export async function updateSheet(req: Request, res: Response) {
+    console.log("update sheet");
+    const updated: any = req.body.sheet;
+    updated.salesmanId = updated.salesman.id;
+    const updatedSheet: BonusComputationSheet = updated;
+    await BonusComputationSheetModel.findOneAndUpdate(
+        {
+            salesmanId: updatedSheet.salesmanId,
+            yearOfEvaluation: updatedSheet.yearOfEvaluation,
+        },
+        updatedSheet
+    )
+        .then((value) => {
+            res.status(200).send(value);
+            //TODO Start new startBonusCalculation for this sheet!
+        })
+        .catch((error) => {
+            res.status(400).send({ message: error });
+        });
+}
+
+
+
+

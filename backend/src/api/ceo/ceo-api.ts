@@ -133,6 +133,7 @@ export async function addComments(req: Request, res: Response) {
     res.status(200).send(allResponses);
 }
 
+//TODO add try catch for reading req.body
 export async function updateSheet(req: Request, res: Response) {
     console.log("update sheet");
     const updated: any = req.body.sheet;

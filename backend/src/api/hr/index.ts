@@ -14,6 +14,7 @@ import {
     readNotPendingSheets,
     readNotPendingValues,
     startBonusCalculation,
+    updateSheet,
 } from "./hr-api";
 
 const router = Router();
@@ -28,5 +29,8 @@ router.get("/sheet", getAllSheets);
 router.get("/sheets/pending", readPendingValues);
 router.get("/sheets/notpending", readNotPendingValues);
 router.post("/sheets/start/:year", startBonusCalculation);
+//TODO: impl update sheet for HR
+router.post("/sheet/update", updateSheet);
+
 
 export default router;
