@@ -41,6 +41,10 @@ export class SheetComponent implements OnInit {
 
             });
     }
+    isDeclined() {
+        return true;
+        return this.bonusComputationSheet.declined;
+    }
     isCeo() {
         return this.roleLoggedIn === "ceo"
     } isHr() {
