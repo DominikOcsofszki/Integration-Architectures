@@ -136,6 +136,7 @@ export const BonusComputationSheetSchema = new mongoose.Schema({
     yearOfEvaluation: { type: Number, required: true },
     totalBonus: { type: Number, required: true },
     status: { type: String, required: true },
+    declined: { type: Boolean, required: true },
     socialPerformanceEvaluation: {
         type: SocialPerformanceEvaluationSchema,
         required: true,

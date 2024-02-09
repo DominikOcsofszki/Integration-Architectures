@@ -2,7 +2,7 @@ import { Response, Request } from "express";
 import { BonusComputationSheetModel } from "../../model/BonusComputationSheet";
 import { Session } from "../../service/auth-service";
 import { Salesman, SalesmanModel } from "../../model/Salesman";
-import {storeBonusInOrangeHRM} from "../../service/sheet-service";
+import { storeBonusInOrangeHRM } from "../../service/sheet-service";
 
 export async function readSheet(req: Request, res: Response) {
     let s = req.session as Session;
@@ -11,8 +11,8 @@ export async function readSheet(req: Request, res: Response) {
         yearOfEvaluation: req.params.yearOfEvaluation,
         status: "pending-salesman",
     })
-        .then((value:any) => res.status(200).send(value))
-        .catch((reason:any) => res.status(400).send(reason));
+        .then((value: any) => res.status(200).send(value))
+        .catch((reason: any) => res.status(400).send(reason));
 }
 
 export async function signSheet(req: Request, res: Response) {
@@ -25,7 +25,7 @@ export async function signSheet(req: Request, res: Response) {
         },
         { status: "finished" }
     )
-        .then((value:any) => {
+        .then((value: any) => {
             if (value === null) {
                 res.status(400).send({
                     message: `There exists no BonusComputationSheet for this salesmanId: ${s.user?.salesmanId} for this year: ${req.params.yearOfEvaluation} with the status pending-salesman`,
@@ -34,10 +34,11 @@ export async function signSheet(req: Request, res: Response) {
                 res.status(200).send(value);
             }
         })
-        .catch((reason:any) => res.status(400).send(reason));
+        .catch((reason: any) => res.status(400).send(reason));
 }
 
-export async function signSheetUntilFix(req: Request, res: Response) {//TODO fix cookies then change to other on top
+export async function signSheetUntilFix(req: Request, res: Response) {
+    //TODO fix cookies then change to other on top
     await BonusComputationSheetModel.findOneAndUpdate(
         {
             salesmanId: req.params.salesmanId,
@@ -46,21 +47,26 @@ export async function signSheetUntilFix(req: Request, res: Response) {//TODO fix
         },
         { status: "finished" }
     )
-        .then((value:any) => {
+        .then((value: any) => {
             if (value === null) {
                 res.status(400).send({
                     message: `There exists no BonusComputationSheet for this salesmanId: ${req.params.salesmanId} for this year: ${req.params.yearOfEvaluation} with the status pending-salesman`,
                 });
             } else {
-                try { //Todo: Bei Migration zu anderer Funktion mitnehmen
-                    storeBonusInOrangeHRM(parseInt(req.params.salesmanId), value.totalBonus, value.yearOfEvaluation)
-                } catch (e){
+                try {
+                    //Todo: Bei Migration zu anderer Funktion mitnehmen
+                    storeBonusInOrangeHRM(
+                        parseInt(req.params.salesmanId),
+                        value.totalBonus,
+                        value.yearOfEvaluation
+                    );
+                } catch (e) {
                     res.status(200).send(e);
                 }
                 res.status(200).send(value);
             }
         })
-        .catch((reason:any) => res.status(400).send(reason));
+        .catch((reason: any) => res.status(400).send(reason));
 }
 
 export async function readPendingValues(req: Request, res: Response) {
@@ -68,7 +74,6 @@ export async function readPendingValues(req: Request, res: Response) {
         const pendingSheets = await BonusComputationSheetModel.find({
             status: "pending-salesman",
             salesmanId: req.params.salesmanId,
-
         });
         const outputList: {
             salesmanId: number;
@@ -92,16 +97,15 @@ export async function readPendingValues(req: Request, res: Response) {
             });
         }
         res.status(200).send(outputList);
-    } catch (reason:any) {
+    } catch (reason: any) {
         res.status(400).send(reason);
     }
 }
 
 export async function readNotPendingValues(req: Request, res: Response) {
-    console.log("inside")
     try {
         const notPendingSheets = await BonusComputationSheetModel.find({
-                        salesmanId: req.params.salesmanId,
+            salesmanId: req.params.salesmanId,
         })
             .where("status")
             .ne("pending-salesman");
@@ -127,7 +131,23 @@ export async function readNotPendingValues(req: Request, res: Response) {
             });
         }
         res.status(200).send(outputList);
-    } catch (reason:any) {
+    } catch (reason: any) {
         res.status(400).send(reason);
     }
+}
+
+export async function declineSheet(req: Request, res: Response) {
+    await BonusComputationSheetModel.findOneAndUpdate(
+        {
+            salesmanId: req.body.sheet.salesmanId,
+            yearOfEvaluation: req.body.sheet.yearOfEvaluation,
+        },
+        { status: "pending-hr", declined: true }
+    )
+        .then(() => {
+            res.status(200).send({ message: "succesfully declined" });
+        })
+        .catch((reason) => {
+            res.status(400).send(reason);
+        });
 }
