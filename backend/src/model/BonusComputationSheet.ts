@@ -8,6 +8,7 @@ export class BonusComputationSheet {
     socialPerformanceEvaluation: SocialPerformanceEvaluation;
     orderEvaluation: OrderEvaluation;
     comment?: string;
+    declined: boolean;
 
     constructor(
         salesmanId: number,
@@ -25,6 +26,7 @@ export class BonusComputationSheet {
         this.socialPerformanceEvaluation = socialPerformanceEvaluation;
         this.orderEvaluation = orderEvaluation;
         this.comment = comment;
+        this.declined = false;
     }
 }
 
