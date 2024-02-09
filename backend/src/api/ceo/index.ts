@@ -13,7 +13,6 @@
 
 import { Router } from "express";
 import {
-    addComments,
     getSheetByIdAndYear,
     readNotPendingValues,
     readPendingSheets,
@@ -29,11 +28,6 @@ router.get("/sheets/pending", readPendingValues);
 router.get("/sheets/notpending", readNotPendingValues);
 router.get("/sheet/:salesmanId/:yearOfEvaluation/", getSheetByIdAndYear);
 router.post("/sheet/update", updateSheet);
-
-router.post(
-    "/pending/sheet/comment/:salesmanId/:yearOfEvaluation",
-    addComments
-);
 
 router.post("/pending/sheet/sign/:salesmanId/:yearOfEvaluation", signSheet);
 // from hr:

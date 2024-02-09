@@ -137,9 +137,10 @@ export async function readNotPendingValues(req: Request, res: Response) {
 }
 
 export async function declineSheet(req: Request, res: Response) {
+    console.log(req.body);
     await BonusComputationSheetModel.findOneAndUpdate(
         {
-            salesmanId: req.body.sheet.salesmanId,
+            salesmanId: req.body.sheet.salesman.id,
             yearOfEvaluation: req.body.sheet.yearOfEvaluation,
         },
         { status: "pending-hr", declined: true }

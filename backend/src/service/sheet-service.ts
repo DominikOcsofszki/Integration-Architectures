@@ -10,10 +10,11 @@ import {
 } from "../model/SheetsDB";
 import {
     BonusComputationSheet,
+    BonusComputationSheetModel,
     SocialPerformanceEvaluation,
 } from "../model/BonusComputationSheet";
-import {Connection, Document} from "mongoose";
-import {getItemsFromHRM, storeBonus} from "../connector/hrm-connector";
+import { Connection, Document } from "mongoose";
+import { getItemsFromHRM, storeBonus } from "../connector/hrm-connector";
 
 const dbReady: boolean = true;
 
@@ -24,7 +25,6 @@ export async function createSheetsForAllSalesmen(year: number, db: Connection) {
         fillDB(salesmanIds, year);
     }
     console.log(salesmanIds);
-    let sheetIds = 1;
     for (const salesman of salesmanIds) {
         const orderEvaluation = await createOrderEvaluation(salesman);
         console.log(`Order Evaluation for salesman ${salesman} created`);
@@ -37,20 +37,17 @@ export async function createSheetsForAllSalesmen(year: number, db: Connection) {
             const bcs = new BonusComputationSheet(
                 salesman,
                 year,
-                sheetIds++,
                 socialPerformanceEvaluation,
                 orderEvaluation
             );
-            await db
-                .collection("sheets")
-                .replaceOne(
-                    {
-                        salesmanId: bcs.salesmanId,
-                        yearOfEvaluation: bcs.yearOfEvaluation,
-                    },
-                    bcs,
-                    { upsert: true }
-                );
+            await BonusComputationSheetModel.replaceOne(
+                {
+                    salesmanId: bcs.salesmanId,
+                    yearOfEvaluation: bcs.yearOfEvaluation,
+                },
+                bcs,
+                { upsert: true }
+            );
             console.log(
                 `BonusComputationSheet for salesman ${salesman} stored`
             );
@@ -84,11 +81,17 @@ function fillDB(salesmanIds: number[], year: number) {
     }
 }
 
-export async function storeBonusInOrangeHRM(salesmanId: number, bonus: number, year: number){
-    const response = await getItemsFromHRM("https://sepp-hrm.inf.h-brs.de/symfony/web/index.php/api/v1/employee/search?unit=2");
+export async function storeBonusInOrangeHRM(
+    salesmanId: number,
+    bonus: number,
+    year: number
+) {
+    const response = await getItemsFromHRM(
+        "https://sepp-hrm.inf.h-brs.de/symfony/web/index.php/api/v1/employee/search?unit=2"
+    );
     const salesmen = response.data;
     for (const salesman of salesmen) {
-        if (salesman.code == salesmanId){
+        if (salesman.code == salesmanId) {
             await storeBonus(salesman.employeeId, bonus, year);
         }
     }

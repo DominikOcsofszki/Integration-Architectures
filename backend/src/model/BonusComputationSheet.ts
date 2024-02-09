@@ -13,7 +13,6 @@ export class BonusComputationSheet {
     constructor(
         salesmanId: number,
         yearOfEvaluation: number,
-        id: number,
         socialPerformanceEvaluation: SocialPerformanceEvaluation,
         orderEvaluation: OrderEvaluation,
         comment?: string
@@ -149,12 +148,6 @@ export const BonusComputationSheetModel = mongoose.model(
     "sheets",
     BonusComputationSheetSchema
 );
-
-export type Comment = {
-    type: "Order" | "SocialAttribute" | "BonusComputationSheet";
-    _id?: String;
-    text: String;
-};
 
 export type Status =
     | "incomplete"
