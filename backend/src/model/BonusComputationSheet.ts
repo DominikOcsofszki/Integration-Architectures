@@ -13,7 +13,6 @@ export class BonusComputationSheet {
     constructor(
         salesmanId: number,
         yearOfEvaluation: number,
-        id: number,
         socialPerformanceEvaluation: SocialPerformanceEvaluation,
         orderEvaluation: OrderEvaluation,
         comment?: string
@@ -136,6 +135,7 @@ export const BonusComputationSheetSchema = new mongoose.Schema({
     yearOfEvaluation: { type: Number, required: true },
     totalBonus: { type: Number, required: true },
     status: { type: String, required: true },
+    declined: { type: Boolean, required: true },
     socialPerformanceEvaluation: {
         type: SocialPerformanceEvaluationSchema,
         required: true,
@@ -148,12 +148,6 @@ export const BonusComputationSheetModel = mongoose.model(
     "sheets",
     BonusComputationSheetSchema
 );
-
-export type Comment = {
-    type: "Order" | "SocialAttribute" | "BonusComputationSheet";
-    _id?: String;
-    text: String;
-};
 
 export type Status =
     | "incomplete"
