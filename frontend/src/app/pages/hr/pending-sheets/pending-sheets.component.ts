@@ -53,9 +53,14 @@ export class PendingSheetsComponent implements OnInit {
             .subscribe((response): void => {
                 if (response.status === 200) {
                     this.pendingSheets = response.body;
-                    this.percentage = calculatePercentage(
-                        this.pendingSheets.concat(this.restSheets)
-                    );
+                    if (
+                        this.pendingSheets.length > 0 ||
+                        this.restSheets.length > 0
+                    ) {
+                        this.percentage = calculatePercentage(
+                            this.pendingSheets.concat(this.restSheets)
+                        );
+                    }
                 }
             });
     }
@@ -66,9 +71,14 @@ export class PendingSheetsComponent implements OnInit {
                 if (response.status === 200) {
                     this.restSheets = response.body;
                 }
-                this.percentage = calculatePercentage(
-                    this.pendingSheets.concat(this.restSheets)
-                );
+                if (
+                    this.pendingSheets.length > 0 ||
+                    this.restSheets.length > 0
+                ) {
+                    this.percentage = calculatePercentage(
+                        this.pendingSheets.concat(this.restSheets)
+                    );
+                }
             });
     }
 }

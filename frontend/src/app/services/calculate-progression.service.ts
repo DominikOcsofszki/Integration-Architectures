@@ -13,6 +13,6 @@ export function calculatePercentage(allSheets: SheetSummary[]): number {
             .map((sheet) => {
                 return statusMap[sheet.status];
             })
-            .reduce((partial, value) => partial + value) / allSheets.length
+            .reduce((partial, value) => partial + value, 0) / allSheets.length
     );
 }
