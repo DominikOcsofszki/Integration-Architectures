@@ -6,7 +6,7 @@
 // } from "../../model/BonusComputationSheet";
 import { Request, Response } from "express";
 import { Salesman, SalesmanModel } from "../../model/Salesman";
-import { createSheetsForAllSalesmen } from "../../service/sheet-service";
+import {createSheetsForAllSalesmen, updateBonus} from "../../service/sheet-service";
 
 import {
     BonusComputationSheet,
@@ -199,7 +199,8 @@ export async function updateSheet(req: Request, res: Response) {
     console.log("update sheet");
     const updated: any = req.body.sheet;
     updated.salesmanId = updated.salesman.id;
-    const updatedSheet: BonusComputationSheet = updated;
+    let updatedSheet: BonusComputationSheet = updated;
+    updatedSheet = updateBonus(updatedSheet);
     await BonusComputationSheetModel.findOneAndUpdate(
         {
             salesmanId: updatedSheet.salesmanId,
