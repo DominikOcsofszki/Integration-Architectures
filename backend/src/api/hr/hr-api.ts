@@ -210,7 +210,6 @@ export async function updateSheet(req: Request, res: Response) {
     )
         .then((value) => {
             res.status(200).send(value);
-            //TODO Start new startBonusCalculation for this sheet!
         })
         .catch((error) => {
             res.status(400).send({ message: error });
