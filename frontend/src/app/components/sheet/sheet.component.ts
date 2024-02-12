@@ -14,7 +14,7 @@ import { Router } from "@angular/router"
 import { Role } from 'src/app/models/User';
 import { UpdateSheetsService } from 'src/app/services/update-sheets.service';
 
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-sheet',
@@ -39,16 +39,14 @@ export class SheetComponent implements OnInit {
             subscribe((res: BonusComputationSheet) => {
                 this.bonusComputationSheet = res;
                 this.ableToSign = this.bonusComputationSheet.status === "pending-" + this.roleLoggedIn;
-                // console.log(this.ableToSign)
 
             });
     }
-    isFinished(){
+    isFinished() {
         return this.bonusComputationSheet.status === "finished";
     }
 
     isDeclined() {
-        // return true;
         return this.bonusComputationSheet.declined;
     }
     isCeo() {
@@ -61,26 +59,28 @@ export class SheetComponent implements OnInit {
     }
     declineSheetAsSalesman() {
         if (this.isSalesman()) {
-            this.updateSheetsService.declineSheetAsSalesman( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
-            this._snackBar.open("declined");
-            location.reload()
+            this.updateSheetsService.declineSheetAsSalesman(this.bonusComputationSheet).subscribe(() => {
+                this._snackBar.open("declined");
+                location.reload()
+            });
+
         }
 
     }
 
     updateComments() {
         if (this.isCeo()) {
-            this.updateSheetsService.updateSheetAsCeo( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
+            this.updateSheetsService.updateSheetAsCeo(this.bonusComputationSheet).subscribe(() => location.reload());
         }
         if (this.isHr()) {
             let actualValuesInRange = true;
             this.bonusComputationSheet.socialPerformanceEvaluation.socialAttributes.forEach(
-                x=> {
-                    if(x.actualValue > 5 || x.actualValue <0) actualValuesInRange = false;
-                })
-            if(actualValuesInRange) this.updateSheetsService.updateSheetAsHr( this.bonusComputationSheet).subscribe(()=> console.log("updated actual values"));
+                x => {if (x.actualValue > 5 || x.actualValue < 0) actualValuesInRange = false;})
+            if (actualValuesInRange) this.updateSheetsService.updateSheetAsHr(this.bonusComputationSheet).subscribe(
+                () => {
+                    location.reload();
+                });
         }
-        location.reload();
     }
 
 
