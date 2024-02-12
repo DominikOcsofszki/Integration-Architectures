@@ -15,6 +15,7 @@ import {
 } from "../model/BonusComputationSheet";
 import { Connection, Document } from "mongoose";
 import { getItemsFromHRM, storeBonus } from "../connector/hrm-connector";
+import {socialPerformanceBonus} from "./bonus-calculation-service";
 
 const dbReady: boolean = true;
 
@@ -95,4 +96,18 @@ export async function storeBonusInOrangeHRM(
             await storeBonus(salesman.employeeId, bonus, year);
         }
     }
+}
+
+/**
+ * Updates the socialPerformance bonus and total bonus of given sheet and returns it
+ */
+export function updateBonus(sheet: BonusComputationSheet) : BonusComputationSheet {
+    let newBonus: number = 0;
+    for (const socialAttribute of sheet.socialPerformanceEvaluation.socialAttributes) {
+        socialAttribute.bonus = socialPerformanceBonus(socialAttribute.targetValue, socialAttribute.actualValue);
+        newBonus += socialAttribute.bonus;
+    }
+    sheet.socialPerformanceEvaluation.bonussum = newBonus;
+    sheet.totalBonus = sheet.socialPerformanceEvaluation.bonussum + sheet.orderEvaluation.bonussum;
+    return sheet;
 }
