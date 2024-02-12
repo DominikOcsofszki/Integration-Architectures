@@ -14,17 +14,19 @@ import { Router } from "@angular/router"
 import { Role } from 'src/app/models/User';
 import { UpdateSheetsService } from 'src/app/services/update-sheets.service';
 
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-sheet',
     standalone: true,
-    imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, TableComponent, TableOrderComponent, ReactiveFormsModule],
+    imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, TableComponent, TableOrderComponent, ReactiveFormsModule, MatSnackBarModule],
     templateUrl: './sheet.component.html',
     styleUrls: ['./sheet.component.css'],
 })
 export class SheetComponent implements OnInit {
     private router = inject(Router)
     private updateSheetsService = inject(UpdateSheetsService);
+    private _snackBar = inject(MatSnackBar)
     bonusComputationSheet: BonusComputationSheet;
     @Input() id: number;
     @Input() year: number;
@@ -60,6 +62,7 @@ export class SheetComponent implements OnInit {
     declineSheetAsSalesman() {
         if (this.isSalesman()) {
             this.updateSheetsService.declineSheetAsSalesman( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
+            this._snackBar.open("restart");
         }
 
     }

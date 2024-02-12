@@ -70,13 +70,13 @@ export class MenuBarComponent implements OnInit {
     }
 
     async ngOnInit() {
-        if (this.authService.loggedIn) {
+        // if (this.authService.loggedIn) {
             this.getRoleLoggedIn().then((res) => {
                 this.user = res.data;
                 this.loggedInRole = this.user.role
                 this.setUpNavbar()
             });
-        }
+        // }
     }
     /**
         * function which handles clicking the logout button
