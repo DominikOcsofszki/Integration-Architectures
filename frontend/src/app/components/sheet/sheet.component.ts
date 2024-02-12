@@ -62,7 +62,8 @@ export class SheetComponent implements OnInit {
     declineSheetAsSalesman() {
         if (this.isSalesman()) {
             this.updateSheetsService.declineSheetAsSalesman( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
-            this._snackBar.open("restart");
+            this._snackBar.open("declined");
+            location.reload()
         }
 
     }
