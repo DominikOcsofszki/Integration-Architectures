@@ -1,9 +1,12 @@
 <ng-container *ngIf=bonusComputationSheet>
 
-    <ng-container *ngIf="isDeclined()&&!isFinished()">
+    <ng-container *ngIf="isFinished()">
+        <p style="color: green;">approved</p>
+    </ng-container><ng-container *ngIf="isDeclined()&&!isFinished()">
         <h1 style="color: red;"> Bonus Sheet Computation declined !!! </h1>
         <p> Talk to saleman</p>
-    </ng-container><ng-container *ngIf=ableToSign&&isSalesman()>
+    </ng-container>
+    <ng-container *ngIf=ableToSign&&isSalesman()>
         <button mat-raised-button color="primary" (click)="declineSheetAsSalesman()">Decline</button>
     </ng-container>
     <ng-container *ngIf=ableToSign>

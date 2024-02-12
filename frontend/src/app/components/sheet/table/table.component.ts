@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BonusComputationSheet, SocialPerformanceEvaluation } from 'src/app/models/BonusComputationSheet';
+import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
@@ -30,18 +30,3 @@ export class TableComponent {
 }
 
 
-// export class SocialAttribute {
-//     comment?: string;
-//     targetValue: number;
-//     actualValue: number;
-//     socialAttributeName: string;
-//     bonus: number;
-
-    // socialAttributeNamesArr: string[] = [
-    //     "Leadership Competence",
-    //     "Openness to Employee",
-    //     "Social Behavior to Employee",
-    //     "Attitude towards Client",
-    //     "Communication Skills",
-    //     "Integrity to Company"
-    // ];

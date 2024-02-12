@@ -2,7 +2,7 @@
 ////////////////////
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, inject } from '@angular/core';
 import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
@@ -69,8 +69,14 @@ export class SheetComponent implements OnInit {
             this.updateSheetsService.updateSheetAsCeo( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
         }
         if (this.isHr()) {
-            this.updateSheetsService.updateSheetAsHr( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
+            let actualValuesInRange = true;
+            this.bonusComputationSheet.socialPerformanceEvaluation.socialAttributes.forEach(
+                x=> {
+                    if(x.actualValue > 5 || x.actualValue <0) actualValuesInRange = false;
+                })
+            if(actualValuesInRange) this.updateSheetsService.updateSheetAsHr( this.bonusComputationSheet).subscribe(()=> console.log("updated actual values"));
         }
+        location.reload();
     }
 
 
@@ -81,7 +87,6 @@ export class SheetComponent implements OnInit {
         if (this.roleLoggedIn == "salesman") this.router.navigate([ROUTING.salesman.PendingSheetsComponent])
     }
     updateSheetsApiCall() {
-        //TODO
         this.updateComments();
 
     }
