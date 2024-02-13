@@ -2,7 +2,7 @@
 ////////////////////
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, inject } from '@angular/core';
 import { BonusComputationSheet } from 'src/app/models/BonusComputationSheet';
@@ -14,17 +14,19 @@ import { Router } from "@angular/router"
 import { Role } from 'src/app/models/User';
 import { UpdateSheetsService } from 'src/app/services/update-sheets.service';
 
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-sheet',
     standalone: true,
-    imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, TableComponent, TableOrderComponent, ReactiveFormsModule],
+    imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, TableComponent, TableOrderComponent, ReactiveFormsModule, MatSnackBarModule],
     templateUrl: './sheet.component.html',
     styleUrls: ['./sheet.component.css'],
 })
 export class SheetComponent implements OnInit {
     private router = inject(Router)
     private updateSheetsService = inject(UpdateSheetsService);
+    private _snackBar = inject(MatSnackBar)
     bonusComputationSheet: BonusComputationSheet;
     @Input() id: number;
     @Input() year: number;
@@ -37,16 +39,14 @@ export class SheetComponent implements OnInit {
             subscribe((res: BonusComputationSheet) => {
                 this.bonusComputationSheet = res;
                 this.ableToSign = this.bonusComputationSheet.status === "pending-" + this.roleLoggedIn;
-                // console.log(this.ableToSign)
 
             });
     }
-    isFinished(){
+    isFinished() {
         return this.bonusComputationSheet.status === "finished";
     }
 
     isDeclined() {
-        // return true;
         return this.bonusComputationSheet.declined;
     }
     isCeo() {
@@ -59,17 +59,27 @@ export class SheetComponent implements OnInit {
     }
     declineSheetAsSalesman() {
         if (this.isSalesman()) {
-            this.updateSheetsService.declineSheetAsSalesman( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
+            this.updateSheetsService.declineSheetAsSalesman(this.bonusComputationSheet).subscribe(() => {
+                this._snackBar.open("declined");
+                location.reload()
+            });
+
         }
 
     }
 
     updateComments() {
         if (this.isCeo()) {
-            this.updateSheetsService.updateSheetAsCeo( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
+            this.updateSheetsService.updateSheetAsCeo(this.bonusComputationSheet).subscribe(() => location.reload());
         }
         if (this.isHr()) {
-            this.updateSheetsService.updateSheetAsHr( this.bonusComputationSheet).subscribe(()=> console.log("worked"));
+            let actualValuesInRange = true;
+            this.bonusComputationSheet.socialPerformanceEvaluation.socialAttributes.forEach(
+                x => {if (x.actualValue > 5 || x.actualValue < 0) actualValuesInRange = false;})
+            if (actualValuesInRange) this.updateSheetsService.updateSheetAsHr(this.bonusComputationSheet).subscribe(
+                () => {
+                    location.reload();
+                });
         }
     }
 
@@ -81,7 +91,6 @@ export class SheetComponent implements OnInit {
         if (this.roleLoggedIn == "salesman") this.router.navigate([ROUTING.salesman.PendingSheetsComponent])
     }
     updateSheetsApiCall() {
-        //TODO
         this.updateComments();
 
     }
