@@ -5,3 +5,7 @@
 
 <h1> rest sheets:</h1>
 <app-sheets [sheets]="restSheets" [roleLoggedIn]=roleLoggedIn></app-sheets>
+
+<ng-container *ngIf="fetchCompleted()">
+<app-dashboard [restSheets]=restSheets [pendingSheets]=pendingSheets></app-dashboard>
+</ng-container>
