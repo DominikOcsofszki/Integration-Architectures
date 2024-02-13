@@ -9,6 +9,8 @@ import { UserService } from 'src/app/services/user.service';
 import { SheetsAllService } from 'src/app/services/sheets-all.service';
 import { calculatePercentage } from 'src/app/services/calculate-progression.service';
 import { combineLatest } from 'rxjs';
+import { DashboardComponent } from 'src/app/components/dashboard/dashboard.component';
+import { CommonModule } from '@angular/common';
 @Component({
     selector: 'app-pending-sheets',
     templateUrl: './pending-sheets.component.html',
@@ -19,6 +21,8 @@ import { combineLatest } from 'rxjs';
         MatProgressBarModule,
         SheetsComponent,
         SheetsComponent,
+        CommonModule,
+        DashboardComponent
     ],
 })
 export class PendingSheetsComponent implements OnInit {
@@ -39,6 +43,12 @@ export class PendingSheetsComponent implements OnInit {
     finishedPercentage: number;
     percentage: number;
 
+    fetchDonePending: boolean;
+    fetchDoneRest: boolean;
+
+    fetchCompleted() {
+        return this.fetchDoneRest && this.fetchDonePending;
+    }
     ngOnInit(): void {
         this.userService.getOwnUser().subscribe((user) => {
             this.roleLoggedIn = user.role;
@@ -53,6 +63,8 @@ export class PendingSheetsComponent implements OnInit {
             .subscribe((response): void => {
                 if (response.status === 200) {
                     this.pendingSheets = response.body;
+                    this.fetchDonePending = true
+
                     if (
                         this.pendingSheets.length > 0 ||
                         this.restSheets.length > 0
@@ -70,6 +82,7 @@ export class PendingSheetsComponent implements OnInit {
             .subscribe((response): void => {
                 if (response.status === 200) {
                     this.restSheets = response.body;
+                    this.fetchDoneRest = true
                 }
                 if (
                     this.pendingSheets.length > 0 ||
