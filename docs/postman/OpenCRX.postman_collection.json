@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "e90bad6b-16d4-4439-895b-5f8257da4b7f",
+		"name": "OpenCRX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30817167"
+	},
+	"item": [
+		{
+			"name": "Get customer for salesorder",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "guest",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "guest",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://sepp-crm.inf.h-brs.de/opencrx-rest-CRX/org.opencrx.kernel.account1/provider/CRX/segment/Standard/account/97NB4O91UQORTH2MA4T2TYJFL",
+					"protocol": "https",
+					"host": [
+						"sepp-crm",
+						"inf",
+						"h-brs",
+						"de"
+					],
+					"path": [
+						"opencrx-rest-CRX",
+						"org.opencrx.kernel.account1",
+						"provider",
+						"CRX",
+						"segment",
+						"Standard",
+						"account",
+						"97NB4O91UQORTH2MA4T2TYJFL"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get salesman account for salesorder",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "guest",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "guest",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://sepp-crm.inf.h-brs.de/opencrx-rest-CRX/org.opencrx.kernel.account1/provider/CRX/segment/Standard/account/L0NTAXG7TQTPM0EBHQA5MAZ7J",
+					"protocol": "https",
+					"host": [
+						"sepp-crm",
+						"inf",
+						"h-brs",
+						"de"
+					],
+					"path": [
+						"opencrx-rest-CRX",
+						"org.opencrx.kernel.account1",
+						"provider",
+						"CRX",
+						"segment",
+						"Standard",
+						"account",
+						"L0NTAXG7TQTPM0EBHQA5MAZ7J"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific salesorder",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "guest",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "guest",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://sepp-crm.inf.h-brs.de/opencrx-rest-CRX/org.opencrx.kernel.contract1/provider/CRX/segment/Standard/salesOrder/9DTSXR06DLHPM0EBHQA5MAZ7J",
+					"protocol": "https",
+					"host": [
+						"sepp-crm",
+						"inf",
+						"h-brs",
+						"de"
+					],
+					"path": [
+						"opencrx-rest-CRX",
+						"org.opencrx.kernel.contract1",
+						"provider",
+						"CRX",
+						"segment",
+						"Standard",
+						"salesOrder",
+						"9DTSXR06DLHPM0EBHQA5MAZ7J"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
