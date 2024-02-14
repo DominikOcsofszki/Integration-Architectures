@@ -28,7 +28,6 @@ export class MenuBarComponent implements OnInit {
     /*
     This array holds the definition of the menu's buttons.
    */
-    // TODO: Edit the router to the proper ROUTING
     buttons_hr = [
         { title: 'HR-Sheets', routerLink: ROUTING.hr.PendingSheetsComponent },
         { title: 'HR-Start', routerLink: ROUTING.hr.HrStartComponent },
@@ -44,7 +43,6 @@ export class MenuBarComponent implements OnInit {
         { title: 'salesman-Sheets', routerLink: ROUTING.salesman.PendingSheetsComponent },
     ];
 
-    // buttons = this.buttons_hr
     /**
      * The following parameters specify objects, which will be provided by dependency injection
      *
@@ -55,35 +53,25 @@ export class MenuBarComponent implements OnInit {
     constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
 
     setUpNavbar() {
-        // const yearSalesman = 2023; //TODO get year from somehwere. We could say only the latest is visible for him
         if (this.loggedInRole === "hr") this.buttons = this.buttons_hr;
         if (this.loggedInRole === "ceo") this.buttons = this.buttons_ceo;
         if (this.loggedInRole === "salesman") this.buttons = this.buttons_salesman;
         if (this.loggedInRole === "admin") this.buttons = this.buttons_admin;
-        // if(this.loggedInRole ==="salesman") this.buttons = [{ title: 'salesman-Sheet', routerLink: ROUTING.salesman.Sheet+"1"+"/"+"1" }]
-        // if(this.loggedInRole ==="salesman") {
-        //     this.buttons = [
-        //         { title: 'salesman-Sheet', routerLink: ROUTING.salesman.Sheet+`${yearSalesman}/${this.user.salesmanId}` },
-        //         { title: 'salesman-Sheets', routerLink:ROUTING.salesman.PendingSheetsComponent}
-        //     ]
-        // }
     }
 
     async ngOnInit() {
-        // if (this.authService.loggedIn) {
             this.getRoleLoggedIn().then((res) => {
                 this.user = res.data;
                 this.loggedInRole = this.user.role
                 this.setUpNavbar()
             });
-        // }
     }
     /**
         * function which handles clicking the logout button
     */
     handleLogout(): void {
         this.authService.logout().subscribe();
-        void this.router.navigate(['login']); // after logout go back to the login-page
+        void this.router.navigate(['login']);
     }
 
     /**
@@ -94,7 +82,7 @@ export class MenuBarComponent implements OnInit {
             this.user = user;
         });
     }
-    // getRoleLoddedIn(): Role {
+
 
     async getRoleLoggedIn(): Promise<AxiosResponse> {
         return await axios.get(

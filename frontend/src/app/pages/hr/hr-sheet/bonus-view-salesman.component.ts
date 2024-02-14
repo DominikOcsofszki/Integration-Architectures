@@ -19,7 +19,7 @@ import { Role } from 'src/app/models/User';
     styleUrls: ['./bonus-view-salesman.component.css'],
     standalone: true,
     imports: [MatButtonModule, CommentsComponent, NgIf, AsyncPipe, SheetComponent],
-    // changeDetection: ChangeDetectionStrategy.OnPush
+
 
 })
 export class BonusViewSalesmanComponent {

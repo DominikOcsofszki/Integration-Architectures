@@ -22,24 +22,11 @@ export class TableOrderComponent {
     @Input() userRole: Role;
     @Input() ableToSign: boolean;
     displayedColumns = ['productname', 'client', 'clientRanking', 'itemamount', 'bonus', 'comment'];
-    // displayedColumns = ['productname'];
     printBonusSheet() {
-        console.log(this.bonusComputationSheet)
     }
     isCeo() {
-        console.log(this.userRole)
         return this.userRole === "ceo"
     }
 
 }
 
-// export class Order {
-//     productname: string;
-//     client: string;
-//     clientRanking: ClientRanking;
-//     bonus: number;
-//     itemamount: number;
-//     comment?: string;
-//     price: number;
-//
-//

@@ -1,5 +1,5 @@
 
-// copied from backend -- 20.01.24
+
 import mongoose from "mongoose";
 
 export type Role = "admin" | "salesman" | "hr" | "ceo" | "user";

@@ -18,7 +18,6 @@ export class KafkaService {
 
     async consumeLog  () {
         const listOfMsgs: string[] = [];
-        // Consuming
         await this.kafkaConsumer.connect()
         await this.kafkaConsumer.subscribe({ topic: this.kafkaErasmuxTopic, fromBeginning: true })
 
@@ -35,9 +34,5 @@ export class KafkaService {
         return listOfMsgs;
     }
 
-    // exports.kafka = kafka
-    // exports.kafkaProducer = kafkaProducer;
-    // exports.kafkaConsumer = kafkaConsumer;
-    // exports.kafkaErasmuxTopic = kafkaErasmuxTopic;
     constructor() { }
 }

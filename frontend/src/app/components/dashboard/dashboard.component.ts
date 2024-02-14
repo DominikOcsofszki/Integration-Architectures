@@ -32,19 +32,15 @@ export class DashboardComponent {
         divBy = divBy === 0 ? 1 : divBy
         let avg = totalBonus / divBy;
         this.setUpCharts(totalBonus, avg);
-        console.log(this.pendingSheets)
-        console.log(this.restSheets)
     }
 
     ngOnInit() {
         if (this.pendingSheets && this.restSheets) {
-            console.log(this.pendingSheets, this.restSheets)
             this.calcPrepChart();
         }
     }
 
     setUpCharts(totalBonus, avg) {
-        console.log(totalBonus, avg)
             this.chart = new Chart('canvas', {
                 type: 'bar',
                 data: {

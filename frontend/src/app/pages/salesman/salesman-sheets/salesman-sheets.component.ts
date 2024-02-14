@@ -54,7 +54,7 @@ export class SalesmanSheetsComponent implements OnInit {
     fetchPendingSalesman(): void {
         this.sheetsService
             .getPendingSheetsSalesman(this.user)
-            // .getPendingSheets(this.roleLoggedIn)
+
             .subscribe((response): void => {
                 if (response.status === 200) {
                     this.pendingSheets = response.body;
