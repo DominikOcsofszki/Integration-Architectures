@@ -104,7 +104,7 @@ export async function storeBonusInOrangeHRM(
 export function updateBonus(sheet: BonusComputationSheet) : BonusComputationSheet {
     let newBonus: number = 0;
     let newSheet: BonusComputationSheet = new BonusComputationSheet(sheet.salesmanId, sheet.yearOfEvaluation, sheet.socialPerformanceEvaluation, sheet.orderEvaluation, sheet.comment);
-    for (const socialAttribute of sheet.socialPerformanceEvaluation.socialAttributes) {
+    for (const socialAttribute of newSheet.socialPerformanceEvaluation.socialAttributes) {
         socialAttribute.bonus = socialPerformanceBonus(socialAttribute.targetValue, socialAttribute.actualValue);
         newBonus += socialAttribute.bonus;
     }
