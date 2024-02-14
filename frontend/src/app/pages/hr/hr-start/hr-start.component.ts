@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import {HRService} from "../../../services/hr-service";
+
 import {Observable, of} from "rxjs";
 import { SheetsAllService } from 'src/app/services/sheets-all.service';
 
@@ -13,7 +13,7 @@ import { SheetsAllService } from 'src/app/services/sheets-all.service';
 })
 export class HrStartComponent {
     private sheetService = inject(SheetsAllService);
-    // constructor(private hrService: HRService) {}
+
 
     calculationResult$: Observable<string>;
 

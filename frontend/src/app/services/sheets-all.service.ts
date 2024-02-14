@@ -18,7 +18,6 @@ export class SheetsAllService {
     }
 
     getNotPendingSheetsSalesman(user: User): Observable<HttpResponse<[]>> {
-        console.log(user.salesmanId)
         return this.http.get<[]>(
             environment.apiEndpoint + `/api/salesman/sheets/notpending/${user.salesmanId}`,
             { observe: 'response', withCredentials: true }

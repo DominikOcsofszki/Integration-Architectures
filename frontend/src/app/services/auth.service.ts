@@ -15,7 +15,6 @@ import { Role } from '../models/User';
     providedIn: 'root',
 })
 export class AuthService {
-    // constructor(private http: HttpClient) {}
     private userService = inject(UserService);
     private http = inject(HttpClient);
     loggedIn = false;
@@ -26,8 +25,7 @@ export class AuthService {
 
     setUpCurrentUserRole() {
         this.userService.getOwnUser().subscribe(
-            user => {this.currentLoggedInUserRole = user.role,
-            console.log(this.currentLoggedInUserRole);
+            user => {this.currentLoggedInUserRole = user.role
             }
         );
     }
@@ -101,9 +99,8 @@ export class AuthService {
             .pipe(
                 tap((response): void => {
                     if (response.status === 200) {
-                        // if request was successful
-                        this.loggedIn = true; // set new stat
-                        this.emitLoginChange(true); // notify listeners
+                        this.loggedIn = true;
+                        this.emitLoginChange(true);
                     }
                 }),
             );

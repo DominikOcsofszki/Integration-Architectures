@@ -36,11 +36,11 @@ export const ROUTING = {
     salesman: {
         PendingSheetsComponent: 'salesman',
         Sheet: 'salesman/sheet/',
-        // Dashboard: 'salesman/dashboard/',
+
     }
 }
 const routes: Routes = [
-    // { path: 'test', component: DashComponent, canActivate: [AuthGuardService] },
+
     { path: '', component: LoginPageComponent },
     { path: ROUTING.all.LoginPageComponent, component: LoginPageComponent },
     { path: "testing", component: CeoSheetComponent },
@@ -48,7 +48,7 @@ const routes: Routes = [
     { path: ROUTING.ceo.PendingSheetsComponent, component: CeoSheetsComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.hr.PendingSheetsComponent, component: PendingSheetsComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.salesman.PendingSheetsComponent, component: SalesmanSheetsComponent, canActivate: [AuthGuardService] },
-    //
+
     { path: ROUTING.hr.Sheet, component: BonusViewSalesmanComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.ceo.Sheet, component: CeoSheetComponent, canActivate: [AuthGuardService] },
     { path: ROUTING.salesman.Sheet + ":year/:id", component: SalesmanSheetComponent, canActivate: [AuthGuardService] },

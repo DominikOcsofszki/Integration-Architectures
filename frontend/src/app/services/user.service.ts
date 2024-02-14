@@ -12,7 +12,6 @@ import { environment } from '../../../environments/environment';
 })
 export class UserService {
     private http = inject(HttpClient);
-    // constructor(private http: HttpClient) { }
 
     /**
      * retrieves userdata of currently authenticated user

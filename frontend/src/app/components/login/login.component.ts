@@ -20,7 +20,7 @@ import { ROUTING } from 'src/app/app.routing';
 })
 export class LoginComponent implements OnInit {
   private userService = inject(UserService);
-    // object for input-binding
+
     credentials: Credentials;
 
     loginError: string;
@@ -61,12 +61,11 @@ export class LoginComponent implements OnInit {
      */
     enterApplication(): void{
        this.userService.getOwnUser().subscribe(user => {
-           console.log(user.role)
         if(user.role == "hr")this.router.navigate([ROUTING.hr.PendingSheetsComponent]);
         if(user.role == "ceo")this.router.navigate([ROUTING.ceo.PendingSheetsComponent]);
         if(user.role == "salesman")this.router.navigate([ROUTING.salesman.PendingSheetsComponent]);
         if(user.role == "admin")this.router.navigate([ROUTING.admin.LogsComponent]);
-        // void this.router.navigate(['']);
+
        });
     }
 }
