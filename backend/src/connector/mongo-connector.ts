@@ -41,14 +41,11 @@ export class MongoConnector {
             app.set("db", this.db);
             app.listen(environment.port, () => {
                 console.log("Webserver started");
-                // logger.info('Webserver started');
             });
         });
         console.log("App is running");
-        // logger.info("App is running");
     }
 
-    //@todo: How can I start this method?
     async initDb(db: Connection) {
         if ((await db.collection("users").countDocuments()) < 1) {
             //if no user exists create admin user

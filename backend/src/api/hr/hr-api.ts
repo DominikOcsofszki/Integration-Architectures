@@ -1,9 +1,3 @@
-// import {
-//     BonusComputationSheetModel,
-//     OrderEvaluation,
-//     SocialPerformanceEvaluation,
-//     Status
-// } from "../../model/BonusComputationSheet";
 import { Request, Response } from "express";
 import { Salesman, SalesmanModel } from "../../model/Salesman";
 import {createSheetsForAllSalesmen, updateBonus} from "../../service/sheet-service";
@@ -12,42 +6,6 @@ import {
     BonusComputationSheet,
     BonusComputationSheetModel,
 } from "../../model/BonusComputationSheet";
-export async function readSheetStatus(req: Request, res: Response) {
-    await BonusComputationSheetModel.find({})
-        .then((value: any) => {
-            res.status(200).send(
-                value.map((element: any) => ({
-                    salesmanId: element.salesmanId,
-                    yearOfEvaluation: element.yearOfEvaluation,
-                    status: element.status,
-                }))
-            );
-        })
-        .catch((reason: any) => res.status(400).send(reason));
-}
-
-export async function readPendingSheets(req: Request, res: Response) {
-    await BonusComputationSheetModel.find({ status: "pending-hr" })
-        .then((value: any) => {
-            res.status(200).send(value);
-        })
-        .catch((reason: any) => res.status(400).send(reason));
-}
-
-export async function readNotPendingSheets(req: Request, res: Response) {
-    await BonusComputationSheetModel.find({
-        $or: [
-            { status: "incomplete" },
-            { status: "pending-ceo" },
-            { status: "pending-salesman" },
-            { status: "finished" },
-        ],
-    })
-        .then((value: any) => {
-            res.status(200).send(value);
-        })
-        .catch((reason: any) => res.status(400).send(reason));
-}
 
 export async function signSheet(req: Request, res: Response) {
     await BonusComputationSheetModel.findOneAndUpdate(
@@ -95,26 +53,6 @@ export async function getSheetByIdAndYear(req: Request, res: Response) {
     } catch (reason: any) {
         res.status(400).send(reason);
     }
-}
-
-export async function getSheetsById(req: Request, res: Response) {
-    await BonusComputationSheetModel.find({
-        salesmanId: req.params.salesmanId,
-    })
-        .then((value: any) => {
-            res.status(200).send(value);
-        })
-        .catch((reason: any) => res.status(400).send(reason));
-}
-
-export async function getSheetsByYear(req: Request, res: Response) {
-    await BonusComputationSheetModel.find({
-        yearOfEvaluation: req.params.yearOfEvaluation,
-    })
-        .then((value: any) => {
-            res.status(200).send(value);
-        })
-        .catch((reason: any) => res.status(400).send(reason));
 }
 
 export async function getAllSheets(req: Request, res: Response) {

@@ -19,11 +19,3 @@ export async function getItemsCRX(fullUrl: string) {
     const itemsReturnedAsJson = await axios.get(fullUrl, config);
     return itemsReturnedAsJson.data;
 }
-
-// //For testing purposes
-// import { crxAccountURL } from './tools-connector';
-// async function test() {
-//     const items = await getItemsCRX(crxAccountURL);
-//     console.log(items);
-// }
-// test();

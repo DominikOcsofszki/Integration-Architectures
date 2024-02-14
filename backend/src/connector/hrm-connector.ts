@@ -21,14 +21,6 @@ export async function storeBonus(employeeId: string, bonus: number, year: number
     const res = await axios.post(`${environment.env.BASE_URL_HRM}/api/v1/employee/${employeeId}/bonussalary`, body, config);
 }
 
-// //For testing purposes, can be deleted later
-// import { hrmEmployeeURL } from './tools-connector';
-// async function test() {
-//     const items = await getItemsFromHRM(hrmEmployeeURL);
-//     console.log(items);
-// }
-// test();
-
 export async function getTokenHRM() {
     const baseUrl = `${environment.env.BASE_URL_HRM}`;
     const qs = require("querystring");
@@ -51,6 +43,5 @@ export async function getTokenHRM() {
         throw Error(res.data.error);
     }
     const accessToken = res.data["access_token"];
-    // console.log(accessToken);
     return accessToken;
 }

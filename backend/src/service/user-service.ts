@@ -6,11 +6,6 @@ import { UserModel, UserSchema } from "../model/User";
 
 const salt = "integrationArchitectures";
 
-// export async function add(db: Connection, user: typeof UserSchema): Promise<any> {
-//     user.password = hashPassword(user.password);
-//     return (await UserModel.create(user)); //return unique ID
-// }
-
 export async function verify(credentials: Credentials): Promise<User> {
     let user = (await UserModel.findOne({
         username: credentials.username,

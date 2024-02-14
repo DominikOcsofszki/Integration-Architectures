@@ -16,29 +16,6 @@ export async function readSheet(req: Request, res: Response) {
 }
 
 export async function signSheet(req: Request, res: Response) {
-    let s = req.session as Session;
-    await BonusComputationSheetModel.findOneAndUpdate(
-        {
-            salesmanId: s.user?.salesmanId,
-            yearOfEvaluation: req.params.yearOfEvaluation,
-            status: "pending-salesman",
-        },
-        { status: "finished" }
-    )
-        .then((value: any) => {
-            if (value === null) {
-                res.status(400).send({
-                    message: `There exists no BonusComputationSheet for this salesmanId: ${s.user?.salesmanId} for this year: ${req.params.yearOfEvaluation} with the status pending-salesman`,
-                });
-            } else {
-                res.status(200).send(value);
-            }
-        })
-        .catch((reason: any) => res.status(400).send(reason));
-}
-
-export async function signSheetUntilFix(req: Request, res: Response) {
-    //TODO fix cookies then change to other on top
     await BonusComputationSheetModel.findOneAndUpdate(
         {
             salesmanId: req.params.salesmanId,
@@ -54,7 +31,6 @@ export async function signSheetUntilFix(req: Request, res: Response) {
                 });
             } else {
                 try {
-                    //Todo: Bei Migration zu anderer Funktion mitnehmen
                     storeBonusInOrangeHRM(
                         parseInt(req.params.salesmanId),
                         value.totalBonus,
