@@ -2,7 +2,6 @@ import { Router } from "express";
 import {
     readSheet,
     signSheet,
-    signSheetUntilFix,
     readPendingValues,
     readNotPendingValues,
     declineSheet,
@@ -11,14 +10,9 @@ import {
 const router = Router();
 
 router.get("/pending/sheet/:yearOfEvaluation", readSheet);
-
-router.post("/pending/sheet/sign/:yearOfEvaluation", signSheet);
-
-router.post(
-    "/pending/sheet/sign/:salesmanId/:yearOfEvaluation",
-    signSheetUntilFix
-); //TODO delete after cookies fixed
+router.post("/pending/sheet/sign/:salesmanId/:yearOfEvaluation", signSheet);
 router.get("/sheets/pending/:salesmanId", readPendingValues);
 router.get("/sheets/notpending/:salesmanId", readNotPendingValues);
 router.post("/sheet/decline", declineSheet);
+
 export default router;

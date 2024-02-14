@@ -9,14 +9,3 @@ export const hrmEmployeeURL =
 export function getArrowOfEachObject(objects: Object[], func: Function) {
     objects.forEach((object: any) => func(object));
 }
-
-function nameFromObjectsFunc(object: any) {
-    console.log(`${object.name}`);
-    return object.name;
-}
-function getNamesOfEachObject(objects: Object[]) {
-    getArrowOfEachObject(objects, nameFromObjectsFunc);
-}
-function getNamesOfEachObject2(objects: Object[]) {
-    getArrowOfEachObject(objects, (object: any) => object.name);
-}

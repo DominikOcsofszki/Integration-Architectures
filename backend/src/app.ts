@@ -45,7 +45,6 @@ app.use(
         credentials: true,
     })
 );
-//app.use(upload.array()); //adds support multipart/form-data bodies
 
 app.post("/login", login);
 
@@ -57,21 +56,8 @@ app.use(
         httpOnly: false,
     })
 );
-// app.listen(8080) //TODO this was added
 
-// app.use(
-//     cors()
-// );
-// app.use(
-//     cors({
-//         origin: environment.corsOrigins,
-//         credentials: true,
-//     })
-// );
-// /////////// old
-//const apiRouter = require('./routes/api-routes'); //get api-router from routes/api
-app.use("/api", apiRouter); //mount api-router at path "/api"
-// !!!! attention all middlewares, mounted after the router wont be called for any requests
+app.use("/api", apiRouter);
 
 const connector = new MongoConnector(app);
 

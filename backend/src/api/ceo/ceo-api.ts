@@ -3,16 +3,7 @@ import {
     BonusComputationSheet,
     BonusComputationSheetModel,
 } from "../../model/BonusComputationSheet";
-import { UpdateWriteOpResult } from "mongoose";
 import { Salesman, SalesmanModel } from "../../model/Salesman";
-
-export async function readPendingSheets(req: Request, res: Response) {
-    await BonusComputationSheetModel.find({ status: "pending-ceo" })
-        .then((value: any) => {
-            res.status(200).send(value);
-        })
-        .catch((reason: any) => res.status(400).send(reason));
-}
 
 export async function readPendingValues(req: Request, res: Response) {
     try {
@@ -78,9 +69,7 @@ export async function readNotPendingValues(req: Request, res: Response) {
     }
 }
 
-//TODO add try catch for reading req.body
 export async function updateSheet(req: Request, res: Response) {
-    console.log("update sheet");
     const updated: any = req.body.sheet;
     updated.salesmanId = updated.salesman.id;
     const updatedSheet: BonusComputationSheet = updated;
@@ -99,7 +88,6 @@ export async function updateSheet(req: Request, res: Response) {
         });
 }
 
-// //////TODO: add this to the other apis
 import { kafkaErasmuxTopic, kafkaProducer } from "../../kafka/kafka-setup";
 const sendMsgToKafka = async (msg: string) => {
     // Producing
@@ -126,7 +114,6 @@ export async function signSheet(req: Request, res: Response) {
                 });
             } else {
                 res.status(200).send(value);
-                // TODO
                 sendMsgToKafka(
                     `${new Date().toDateString()}: Ceo approved ${
                         req.params.salesmanId
